@@ -3,9 +3,9 @@ import { Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class DataServiceService {
+export class DataService {
 
-  salesDay= signal('');
-
+  salesDayName= signal('');
+  salesDayDateString = signal('');
   constructor() { }
 }
