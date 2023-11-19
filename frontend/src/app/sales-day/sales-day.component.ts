@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-verkaufstag',
+  selector: 'app-sales-day',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './verkaufstag.component.html',
-  styleUrl: './verkaufstag.component.scss'
+  templateUrl: './sales-day.component.html',
+  styleUrl: './sales-day.component.scss'
 })
-export class VerkaufstagComponent {
+export class SalesDayComponent {
 
 }

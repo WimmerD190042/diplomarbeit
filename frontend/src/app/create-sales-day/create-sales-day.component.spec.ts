@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerkaufstagComponent } from './verkaufstag.component';
+import { CreateSalesDayComponent } from './create-sales-day.component';
 
-describe('VerkaufstagComponent', () => {
-  let component: VerkaufstagComponent;
-  let fixture: ComponentFixture<VerkaufstagComponent>;
+describe('CreateSalesDayComponent', () => {
+  let component: CreateSalesDayComponent;
+  let fixture: ComponentFixture<CreateSalesDayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VerkaufstagComponent]
+      imports: [CreateSalesDayComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(VerkaufstagComponent);
+    fixture = TestBed.createComponent(CreateSalesDayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

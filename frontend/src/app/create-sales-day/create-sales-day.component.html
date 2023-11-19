@@ -1,0 +1,26 @@
+<head>
+   
+
+    <style>
+        body {
+           margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="margin-top: 10px;"> Neuen Verkaufstag anlegen:</h1>
+    
+        
+        <br>
+        <h4>Name:
+            <input placeholder="(optional)" type="text">
+        </h4>
+        <h4>Datum:
+            <input  type="datetime-local" id="Test_DatetimeLocal">
+        </h4>
+
+        <h4>
+            <button (click)="createSalesDayClicked()" class="btn btn-primary">Verkaufstag anlegen</button>
+        </h4>
+   
+</body>

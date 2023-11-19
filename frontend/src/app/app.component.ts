@@ -11,12 +11,13 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
 homeClicked() {
-throw new Error('Method not implemented.');
+  // this.router.navigateByUrl('Home');
+    console.log("clicked")
 }
 private router = inject(Router);
 
-verkaufstagClicked() {
-    this.router.navigateByUrl('Verkaufstag');
+newSalesDayClick() {
+    this.router.navigateByUrl('newSalesDay');
     console.log("clicked")
 }
   title = 'frontend';
