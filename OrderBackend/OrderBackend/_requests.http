@@ -1,6 +1,31 @@
 @baseUrl = https://localhost:5001
 
 
+################################################## Address
+POST {{baseUrl}}/api/Address/addAddress
+Content-type: application/json
+
+{
+   "street": "abc",
+   "city": "abc",
+   "postCode": 1,
+   "country": "abc"
+}
+#####
+
+################################################## Customer
+GET {{baseUrl}}/api/Customer/getAllCustomers
+#####
+POST {{baseUrl}}/api/Customer/addNewCustomer
+Content-type: application/json
+
+{
+   "firstName": "abc",
+   "lastName": "abc",
+   "addressId": 1
+}
+#####
+
 ################################################## Order
 GET {{baseUrl}}/Order/Orders
 #####

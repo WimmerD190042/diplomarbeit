@@ -48,8 +48,9 @@ Console.ResetColor();
 builder.Services.AddDbContext<OrdersContext>(options => options.UseSqlServer(connectionString));
 #endregion
 
-builder.Services.AddScoped<DbService>();
-
+builder.Services.AddScoped<AddressService>();
+builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<OrderService>();
 var app = builder.Build();
 
 

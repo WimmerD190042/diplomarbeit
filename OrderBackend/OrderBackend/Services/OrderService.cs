@@ -1,9 +1,9 @@
 ﻿namespace OrderBackend.Services
 {
-    public class DbService
+    public class OrderService
     {
         private readonly OrdersContext _db;
-        public DbService(OrdersContext db) => _db = db;
+        public OrderService(OrdersContext db) => _db = db;
 
         public List<Order> getOrders()
         {
