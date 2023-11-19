@@ -1,0 +1,6 @@
+@baseUrl = https://localhost:5001
+
+
+################################################## Order
+GET {{baseUrl}}/Order/Orders
+#####
