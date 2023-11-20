@@ -2,7 +2,19 @@
 
 
 ################################################## Address
+GET {{baseUrl}}/api/Address/getCustomerAddress?addressId=1
+#####
 POST {{baseUrl}}/api/Address/addAddress
+Content-type: application/json
+
+{
+   "street": "abc",
+   "city": "abc",
+   "postCode": 1,
+   "country": "abc"
+}
+#####
+PUT {{baseUrl}}/api/Address/editAddress?addressId=1
 Content-type: application/json
 
 {
@@ -17,6 +29,15 @@ Content-type: application/json
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
 POST {{baseUrl}}/api/Customer/addNewCustomer
+Content-type: application/json
+
+{
+   "firstName": "abc",
+   "lastName": "abc",
+   "addressId": 1
+}
+#####
+PUT {{baseUrl}}/api/Customer/editCustomer?customerId=1
 Content-type: application/json
 
 {

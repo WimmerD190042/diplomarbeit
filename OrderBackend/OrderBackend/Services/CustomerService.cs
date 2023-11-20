@@ -1,15 +1,17 @@
-﻿namespace OrderBackend.Services
+﻿using OrdersDb;
+
+namespace OrderBackend.Services
 {
     public class CustomerService
     {
         private readonly OrdersContext _db;
         public CustomerService(OrdersContext db) => _db = db;
 
-        public List<NewCustomerDto> GetAllCustomers()
+        public List<CustomerDto> GetAllCustomers()
         {
             //Kunden von File importieren -> filePath ersetzen, und einkommentieren
-            //string filePath = "C:\\Users\\worts\\OneDrive\\Desktop\\Kunden.txt";
-            /*using (StreamReader reader = new StreamReader(filePath))
+            /*string filePath = "C:\\Schule\\diplomarbeit\\Daten\\KundenDaten.txt";
+            using (StreamReader reader = new StreamReader(filePath))
             {
                 string content = reader.ReadToEnd();
                 string[] lines = content.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
@@ -26,9 +28,9 @@
                     _db.Customers.Add(addCustomer);
                 }
                 _db.SaveChanges();
-            }
-            */
-            return _db.Customers.Select(x => new NewCustomerDto().CopyPropertiesFrom(x)).ToList();
+            }*/
+            
+            return _db.Customers.Select(x => new CustomerDto().CopyPropertiesFrom(x)).ToList();
         }
 
         public string AddCustomer(NewCustomerDto newCustomer)
@@ -36,7 +38,16 @@
             Customer addCustomer = new Customer().CopyPropertiesFrom(newCustomer);
             _db.Customers.Add(addCustomer);
             _db.SaveChanges();
-            return "Customer Added";
+            return "Customer added";
+        }
+
+        public string EditCustomer(int customerId, EditCustomerDto editCustomerInput)
+        {
+            Customer updateCustomer = _db.Customers.Where(x => x.Id == customerId).First();
+            updateCustomer.FirstName = editCustomerInput.FirstName;
+            updateCustomer.LastName = editCustomerInput.LastName;
+            _db.SaveChanges();
+            return "Customer edite";
         }
     }
 }

@@ -11,15 +11,21 @@ namespace OrderBackend.Controllers
         public CustomerController(CustomerService db) => _dbService = db;
 
         [HttpGet("getAllCustomers")]
-        public List<NewCustomerDto> GetAllCustomers()
+        public List<CustomerDto> GetAllCustomers()
         {
             return _dbService.GetAllCustomers();
         }
 
         [HttpPost("addNewCustomer")]
-        public string AddCustomer([FromBody] NewCustomerDto newCustomer)
+        public string AddCustomer(NewCustomerDto newCustomer)
         {
             return _dbService.AddCustomer(newCustomer);
+        }
+
+        [HttpPut("editCustomer")]
+        public string EditCustomer(int customerId, EditCustomerDto editCustomerInput)
+        {
+            return _dbService.EditCustomer(customerId, editCustomerInput);
         }
     }
 }
