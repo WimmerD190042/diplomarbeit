@@ -7,5 +7,6 @@ export class DataService {
 
   salesDayName= signal('');
   salesDayDateString = signal('');
+  
   constructor() { }
 }

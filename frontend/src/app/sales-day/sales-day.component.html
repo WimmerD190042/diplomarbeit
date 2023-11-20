@@ -1,6 +1,50 @@
-<h1>SalesDay {{dataService.salesDayName()}}</h1>
+<h1>Verkaufstag:  {{dataService.salesDayName()}}</h1>
 <h5>am {{dataService.salesDayDateString().substring(0,15)}}</h5>
 
-<select>
-    <option></option>
-</select>
+
+
+<table class="table-secondary">
+        <tr>
+        <!-- <td>
+            Ochse 1 
+        </td>
+        <td>
+            Ochse 2
+        </td> -->
+
+        <td> Ox</td>
+        <td>
+            <button class="btn btn-success" (click)="addNameField($event.target)">
+                +
+            </button>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <label for="selectPerson">Kunde auswählen</label>
+    <select (selectionchange)="customerChanged()"> 
+        <option >TestKunde 1</option>
+        <option >TestKunde 2</option>
+        <option >TestKunde 3</option>
+
+    </select>
+    
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Menge (kg)</th>
+        <th scope="col">Anmerkung</th>
+        <th scope="col">test</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+      </tr>
+    </tbody>
+  </table>

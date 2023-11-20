@@ -10,5 +10,21 @@ import { DataService } from '../data.service';
   styleUrl: './sales-day.component.scss'
 })
 export class SalesDayComponent {
-      public dataService = inject(DataService);
+customerChanged() {
+  
+}
+  public dataService = inject(DataService);
+
+
+   addNameField(button:any) {
+    var td = button.parentNode;
+    var tr = td.parentNode;
+    var input = document.createElement("input");
+    input.type = "text";
+    input.className = "form-control form-control-sm flex-grow-1";
+    input.style.marginRight = "10px";
+    tr.insertBefore(input, td);
+    tr.classList.add("d-flex");
+  }
+     
 }

@@ -28,9 +28,10 @@ export class CreateSalesDayComponent {
 
 
   createSalesDayClicked(dayName: string) {
+   
       this.dataService.salesDayName.set(dayName);
     this.router.navigateByUrl('salesDay')
-      console.log("eoeoeo")
+     
   }
   
 }
