@@ -6,10 +6,10 @@ import { SalesDaysOverviewComponent } from './sales-days-overview/sales-days-ove
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 export const routes: Routes = [
-    {path:'*',component:WelcomePageComponent},
+   
     {path:'salesDaysOverview',component:SalesDaysOverviewComponent},
     {path:'newSalesDay',component:CreateSalesDayComponent},
     {path:'salesDay',component:SalesDayComponent},
     {path:'Home',component:AppComponent},
-
+    {path:'**',component:WelcomePageComponent},
 ];

@@ -1,17 +1,22 @@
 
-<div (click)="salesDayClicked()">
+<div style="margin-bottom: 30px;" class="row row-cols-1 row-cols-md-4 g-4">
+    <div  class="col">
+        <div class="card h-100">
+          <img src="https://img.freepik.com/free-vector/abstract-minimal-white-background_23-2148887988.jpg?w=1060&t=st=1703333894~exp=1703334494~hmac=15f68c3ce86ae1f129e08e4148d966eaec36058ed117495411fdd35e1383862f" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Neuer Verkaufstag</h5>
+            <p class="card-text">Hiermit wird ein neuer Verkaufstag erstellt</p>
+            <a (click)="newSalesDayClick()" class="btn btn-secondary">Verkaufstag anlegen</a>
+      
+          </div>
+        </div>
+      </div>
+    <app-sales-day-info *ngFor="let salesDay of dataService.salesDays()" [salesDay]="salesDay">
+
+    </app-sales-day-info>
+   
+  </div>
 
 
-<table style="margin-top: 20px; margin-left: 20px;">
-    <tr>
-        <td  *ngFor="let salesDay of dataService.salesDays()">
-            <app-sales-day-info  [salesDay]="salesDay"></app-sales-day-info>
-        
-        </td>
-    </tr>
-</table>
-</div>
 
-<body>
-    <button id="addBTN" style="margin-left: 30px;" (click)="newSalesDayClick()" class="btn btn-success">+</button>
-</body>
+  

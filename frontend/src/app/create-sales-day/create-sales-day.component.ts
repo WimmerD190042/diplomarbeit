@@ -56,7 +56,7 @@ export class CreateSalesDayComponent {
     }
     );
     console.log("added");
-    this.dataService.salesDayName.set(dayName);
+    // this.dataService.salesDayName.set(dayName);
     this.router.navigateByUrl('salesDaysOverview')
      
   }
