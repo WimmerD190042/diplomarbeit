@@ -5,6 +5,7 @@
 //----------------------------------------
 
 using GrueneisR.RestClientGenerator;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.OpenApi.Models;
 
 string corsKey = "_myCorsKey";
@@ -47,7 +48,12 @@ Console.WriteLine($"******** Don't forget to comment out OrdersContext.OnConfigu
 Console.ResetColor();
 builder.Services.AddDbContext<OrdersContext>(options => options.UseSqlServer(connectionString));
 #endregion
+var db = new OrdersContext();
+db.Database.EnsureCreated();
 
+
+
+builder.Services.AddScoped<SalesDayService>();
 builder.Services.AddScoped<AddressService>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<OrderService>();
@@ -82,7 +88,6 @@ app.UseAuthorization();
 //  }
 //}));
 #endregion
-
 
 app.Map("/", () => Results.Redirect("/swagger"));
 

@@ -20,6 +20,7 @@ namespace OrderBackend.Controllers
         public string AddCustomer(NewCustomerDto newCustomer)
         {
             return _dbService.AddCustomer(newCustomer);
+            
         }
 
         [HttpPut("editCustomer")]

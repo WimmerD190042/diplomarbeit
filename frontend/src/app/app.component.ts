@@ -1,24 +1,29 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [HttpClientModule,CommonModule, RouterOutlet,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  private router = inject(Router);
+
 homeClicked() {
   // this.router.navigateByUrl('Home');
-    console.log("clicked")
+    console.log("home clicked")
 }
-private router = inject(Router);
 
-newSalesDayClick() {
-    this.router.navigateByUrl('newSalesDay');
-    console.log("clicked")
+
+salesDaysOverviewClick(){
+  this.router.navigateByUrl('salesDaysOverview');
+    console.log("salesDaysOverview clicked")
 }
+
+
   title = 'frontend';
 }

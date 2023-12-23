@@ -39,6 +39,8 @@ namespace OrderBackend.Services
             _db.Customers.Add(addCustomer);
             _db.SaveChanges();
             return "Customer added";
+
+
         }
 
         public string EditCustomer(int customerId, EditCustomerDto editCustomerInput)

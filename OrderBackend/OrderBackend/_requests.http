@@ -1,4 +1,4 @@
-@baseUrl = https://localhost:5001
+@baseUrl = http://localhost:5000
 
 
 ################################################## Address
@@ -42,11 +42,25 @@ Content-type: application/json
 
 {
    "firstName": "abc",
-   "lastName": "abc",
-   "addressId": 1
+   "lastName": "abc"
 }
 #####
 
 ################################################## Order
 GET {{baseUrl}}/Order/Orders
+#####
+
+################################################## SalesDay
+DELETE {{baseUrl}}/api/SalesDay/SalesDay?salesDayId=1
+#####
+GET {{baseUrl}}/api/SalesDay/getSalesDays
+#####
+POST {{baseUrl}}/api/SalesDay/addSalesDay
+Content-type: application/json
+
+{
+   "id": 1,
+   "name": "abc",
+   "dateString": "abc"
+}
 #####

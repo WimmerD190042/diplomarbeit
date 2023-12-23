@@ -28,7 +28,7 @@
         </h4>
 
         <h4>
-            <button (click)="createSalesDayClicked(txtName.value)" class="btn btn-primary">Verkaufstag anlegen</button>
+            <button *ngIf="createSalesDayEnabled"  (click)="createSalesDayClicked(txtName.value)" class="btn btn-primary">Verkaufstag anlegen</button>
         </h4>
    
 </body>

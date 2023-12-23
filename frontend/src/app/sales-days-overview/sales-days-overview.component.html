@@ -1,0 +1,17 @@
+
+<div (click)="salesDayClicked()">
+
+
+<table style="margin-top: 20px; margin-left: 20px;">
+    <tr>
+        <td  *ngFor="let salesDay of dataService.salesDays()">
+            <app-sales-day-info  [salesDay]="salesDay"></app-sales-day-info>
+        
+        </td>
+    </tr>
+</table>
+</div>
+
+<body>
+    <button id="addBTN" style="margin-left: 30px;" (click)="newSalesDayClick()" class="btn btn-success">+</button>
+</body>
