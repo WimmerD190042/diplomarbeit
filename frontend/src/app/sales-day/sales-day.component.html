@@ -1,7 +1,6 @@
 <body style="margin-left: 10px;">
-<h1>Verkaufstag:  {{dataService.selectedSalesDay().name}}</h1>
-<h5>am {{dataService.selectedSalesDayFormattedDate()}}</h5>
-
+<h1>Verkaufstag:  {{dataService.selectedSalesDay.value.name}}</h1>
+<h5>am {{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) }}</h5>
 
 
 <table class="table-secondary">
