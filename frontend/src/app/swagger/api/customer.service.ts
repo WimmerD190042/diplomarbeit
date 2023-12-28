@@ -21,8 +21,6 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { CustomerDto } from '../model/customerDto';
 // @ts-ignore
-import { EditCustomerDto } from '../model/editCustomerDto';
-// @ts-ignore
 import { NewCustomerDto } from '../model/newCustomerDto';
 
 // @ts-ignore
@@ -164,21 +162,14 @@ export class CustomerService {
     }
 
     /**
-     * @param customerId 
-     * @param editCustomerDto 
+     * @param customerDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCustomerEditCustomerPut(customerId?: number, editCustomerDto?: EditCustomerDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<string>;
-    public apiCustomerEditCustomerPut(customerId?: number, editCustomerDto?: EditCustomerDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<string>>;
-    public apiCustomerEditCustomerPut(customerId?: number, editCustomerDto?: EditCustomerDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<string>>;
-    public apiCustomerEditCustomerPut(customerId?: number, editCustomerDto?: EditCustomerDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (customerId !== undefined && customerId !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>customerId, 'customerId');
-        }
+    public apiCustomerEditCustomerPut(customerDto?: CustomerDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<string>;
+    public apiCustomerEditCustomerPut(customerDto?: CustomerDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<string>>;
+    public apiCustomerEditCustomerPut(customerDto?: CustomerDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<string>>;
+    public apiCustomerEditCustomerPut(customerDto?: CustomerDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -228,8 +219,7 @@ export class CustomerService {
         return this.httpClient.request<string>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: editCustomerDto,
-                params: localVarQueryParameters,
+                body: customerDto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -24,9 +24,9 @@ namespace OrderBackend.Controllers
         }
 
         [HttpPut("editCustomer")]
-        public string EditCustomer(int customerId, EditCustomerDto editCustomerInput)
+        public string EditCustomer(CustomerDto editCustomerDto)
         {
-            return _dbService.EditCustomer(customerId, editCustomerInput);
+            return _dbService.EditCustomer(editCustomerDto);
         }
     }
 }

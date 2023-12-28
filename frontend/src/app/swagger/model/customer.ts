@@ -10,15 +10,12 @@
  * Do not edit the class manually.
  */
 import { Order } from './order';
-import { Address } from './address';
 
 
 export interface Customer { 
     id?: number;
-    firstName?: string | null;
-    lastName?: string | null;
-    addressId?: number;
-    address?: Address;
+    name?: string | null;
+    address?: string | null;
     readonly orders?: Array<Order> | null;
 }
 

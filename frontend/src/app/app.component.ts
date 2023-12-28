@@ -11,8 +11,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
   private router = inject(Router);
 
+  customersClicked() {
+    this.router.navigateByUrl('customers');
+    console.log("customers clicked")
+  }
 homeClicked() {
   // this.router.navigateByUrl('Home');
     console.log("home clicked")

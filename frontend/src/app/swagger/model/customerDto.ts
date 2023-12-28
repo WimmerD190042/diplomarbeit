@@ -13,8 +13,7 @@
 
 export interface CustomerDto { 
     id?: number;
-    firstName?: string | null;
-    lastName?: string | null;
-    addressId?: number;
+    name?: string | null;
+    address?: string | null;
 }
 

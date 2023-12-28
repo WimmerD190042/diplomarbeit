@@ -10,25 +10,38 @@ namespace OrderBackend.Services
         public List<CustomerDto> GetAllCustomers()
         {
             //Kunden von File importieren -> filePath ersetzen, und einkommentieren
-            string filePath = "F:\\Temp\\KundenDaten.txt";
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string content = reader.ReadToEnd();
-                string[] lines = content.Split("\n");
-                foreach (string line in lines)
-                {
-                    NewCustomerDto newCustomer = new NewCustomerDto()
-                    {
-                        FirstName = line,
-                        LastName = "",
-                        AddressId = 3,
-                    };
+            //string filePath = "F:\\Temp\\KundenData.csv";
+            //using (StreamReader reader = new StreamReader(filePath))
+            //{
+            //    string content = reader.ReadToEnd();
+            //    string[] lines = content.Split("\n");
+            //    NewCustomerDto newCustomer = new() ;
+            //    foreach (string line in lines)
+            //    {
+            //        string[] parts = line.Split(";");
 
-                    Customer addCustomer = new Customer().CopyPropertiesFrom(newCustomer);
-                    _db.Customers.Add(addCustomer);
-                }
-                _db.SaveChanges();
-            }
+            //        if (parts.Length > 1)
+            //        {
+            //            if (parts[2] == "\r")
+            //            {
+            //                parts[2] = "";
+            //            }
+
+            //             newCustomer = new NewCustomerDto()
+            //            {
+            //                Name = parts[1],
+            //                Address = parts[2],
+
+            //            };
+            //        }
+                    
+
+
+            //        Customer addCustomer = new Customer().CopyPropertiesFrom(newCustomer);
+            //        _db.Customers.Add(addCustomer);
+            //    }
+            //    _db.SaveChanges();
+            //}
 
             return _db.Customers.Select(x => new CustomerDto().CopyPropertiesFrom(x)).ToList();
         }
@@ -43,13 +56,14 @@ namespace OrderBackend.Services
 
         }
 
-        public string EditCustomer(int customerId, EditCustomerDto editCustomerInput)
+        public string EditCustomer(CustomerDto Customer)
         {
-            Customer updateCustomer = _db.Customers.Where(x => x.Id == customerId).First();
-            updateCustomer.FirstName = editCustomerInput.FirstName;
-            updateCustomer.LastName = editCustomerInput.LastName;
+            Customer updateCustomer = _db.Customers.Where(x => x.Id == Customer.Id).First();
+            updateCustomer.Name = Customer.Name;
+            updateCustomer.Id= Customer.Id;
+            updateCustomer.Address = Customer.Address;
             _db.SaveChanges();
-            return "Customer edite";
+            return "Customer edited";
         }
     }
 }

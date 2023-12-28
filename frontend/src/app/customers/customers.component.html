@@ -1,0 +1,30 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Addresse</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of dataService.customers()">
+        <th scope="row">{{customer.id}}</th>
+        <td>
+          <input *ngIf="editingCustomer === customer" #nameInput type="text" [value]="customer.name" (input)="customer.name = nameInput.value">
+          <span *ngIf="editingCustomer !== customer">{{customer.name}}</span>
+        </td>
+        <td>
+          <input *ngIf="editingCustomer === customer" #addressInput type="text" [value]="customer.address" (input)="customer.address = addressInput.value">
+          <span *ngIf="editingCustomer !== customer">{{customer.address}}</span>
+        </td>
+        <td>
+          <button *ngIf="editingCustomer === customer" class="btn btn-success btn-sm" (click)="saveChanges(customer)">Speichern</button>
+          <button *ngIf="editingCustomer !== customer" class="btn btn-secondary btn-sm" (click)="editCustomer(customer)">Bearbeiten</button>
+        </td>
+        <td><button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer)">Löschen</button></td>
+      </tr>
+    
+    </tbody>
+  </table>
