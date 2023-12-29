@@ -43,7 +43,7 @@ namespace OrderBackend.Services
             //    _db.SaveChanges();
             //}
 
-            return _db.Customers.Select(x => new CustomerDto().CopyPropertiesFrom(x)).ToList();
+            return _db.Customers.OrderBy(x => x.Name).Select(x => new CustomerDto().CopyPropertiesFrom(x)).ToList();
         }
 
         public string AddCustomer(NewCustomerDto newCustomer)

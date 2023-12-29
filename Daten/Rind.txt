@@ -1,0 +1,79 @@
+Kategorie;Unterkategorie;Teilstück
+R-Kurzbrätiges;Filet;Filet
+R-Kurzbrätiges;Filet;Filetkopf
+R-Kurzbrätiges;Beiried;Beiried
+R-Kurzbrätiges;Beiried;Rumpsteak
+R-Kurzbrätiges;Rostbraten;Rostbraten
+R-Kurzbrätiges;Rostbraten;Ribeye
+R-Kurzbrätiges;Ribeye Dry Aged;Ribeye Dry Aged
+R-Kurzbrätiges;Tomahawk Dry Aged;Tomahawk Dry Aged
+R-Kurzbrätiges;Tafelspitz;Tafelspitz
+R-Kurzbrätiges;Hüferscherzl;Hüferscherzl
+R-Kurzbrätiges;Hüferscherzl;Hüftsteak
+R-Kurzbrätiges;Bavette;Bavette
+R-Kurzbrätiges;Kette;Kette
+R-Kurzbrätiges;Flank Steak;Flank Steak
+R-Kurzbrätiges;Thors Hammer;Thors Hammer
+R-Kurzbrätiges;Rieddeckel;Rieddeckel
+R-Kurzbrätiges;Rieddeckel;Ribeye Cap
+R-Kurzbrätiges;Hanging Tender;Hanging Tender
+R-Kurzbrätiges;Inside Skirt;Inside Skirt
+R-Kurzbrätiges;Outside Skirt;Outside Skirt
+R-Kurzbrätiges;Fledermaus;Fledermaus
+R-Kurzbrätiges;Theres Major;Theres Major
+R-Schnitzel;Schale;Schale
+R-Schnitzel;Schalendeckel;Schalendeckel
+R-Schnitzel;Nuss;Nuss
+R-Schnitzel;Bugscherzl;Bugscherzl
+R-Schnitzel;Tafelstück;Tafelstück
+R-Schnitzel;Weißes Scherzl;Weißes Scherzl
+R-Braten;Für Zwiebelrostbraten;Für Zwiebelrostbraten
+R-Braten;Gab;Gab
+R-Braten;Braten;Braten
+R-Braten;Dicke Schulter;Dicke Schulter
+R-Braten;Hüferscherzl Braten;Hüferscherzl Braten
+R-Braten;Mageres Meisel;Mageres Meisel
+R-Braten;Schulterscherzel;Schulterscherzel
+R-Braten;Schulterscherzel;Flat Iron Steak
+R-Kochfleisch;Hüferschwanzel;Hüferschwanzel
+R-Kochfleisch;Brustkern;Brustkern
+R-Kochfleisch;Brustkern;Brisket
+R-Kochfleisch;Rippen ausgelöst;Rippen ausgelöst
+R-Kochfleisch;Siedefleisch undefiniert;Siedefleisch undefiniert
+R-Kochfleisch;Hals;Hals
+R-Gulasch;Gulasch oder Kochfleisch;Gulasch oder Kochfleisch
+R-Gulasch;Kavalierspitz;Kavalierspitz
+R-Gulasch;Gulasch undefiniert;Gulasch undefiniert
+R-Gulasch;Eintopf;Eintopf
+R-Gulasch;Schalendeckel = Eintopf;Schalendeckel
+R-Gulasch;Hinterer Wadschinken;Hinterer Wadschinken
+R-Gulasch;Vorderer Wadschinken;Vorderer Wadschinken
+R-Gulasch;Hals = Gulasch oder Koch;Hals = Gulasch oder Koch
+R-Gulasch;Beinfleisch (Short Ribs);Beinfleisch (Short Ribs)
+R-Gulasch;Ossobuco;Ossobuco
+R-Faschiertes;Faschiertes;Faschiertes
+R-Faschiertes;Faschiertes;Burger Puro
+R-Faschiertes;Faschiertes;Burger comino
+R-Wanger;Wangerl;Wangerl
+R-Wurst-u Verarbeitungsfleisch;Angus Fleisch zum Wursten;Angus Fleisch zum Wursten
+R-Wurst-u Verarbeitungsfleisch;Angus Fleisch zum Wursten;Wurstfleisch an wirsis
+R-Wurst-u Verarbeitungsfleisch;Puerco Rico Fleisch f Wursten;Puerco Rico Fleisch f Wursten
+R-Wurst-u Verarbeitungsfleisch;Schnitzel, Braten f Hable-Rohschinken;Schnitzel, Braten f Hable-Rohschinken
+R-Wurst-u Verarbeitungsfleisch;Brustkern f Pastrami;Brustkern f Pastrami
+R-Knochen;Knochen;Knochen
+R-Knochen;Ochsenschlepp;Ochsenschlepp
+R-Organe;Leber;Leber
+R-Organe;Lunge;Lunge
+R-Organe;Herz;Herz
+R-Organe;Zunge;Zunge
+R-Organe;Milz;Milz
+R-Verarbeitetes;Leberknödel;Leberknödel
+R-Verarbeitetes;Rinderfond;Rinderfond
+Wurstwaren;Chorizo;Chorizo
+Wurstwaren;Bratwürstl;Bratwürstl
+Wurstwaren;Käsekrainer;Käsekrainer
+Wurstwaren;ROHSCHINKEN;ROHSCHINKEN
+Wurstwaren;Knacker;Knacker
+Wurstwaren;Cabbanossi;Cabbanossi
+Wurstwaren;Frankfurter;Frankfurter
+

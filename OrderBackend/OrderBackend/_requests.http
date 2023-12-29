@@ -1,5 +1,9 @@
-@baseUrl = http://localhost:5000
+@baseUrl = https://localhost:5001
 
+
+################################################## Category
+GET {{baseUrl}}/api/Category/getAllCategories
+#####
 
 ################################################## Customer
 GET {{baseUrl}}/api/Customer/getAllCustomers

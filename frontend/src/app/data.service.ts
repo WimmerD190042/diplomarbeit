@@ -19,7 +19,7 @@ export class DataService {
   public formattedDate: string | undefined;
 
   
-  // hasSalesDays= computed(()=>this.salesDays().length!=0);
+ 
   customers= signal<CustomerDto[]>([]);
   salesDays= signal<SalesDayDto[]>([]);
   selectedSalesDay = new BehaviorSubject<SalesDayDto>({});
@@ -32,8 +32,7 @@ export class DataService {
   constructor() {
       this.loadSalesDaysFromBackend();
       this.loadCustomersFromBackend();
-    
-  }
+    }
 
   getSalesDayDate(salesDay: SalesDayDto) {
     return this.formateDate(salesDay);

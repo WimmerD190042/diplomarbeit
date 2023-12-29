@@ -21,20 +21,21 @@
     </tr>
 </table>
 
-<div>
-    <label for="selectPerson">Kunde auswählen</label>
-    <select (selectionchange)="customerChanged()"> 
-        <option >TestKunde 1</option>
-        <option >TestKunde 2</option>
-        <option >TestKunde 3</option>
+<div style="display: flex;">
+    <label for="selectPerson">Kunde</label>
+    <select style="width: 20%;" class="form-select" (selectionchange)="customerChanged()"> 
+        <option *ngFor="let customer of dataService.customers()" >
+            {{customer.name}}
+        </option>
+        
 
     </select>
     
 </div>
 
 
-<table class="table table-striped">
-    <thead>
+<table class="table table-hover">
+      <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Menge (kg)</th>

@@ -54,6 +54,7 @@ db.Database.EnsureCreated();
 
 
 builder.Services.AddScoped<SalesDayService>();
+builder.Services.AddScoped<CategoryService>();
 
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<OrderService>();
