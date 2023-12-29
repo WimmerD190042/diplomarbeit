@@ -6,12 +6,11 @@ namespace OrderBackend.Services
     {
         private readonly OrdersContext _db;
         public CategoryService(OrdersContext db) => _db = db;
+        string filePath = "C:\\Users\\Megaport\\Desktop\\diplomarbeit\\diplomarbeit\\Daten\\GesamteTiere.TXT";
 
-        public List<Category> GetAllCategories()
+
+        public void ReadAndInsertCategories()
         {
-            string filePath = "C:\\Users\\Megaport\\Downloads\\APP_Liste Teilstücke.CSV";
-
-
             List<Category> categories = new List<Category>();
             List<SubCategory> subCategories = new List<SubCategory>();
             List<MeatPiece> meatPieces = new List<MeatPiece>();
@@ -25,30 +24,39 @@ namespace OrderBackend.Services
             {
                 var columns = line.Split(';');
 
-                // Wenn die Spalte auf der rechten Seite leer ist, handelt es sich um eine Kategorie
-                if (string.IsNullOrWhiteSpace(columns[4]))
+                // Entferne Leerzeichen
+                if (columns.Length > 1)
                 {
-                    currentCategory = new Category { Name = columns[0].Trim() };
-                    categories.Add(currentCategory);
-                }
-                // Wenn die Spalte in der Mitte leer ist, handelt es sich um eine Unterkategorie
-                else if (string.IsNullOrWhiteSpace(columns[2]))
-                {
-                    currentSubCategory = new SubCategory
+                    var category = columns[0].Trim();
+                    var subCategory = columns[1].Trim();
+                    var meatPieceName = columns[2].Trim();
+
+                    // Kategorie erstellen, falls nicht vorhanden
+                    currentCategory = categories.FirstOrDefault(c => c.Name == category);
+                    if (currentCategory == null)
                     {
-                        Name = columns[1].Trim(),
-                        Category = currentCategory,
-                        CategoryId = currentCategory.Id
-                    };
-                    subCategories.Add(currentSubCategory);
-                    currentCategory.SubCategories.Add(currentSubCategory);
-                }
-                // Andernfalls handelt es sich um ein Teilstück
-                else
-                {
+                        currentCategory = new Category { Name = category };
+                        categories.Add(currentCategory);
+                    }
+
+                    // Unterkategorie erstellen, falls nicht vorhanden
+                    currentSubCategory = subCategories.FirstOrDefault(sc => sc.Name == subCategory && sc.Category == currentCategory);
+                    if (string.IsNullOrWhiteSpace(subCategory) || currentSubCategory == null)
+                    {
+                        currentSubCategory = new SubCategory
+                        {
+                            Name = subCategory,
+                            Category = currentCategory,
+                            CategoryId = currentCategory.Id
+                        };
+                        subCategories.Add(currentSubCategory);
+                        currentCategory.SubCategories.Add(currentSubCategory);
+                    }
+
+                    // Teilstück erstellen
                     var meatPiece = new MeatPiece
                     {
-                        Name = columns[2].Trim(),
+                        Name = meatPieceName,
                         PricePerKg = 0.0, // Du musst den Preis hier einfügen
                         SubCategory = currentSubCategory,
                         SubCategoryId = currentSubCategory.Id
@@ -56,7 +64,23 @@ namespace OrderBackend.Services
                     meatPieces.Add(meatPiece);
                     currentSubCategory.MeatPieces.Add(meatPiece);
                 }
+                
             }
+
+            // Hier füge die Kategorien, Unterkategorien und Teilstücke zur Datenbank hinzu
+            _db.Categories.AddRange(categories);
+            _db.SubCategories.AddRange(subCategories);
+            _db.MeatPieces.AddRange(meatPieces);
+            _db.SaveChanges();
+        }
+
+
+
+        public List<Category> GetAllCategories()
+        {
+
+
+            ReadAndInsertCategories();
             _db.SaveChanges();
             return _db.Categories.OrderBy(x => x.Name).ToList();
 
