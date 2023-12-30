@@ -1,5 +1,5 @@
 import { Component, Inject, Injectable, InjectionToken, computed, inject, signal } from '@angular/core';
-import { CustomerDto, CustomerService, SalesDayDto, SalesDayService } from './swagger';
+import { Category, CategoryDto, CategoryService, CustomerDto, CustomerService, SalesDayDto, SalesDayService } from './swagger';
 import { HttpClientModule } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 export const SWAGGER_salesDayService_TOKEN = new InjectionToken<SalesDayService>('swaggersalesDayService');
@@ -14,12 +14,13 @@ class HeroListComponent {}
 export class DataService {
   private salesDayService= inject(SalesDayService)
   private customerService= inject(CustomerService);
+  private categoryService = inject(CategoryService);
 
   private dateObject: Date | undefined;         
   public formattedDate: string | undefined;
 
   
- 
+  categories= signal<CategoryDto[]>([]);
   customers= signal<CustomerDto[]>([]);
   salesDays= signal<SalesDayDto[]>([]);
   selectedSalesDay = new BehaviorSubject<SalesDayDto>({});
@@ -32,13 +33,22 @@ export class DataService {
   constructor() {
       this.loadSalesDaysFromBackend();
       this.loadCustomersFromBackend();
+      this.loadCategoriesFromBackend();
     }
 
   getSalesDayDate(salesDay: SalesDayDto) {
     return this.formateDate(salesDay);
   }
 
+  loadCategoriesFromBackend(){
   
+    this.categoryService.apiCategoryGetAllCategoriesGet().subscribe(x=>{
+     
+      this.categories.set(x);
+      console.log(this.categories());
+    });
+  }
+
 loadCustomersFromBackend(){
   this.customerService.apiCustomerGetAllCustomersGet().subscribe(x=>{
     this.customers.set(x);

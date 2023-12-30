@@ -11,9 +11,32 @@ import { CustomerDto, CustomerService } from '../swagger';
   styleUrl: './customers.component.scss'
 })
 export class CustomersComponent {
+
+//schreib mir die eine Methode, die die Customer in die Datenbank schreibt  
+    
+
+
   editingCustomer: any = null;
+  
   public dataService = inject(DataService);
   public customerService= inject(CustomerService);
+
+
+
+
+  createCustomerFromInput(customerName: string, customerAddress: string) {
+    const customer = {name: customerName, address:customerAddress} as CustomerDto;
+    this.customerService.apiCustomerAddNewCustomerPost(customer).subscribe(x=>{
+      console.log("Customer sent to DB")
+      this.dataService.loadCustomersFromBackend();
+    },error=>{
+      console.error("Error: ",error)
+    }
+    );
+    console.log("added");
+    customerName = "";
+  }
+ 
 
 
   saveChanges(customer : CustomerDto) {
@@ -25,8 +48,11 @@ export class CustomersComponent {
       });
   }
 
-deleteCustomer(_t10: CustomerDto) {
-
+deleteCustomer(customer: CustomerDto) {
+  this.customerService.apiCustomerDeleteCustomerDelete(customer).subscribe(x=>{
+    console.log(`Customer ${customer.name} deleted`)
+    this.dataService.loadCustomersFromBackend();
+  });
 }
 editCustomer(customer: CustomerDto) {
   this.editingCustomer = customer;

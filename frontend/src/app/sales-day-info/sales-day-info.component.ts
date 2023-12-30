@@ -4,15 +4,21 @@ import { SalesDayDto, SalesDayService } from '../swagger';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-sales-day-info',
   standalone: true,
-  imports: [CommonModule],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './sales-day-info.component.html',
   styleUrl: './sales-day-info.component.scss'
 })
 export class SalesDayInfoComponent implements OnInit {
+
+
+
+  
   @Input() salesDay: SalesDayDto = {};
   private salesDayService = inject(SalesDayService);
   public dataService = inject(DataService);
@@ -21,6 +27,9 @@ export class SalesDayInfoComponent implements OnInit {
   public formattedDate: string | undefined;
   private subscription: Subscription = new Subscription();
 
+
+
+  
 
   ngOnInit(): void {
     this.subscription = this.dataService.selectedSalesDay.subscribe(salesDay => {

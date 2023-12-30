@@ -1,4 +1,4 @@
-@baseUrl = https://localhost:5001
+@baseUrl = http://localhost:5000
 
 
 ################################################## Category
@@ -6,6 +6,15 @@ GET {{baseUrl}}/api/Category/getAllCategories
 #####
 
 ################################################## Customer
+DELETE {{baseUrl}}/api/Customer/deleteCustomer
+Content-type: application/json
+
+{
+         "id": 1,
+   "name": "abc",
+   "address": "abc"
+}
+#####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
 POST {{baseUrl}}/api/Customer/addNewCustomer
@@ -13,17 +22,17 @@ Content-type: application/json
 
 {
    "name": "abc",
-   "address": "abc"
-}
+      "address": "abc"
+   }
 #####
 PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "address": "abc"
-}
+         "id": 1,
+         "name": "abc",
+      "address": "abc"
+   }
 #####
 
 ################################################## Order
@@ -39,8 +48,8 @@ POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
+      "id": 1,
+      "name": "abc",
    "dateString": "abc"
 }
 #####

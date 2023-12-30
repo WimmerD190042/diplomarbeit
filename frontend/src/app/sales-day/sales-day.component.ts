@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
-
+import { CategoryDto, CategoryService, SubCategoryDto } from '../swagger';
 @Component({
   selector: 'app-sales-day',
   standalone: true,
@@ -11,9 +11,28 @@ import { DataService } from '../data.service';
 })
 export class SalesDayComponent {
 customerChanged() {
-  
+throw new Error('Method not implemented.');
 }
+
   public dataService = inject(DataService);
+  public categoryService = inject(CategoryService); 
+
+  selectedCategory: CategoryDto = {};
+  selectedSubCategory: SubCategoryDto = {};
+
+  onSubCategorySelected(subCategory:SubCategoryDto) {
+    this.selectedSubCategory = subCategory;
+  }
+
+  onCategorySelected(category:CategoryDto) {
+    console.log(category.subCategories);
+    this.selectedCategory = category;
+  }
+  
+
+     
+
+
 
 
    addNameField(button:any) {

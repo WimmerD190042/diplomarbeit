@@ -11,22 +11,10 @@ namespace OrderBackend.Controllers
         public CategoryController(CategoryService db) => _dbService = db;
 
         [HttpGet("getAllCategories")]
-        public List<Category> GetAllCategories()
+        public List<CategoryDto> GetAllCategories()
         {
             return _dbService.GetAllCategories();
         }
 
-        //[HttpPost("addNewCustomer")]
-        //public string AddCustomer(NewCustomerDto newCustomer)
-        //{
-        //    return _dbService.AddCustomer(newCustomer);
-            
-        //}
-
-        //[HttpPut("editCustomer")]
-        //public string EditCustomer(CustomerDto editCustomerDto)
-        //{
-        //    return _dbService.EditCustomer(editCustomerDto);
-        //}
     }
 }

@@ -65,5 +65,12 @@ namespace OrderBackend.Services
             _db.SaveChanges();
             return "Customer edited";
         }
+
+        public void DeleteCustomer(CustomerDto Customer)
+        {
+                Customer deleteCustomer= _db.Customers.Where(x=>x.Id == Customer.Id).First();
+            _db.Customers.Remove(deleteCustomer);
+            _db.SaveChanges();
+        }
     }
 }
