@@ -78,7 +78,7 @@ addOrder() {
         this.orderService.orderOrderPost(order).subscribe(x=>{
           console.log("Order sent to DB")
           this.dataService.loadSalesDaysFromBackend();
-
+            this.customerChanged();
         },error=>{
           console.error("Error: ",error.error)
         });
