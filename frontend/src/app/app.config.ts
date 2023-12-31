@@ -10,10 +10,10 @@ import { FormsModule } from '@angular/forms';
 export const appConfig: ApplicationConfig = {
  
   providers: [
-   
     FormsModule,
-   provideHttpClient(),
+    provideHttpClient(),
     provideRouter(routes), provideAnimations(),
-  {provide: BASE_PATH,useValue:environment.apiRoot},
-  ]
+    { provide: BASE_PATH, useValue: environment.apiRoot },
+    provideAnimations()
+]
 };

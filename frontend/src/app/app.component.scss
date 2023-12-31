@@ -1,7 +1,46 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body{
+body {
     background-color: #3e3c47ff;
+}
+
+.centered-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.mat-nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    /* Adjust the width and other styles as needed */
+    width: 260px;
+    background: #060606;
+    /* Add any other styles you want for the sidebar container */
+}
+
+.main-content {
+    /* Adjust the styles for the main content area */
+    flex: 1;
+    /* Add any other styles you want for the main content container */
+}
+
+.active-link {
+    color: orange;
 }
