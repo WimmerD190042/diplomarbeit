@@ -1,5 +1,5 @@
 import { Component, Inject, Injectable, InjectionToken, computed, inject, signal } from '@angular/core';
-import { Category, CategoryDto, CategoryService, CustomerDto, CustomerService, SalesDayDto, SalesDayService } from './swagger';
+import { Category, CategoryDto, CategoryService, CustomerDto, CustomerService, MeatPieceDto, SalesDayDto, SalesDayService } from './swagger';
 import { HttpClientModule } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 export const SWAGGER_salesDayService_TOKEN = new InjectionToken<SalesDayService>('swaggersalesDayService');
@@ -40,10 +40,12 @@ export class DataService {
     return this.formateDate(salesDay);
   }
 
-  loadCategoriesFromBackend(){
-  
-    this.categoryService.apiCategoryGetAllCategoriesGet().subscribe(x=>{
-     
+  getMeatPieceFromID(id: number): MeatPieceDto | undefined {
+    return this.categories().flatMap(x => x?.subCategories).flatMap(x => x?.meatPieces).find(x => x?.id == id) || undefined;
+  }
+
+  loadCategoriesFromBackend() {
+    this.categoryService.apiCategoryGetAllCategoriesGet().subscribe(x => {
       this.categories.set(x);
       console.log(this.categories());
     });

@@ -16,6 +16,7 @@ Content-type: application/json
    "name": "abc",
    "address": "abc"
 }
+
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -39,6 +40,8 @@ Content-type: application/json
 
 ################################################## Order
 GET {{baseUrl}}/Order/Orders
+#####
+GET {{baseUrl}}/Order/OrdersByCustomer?customerId=1
 #####
 POST {{baseUrl}}/Order/Order
 Content-type: application/json
