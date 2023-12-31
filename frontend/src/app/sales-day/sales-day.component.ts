@@ -59,6 +59,8 @@ addOrder() {
       customerId:this.selectedCustomerId,
       date: dateNow,
       notes: this.notes,
+      meatPieceId: this.selectedMeatPiece.id,
+      
 
       
       
