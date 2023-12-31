@@ -1,7 +1,7 @@
-import { Component,  ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component,  ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
-import { CategoryDto, CategoryService, CustomerDto, MeatPieceDto, SubCategoryDto } from '../swagger';
+import { CategoryDto, CategoryService, CustomerDto, MeatPieceDto, OrderDto, OrderService, SubCategoryDto } from '../swagger';
 import { Order } from '../swagger';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
@@ -15,20 +15,30 @@ import { ChangeDetectorRef } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class SalesDayComponent {
-customerChanged() {
-throw new Error('Method not implemented.');
-}
+
 
 public changeDetectorRef = inject(ChangeDetectorRef);
   public dataService = inject(DataService);
   public categoryService = inject(CategoryService); 
+  public orderService = inject(OrderService);
+
+  public orders= signal<OrderDto[]>([]);
 
   notes: string = "";
-selectedCustomerId : CustomerDto = {};
+selectedCustomerId : Number = 0;
 
   selectedCategory: CategoryDto = {};
   selectedSubCategory: SubCategoryDto = {};
   selectedMeatPiece: MeatPieceDto = {};
+
+  customerChanged() {
+    console.log("changingchangingchanging")
+        this.orderService.orderOrdersByCustomerGet(this.selectedCustomerId as number).subscribe(x=>{
+          this.orders.set(x);
+          console.log("orders: ",this.orders);
+        });
+  }
+
 
   onMeatPieceSelected(meatpiece: MeatPieceDto) {
     console.log('meatpiece:', meatpiece);
@@ -51,21 +61,28 @@ selectedCustomerId : CustomerDto = {};
      
 addOrder() {  
     console.log("addOrder clicked"); 
-    const dateObject = new Date();
-    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-   var dateNow= dateObject.toLocaleDateString('de-DE', options); 
-
-    const order = {
-      customerId:this.selectedCustomerId,
-      date: dateNow,
-      notes: this.notes,
-      meatPieceId: this.selectedMeatPiece.id,
+    const dateString = new Date().toISOString();
       
 
-      
-      
-    } as Order;
-    console.log(order);
+      const order = {
+        customerId: this.selectedCustomerId as number,
+        dateString: dateString,
+        notes: this.notes,
+        meatPieceId: this.selectedMeatPiece.id,
+        salesDayId: this.dataService.selectedSalesDay.value.id,
+        
+
+        
+        
+      } as OrderDto;
+        this.orderService.orderOrderPost(order).subscribe(x=>{
+          console.log("Order sent to DB")
+          this.dataService.loadSalesDaysFromBackend();
+
+        },error=>{
+          console.error("Error: ",error.error)
+        });
+      console.log(order);
     console.log(this.selectedMeatPiece.name);
 }
 

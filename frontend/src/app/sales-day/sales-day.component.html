@@ -23,7 +23,7 @@
 
 <div style="display: flex;">
     <label for="selectPerson">Kunde</label>
-    <select  style="width: 20%;" class="form-select" [(ngModel)]="selectedCustomerId" (selectionchange)="customerChanged()"> 
+    <select  style="width: 20%;" class="form-select" [(ngModel)]="selectedCustomerId" (change)="customerChanged()"> 
         <option *ngFor="let customer of dataService.customers()" [value]="customer.id" >
             {{customer.name}} 
         </option>
@@ -113,6 +113,15 @@
                 +
               </button>
             </td>
+      </tr>
+      <tr *ngFor="let order of orders()">
+        
+    
+          <td>{{order.id}}</td>
+          <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
+        <td>megne</td>
+        <td>  {{order.notes}}</td>
+        
       </tr>
     </tbody>
   </table>

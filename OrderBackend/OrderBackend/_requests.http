@@ -15,7 +15,7 @@ Content-type: application/json
          "id": 1,
          "name": "abc",
          "address": "abc"
-      }
+   }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -32,179 +32,26 @@ Content-type: application/json
 
 {
       "id": 1,
-      "name": "abc",
-      "address": "abc"
-   }
+         "name": "abc",
+         "address": "abc"
+      }
 #####
 
 ################################################## Order
 GET {{baseUrl}}/Order/Orders
 #####
+GET {{baseUrl}}/Order/OrdersByCustomer?customerId=1
+#####
 POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-      "id": 1,
-      "customerId": 1,
-      "salesDayId": 1,
-      "date": "abc",
-      "notes": "abc",
-      "meatPieceId": 1,
-            "salesDay": 
-      {
-         "id": 1,
-         "date": "abc",
-         "name": "abc",
-               "orders": 
-                  []
-            },
-      "meatPiece": 
-            {
-               "id": 1,
-               "name": "abc",
-                  "pricePerKg": 1,
-                  "subCategoryId": 1,
-               "articles": 
-               [{
-                  "id": 1,
-                  "name": "abc",
-                  "meatPieceId": 1,
-                  "weight": 1,
-                  "orderId": 1,
-                  "meatPiece": 
-                  ,
-                  "order": 
-                  
-               }],
-         "subCategory": 
-               {
-                  "id": 1,
-               "name": "abc",
-               "categoryId": 1,
-            "category": 
-               {
-                  "id": 1,
-                  "name": "abc",
-               "subCategories": 
-                  []
-            },
-            "meatPieces": 
-            [{
-               "id": 1,
-               "name": "abc",
-               "pricePerKg": 1,
-               "subCategoryId": 1,
-               "articles": 
-               [{
-                  "id": 1,
-                  "name": "abc",
-                  "meatPieceId": 1,
-                  "weight": 1,
-                  "orderId": 1,
-                  "meatPiece": 
-                  ,
-                  "order": 
-                  
-               }],
-               "subCategory": 
-               {
-                  "id": 1,
-                  "name": "abc",
-                  "categoryId": 1,
-                  "category": 
-                  ,
-                  "meatPieces": 
-                  []
-               }
-            }]
-         }
-      },
-      "customer": 
-      {
-         "id": 1,
-         "name": "abc",
-         "address": "abc",
-         "orders": 
-         [{
-            "id": 1,
-            "customerId": 1,
-            "salesDayId": 1,
-            "date": "abc",
-            "notes": "abc",
-            "meatPieceId": 1,
-            "salesDay": 
-            {
-               "id": 1,
-               "date": "abc",
-               "name": "abc",
-               "orders": 
-               [{
-                  "id": 1,
-                  "customerId": 1,
-                  "salesDayId": 1,
-                  "date": "abc",
-                  "notes": "abc",
-                  "meatPieceId": 1,
-                  "salesDay": 
-                  ,
-                  "meatPiece": 
-                  ,
-                  "customer": 
-                  
-               }]
-            },
-            "meatPiece": 
-            {
-               "id": 1,
-               "name": "abc",
-               "pricePerKg": 1,
-               "subCategoryId": 1,
-               "articles": 
-               [{
-                  "id": 1,
-                  "name": "abc",
-                  "meatPieceId": 1,
-                  "weight": 1,
-                  "orderId": 1,
-                  "meatPiece": 
-                  ,
-                  "order": 
-                  
-               }],
-               "subCategory": 
-               {
-                  "id": 1,
-                  "name": "abc",
-                  "categoryId": 1,
-                  "category": 
-                  ,
-                  "meatPieces": 
-                  []
-               }
-            },
-            "customer": 
-            {
-               "id": 1,
-               "name": "abc",
-               "address": "abc",
-               "orders": 
-               [{
-                  "id": 1,
-                  "customerId": 1,
-                  "salesDayId": 1,
-                  "date": "abc",
-                  "notes": "abc",
-                  "meatPieceId": 1,
-                  "salesDay": 
-                  ,
-                  "meatPiece": 
-                  ,
-                  "customer": 
-                  
-               }]
-            }
-         }]
-      }
+   "id": 1,
+         "dateString": "abc",
+         "customerId": 1,
+         "salesDayId": 1,
+         "notes": "abc",
+      "meatPieceId": 1
    }
 #####
 
@@ -217,7 +64,7 @@ POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-      "id": 1,
+         "id": 1,
       "name": "abc",
       "dateString": "abc"
    }

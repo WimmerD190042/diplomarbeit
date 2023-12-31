@@ -16,10 +16,16 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost("Order")]
-    public string AddOrder(Order order)
+    public string AddOrder(OrderDto newOrder)
     {
-        _dbService.AddOrder(order);
+        _dbService.AddOrder(newOrder);
         return "Customer added";
+    }
+
+    [HttpGet("OrdersByCustomer")]
+    public List<Order> getOrdersByCustomerId(int customerId)
+    {
+        return _dbService.getOrdersByCustomer(customerId);
     }
 
 }

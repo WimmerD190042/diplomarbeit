@@ -11,6 +11,8 @@ public partial class MeatPiece
 
     public double PricePerKg { get; set; }
 
+
+
     public int SubCategoryId { get; set; }
 
     public virtual ICollection<Article> Articles { get; } = new List<Article>();
