@@ -105,20 +105,20 @@ namespace OrderBackend.Services
                 }).ToList()
             }).ToList();
 
-            // Hier kannst du das JSON nutzen oder einfach die Liste zurückgeben
+            
             return categoryDtos;
         }
 
 
-        //public List<Category> GetAllCategories()
-        //{
+        public void ReadCategories()
+        {
 
-        //    //einkommentieren wenn categories neu geladen werden müssen
-        //    //ReadAndInsertCategories();
-        //    _db.SaveChanges();
-        //    return _db.Categories.OrderBy(x => x.Name).ToList();
+            //einkommentieren wenn categories neu geladen werden müssen
+            ReadAndInsertCategories();
+            _db.SaveChanges();
+            
 
-        //}
+        }
 
         public string AddCustomer(NewCustomerDto newCustomer)
         {

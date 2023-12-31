@@ -26,6 +26,7 @@ homeClicked() {
 }
 
 
+
 salesDaysOverviewClick(){
   this.router.navigateByUrl('salesDaysOverview');
     console.log("salesDaysOverview clicked")

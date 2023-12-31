@@ -4,6 +4,8 @@
 ################################################## Category
 GET {{baseUrl}}/api/Category/getAllCategories
 #####
+POST {{baseUrl}}/api/Category/readCategories
+#####
 
 ################################################## Customer
 DELETE {{baseUrl}}/api/Customer/deleteCustomer
@@ -11,9 +13,9 @@ Content-type: application/json
 
 {
          "id": 1,
-   "name": "abc",
-   "address": "abc"
-}
+         "name": "abc",
+         "address": "abc"
+      }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -21,7 +23,7 @@ POST {{baseUrl}}/api/Customer/addNewCustomer
 Content-type: application/json
 
 {
-   "name": "abc",
+      "name": "abc",
       "address": "abc"
    }
 #####
@@ -29,14 +31,181 @@ PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
 {
-         "id": 1,
-         "name": "abc",
+      "id": 1,
+      "name": "abc",
       "address": "abc"
    }
 #####
 
 ################################################## Order
 GET {{baseUrl}}/Order/Orders
+#####
+POST {{baseUrl}}/Order/Order
+Content-type: application/json
+
+{
+      "id": 1,
+      "customerId": 1,
+      "salesDayId": 1,
+      "date": "abc",
+      "notes": "abc",
+      "meatPieceId": 1,
+            "salesDay": 
+      {
+         "id": 1,
+         "date": "abc",
+         "name": "abc",
+               "orders": 
+                  []
+            },
+      "meatPiece": 
+            {
+               "id": 1,
+               "name": "abc",
+                  "pricePerKg": 1,
+                  "subCategoryId": 1,
+               "articles": 
+               [{
+                  "id": 1,
+                  "name": "abc",
+                  "meatPieceId": 1,
+                  "weight": 1,
+                  "orderId": 1,
+                  "meatPiece": 
+                  ,
+                  "order": 
+                  
+               }],
+         "subCategory": 
+               {
+                  "id": 1,
+               "name": "abc",
+               "categoryId": 1,
+            "category": 
+               {
+                  "id": 1,
+                  "name": "abc",
+               "subCategories": 
+                  []
+            },
+            "meatPieces": 
+            [{
+               "id": 1,
+               "name": "abc",
+               "pricePerKg": 1,
+               "subCategoryId": 1,
+               "articles": 
+               [{
+                  "id": 1,
+                  "name": "abc",
+                  "meatPieceId": 1,
+                  "weight": 1,
+                  "orderId": 1,
+                  "meatPiece": 
+                  ,
+                  "order": 
+                  
+               }],
+               "subCategory": 
+               {
+                  "id": 1,
+                  "name": "abc",
+                  "categoryId": 1,
+                  "category": 
+                  ,
+                  "meatPieces": 
+                  []
+               }
+            }]
+         }
+      },
+      "customer": 
+      {
+         "id": 1,
+         "name": "abc",
+         "address": "abc",
+         "orders": 
+         [{
+            "id": 1,
+            "customerId": 1,
+            "salesDayId": 1,
+            "date": "abc",
+            "notes": "abc",
+            "meatPieceId": 1,
+            "salesDay": 
+            {
+               "id": 1,
+               "date": "abc",
+               "name": "abc",
+               "orders": 
+               [{
+                  "id": 1,
+                  "customerId": 1,
+                  "salesDayId": 1,
+                  "date": "abc",
+                  "notes": "abc",
+                  "meatPieceId": 1,
+                  "salesDay": 
+                  ,
+                  "meatPiece": 
+                  ,
+                  "customer": 
+                  
+               }]
+            },
+            "meatPiece": 
+            {
+               "id": 1,
+               "name": "abc",
+               "pricePerKg": 1,
+               "subCategoryId": 1,
+               "articles": 
+               [{
+                  "id": 1,
+                  "name": "abc",
+                  "meatPieceId": 1,
+                  "weight": 1,
+                  "orderId": 1,
+                  "meatPiece": 
+                  ,
+                  "order": 
+                  
+               }],
+               "subCategory": 
+               {
+                  "id": 1,
+                  "name": "abc",
+                  "categoryId": 1,
+                  "category": 
+                  ,
+                  "meatPieces": 
+                  []
+               }
+            },
+            "customer": 
+            {
+               "id": 1,
+               "name": "abc",
+               "address": "abc",
+               "orders": 
+               [{
+                  "id": 1,
+                  "customerId": 1,
+                  "salesDayId": 1,
+                  "date": "abc",
+                  "notes": "abc",
+                  "meatPieceId": 1,
+                  "salesDay": 
+                  ,
+                  "meatPiece": 
+                  ,
+                  "customer": 
+                  
+               }]
+            }
+         }]
+      }
+   }
 #####
 
 ################################################## SalesDay
@@ -50,6 +219,6 @@ Content-type: application/json
 {
       "id": 1,
       "name": "abc",
-   "dateString": "abc"
-}
+      "dateString": "abc"
+   }
 #####

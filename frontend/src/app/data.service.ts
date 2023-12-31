@@ -74,7 +74,7 @@ formateDate(salesDay: SalesDayDto) {
     return dateObject.toLocaleDateString('de-DE', options);
   } else {
     // Handle the case when dateString is not available
-    console.error('Date string is not available.');
+    
     return undefined;
   }
 }

@@ -15,7 +15,7 @@ namespace OrderBackend.Services
             //{
             //    string content = reader.ReadToEnd();
             //    string[] lines = content.Split("\n");
-            //    NewCustomerDto newCustomer = new() ;
+            //    NewCustomerDto newCustomer = new();
             //    foreach (string line in lines)
             //    {
             //        string[] parts = line.Split(";");
@@ -27,14 +27,14 @@ namespace OrderBackend.Services
             //                parts[2] = "";
             //            }
 
-            //             newCustomer = new NewCustomerDto()
+            //            newCustomer = new NewCustomerDto()
             //            {
             //                Name = parts[1],
             //                Address = parts[2],
 
             //            };
             //        }
-                    
+
 
 
             //        Customer addCustomer = new Customer().CopyPropertiesFrom(newCustomer);

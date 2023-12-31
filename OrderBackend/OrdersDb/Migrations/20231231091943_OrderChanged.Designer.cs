@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrdersDb;
 
@@ -11,9 +12,11 @@ using OrdersDb;
 namespace OrdersDb.Migrations
 {
     [DbContext(typeof(OrdersContext))]
-    partial class OrdersContextModelSnapshot : ModelSnapshot
+    [Migration("20231231091943_OrderChanged")]
+    partial class OrderChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,7 +135,7 @@ namespace OrdersDb.Migrations
                     b.Property<int>("MeatPieceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("salesDayId")
+                    b.Property<int?>("SalesDayId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -141,7 +144,7 @@ namespace OrdersDb.Migrations
 
                     b.HasIndex("MeatPieceId");
 
-                    b.HasIndex("salesDayId");
+                    b.HasIndex("SalesDayId");
 
                     b.ToTable("Orders");
                 });
@@ -232,9 +235,7 @@ namespace OrdersDb.Migrations
 
                     b.HasOne("OrdersDb.SalesDay", null)
                         .WithMany("Orders")
-                        .HasForeignKey("salesDayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SalesDayId");
 
                     b.Navigation("Customer");
 

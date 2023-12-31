@@ -25,10 +25,13 @@ export class WelcomePageComponent implements OnInit {
   // Definiere die Funktion typeWriter
   typeWriteWelcome(): void {
     if (this.i < this.welcomeText.length) {
-      document.getElementById("typewriterWelcome")!.innerHTML += this.welcomeText.charAt(this.i);
-      this.i++;
-      setTimeout(() => this.typeWriteWelcome(), this.speed);
-      console.log("eoeooe")
+      if(document.getElementById("typewriterWelcome") != null){
+        document.getElementById("typewriterWelcome")!.innerHTML += this.welcomeText.charAt(this.i);
+        this.i++;
+        setTimeout(() => this.typeWriteWelcome(), this.speed);
+        console.log("eoeooe")
+      }
+    
     }
   }
 

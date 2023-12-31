@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace OrderBackend.Controllers;
 
 [Route("[controller]")]
@@ -12,4 +14,12 @@ public class OrderController : ControllerBase
     {
         return _dbService.getOrders();
     }
+
+    [HttpPost("Order")]
+    public string AddOrder(Order order)
+    {
+        _dbService.AddOrder(order);
+        return "Customer added";
+    }
+
 }

@@ -13,6 +13,9 @@ namespace OrdersDb
 
         public string Name { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; } = new List<Order>();
+
+
+
     }
 }

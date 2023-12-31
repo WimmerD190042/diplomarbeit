@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace OrderBackend.Controllers
 {
@@ -14,6 +15,12 @@ namespace OrderBackend.Controllers
         public List<CategoryDto> GetAllCategories()
         {
             return _dbService.GetAllCategories();
+        }
+
+        [HttpPost("readCategories")]
+        public void ReadCategories()
+        {
+           _dbService.ReadCategories();
         }
 
     }

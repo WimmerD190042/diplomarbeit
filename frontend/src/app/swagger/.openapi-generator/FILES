@@ -20,6 +20,7 @@ model/meatPieceDto.ts
 model/models.ts
 model/newCustomerDto.ts
 model/order.ts
+model/salesDay.ts
 model/salesDayDto.ts
 model/subCategory.ts
 model/subCategoryDto.ts

@@ -34,7 +34,7 @@ namespace OrderBackend.Services
             Console.WriteLine(parsedDate);
 
 
-            SalesDay salesDay = new SalesDay { Id = salesDayDto.Id, Name =salesDayDto.Name,Orders=null,Date=parsedDate};
+            SalesDay salesDay = new SalesDay { Id = salesDayDto.Id, Name =salesDayDto.Name,Date=parsedDate};
 
             _db.SalesDays.Add(salesDay);
             _db.SaveChanges();

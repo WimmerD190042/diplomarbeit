@@ -9,15 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { MeatPiece } from './meatPiece';
 import { Customer } from './customer';
-import { Article } from './article';
+import { SalesDay } from './salesDay';
 
 
 export interface Order { 
     id?: number;
     customerId?: number;
+    salesDayId?: number;
     date?: string;
-    readonly articles?: Array<Article> | null;
+    notes?: string | null;
+    meatPieceId?: number;
+    salesDay?: SalesDay;
+    meatPiece?: MeatPiece;
     customer?: Customer;
 }
 
