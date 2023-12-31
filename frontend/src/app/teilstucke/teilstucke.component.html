@@ -1,0 +1,53 @@
+<div style="display: flex;">
+    <label for="selectPerson">Teilstücke</label>
+    <div dropdown class="d-inline-block">
+        <div class="dropdown">
+            <button #selectedMeatPiece class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{selectedMeatPiece.name ? selectedMeatPiece : 'Auswählen'}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
+                    (click)="$event.stopPropagation()">
+                    <a class="dropdown-item" (click)="onCategorySelected(category)">{{category.name}}</a>
+                    <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
+                        <li *ngFor="let subcategory of selectedCategory?.subCategories" class="dropdown-submenu"
+                            (click)="$event.stopPropagation()">
+                            <a class="dropdown-item"
+                                (click)="onSubCategorySelected(subcategory)">{{subcategory.name}}</a>
+                            <ul [class.show]="selectedSubCategory === subcategory"
+                                class="dropdown-menu dropdown-submenu">
+                                <li *ngFor="let meatpiece of selectedSubCategory?.meatPieces">
+                                    <a class="dropdown-item"
+                                        (click)="onMeatPieceSelected(meatpiece)">{{meatpiece.name}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Person</th>
+            <th scope="col">Menge (kg)</th>
+            <th scope="col">Anmerkung</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Müller</td>
+            <td>
+                0.5
+            </td>
+            <td>
+                Anmerkung
+            </td>
+        </tr>
+    </tbody>
+</table>
