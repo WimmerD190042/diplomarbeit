@@ -14,11 +14,15 @@
         {
             Order addOrder = new Order
             {
+                Id= newOrder.Id,
                 Customer = _db.Customers.Find(newOrder.CustomerId),
-                SalesDay = _db.SalesDays.Find(newOrder.salesDayId),
+                SalesDay = _db.SalesDays.Find(newOrder.SalesDayId),
                 Date = DateTime.Parse(newOrder.DateString),
                 Notes = newOrder.Notes,
-                MeatPiece = _db.MeatPieces.Find(newOrder.MeatPieceId)
+                MeatPiece = _db.MeatPieces.Find(newOrder.MeatPieceId),
+                amount=newOrder.Amount,
+                PaidStatus=newOrder.PaidStatus
+                
             };
             _db.Orders.Add(addOrder);
             _db.SaveChanges();

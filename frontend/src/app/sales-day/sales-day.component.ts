@@ -24,6 +24,9 @@ export class SalesDayComponent {
 
   public orders = signal<OrderDto[]>([]);
 
+  
+
+  quantity: number = 0.0;
   notes: string = "";
   selectedCustomerId: Number = 0;
 
@@ -88,21 +91,28 @@ export class SalesDayComponent {
   addOrder() {
     console.log("addOrder clicked");
     const dateString = new Date().toISOString();
-    const order = {
-      customerId: this.selectedCustomerId as number,
-      dateString: dateString,
-      notes: this.notes,
-      meatPieceId: this.selectedMeatPiece.id,
-      salesDayId: this.dataService.selectedSalesDay.value.id,
-    } as OrderDto;
-    this.orderService.orderOrderPost(order).subscribe(x => {
-      console.log("Order sent to DB")
-      this.dataService.loadSalesDaysFromBackend();
-      this.customerChanged();
-    }, error => {
-      console.error("Error: ", error.error)
-    });
-    console.log(order);
+      
+
+      const order = {
+        customerId: this.selectedCustomerId as number,
+        dateString: dateString,
+        notes: this.notes,
+        meatPieceId: this.selectedMeatPiece.id,
+        salesDayId: this.dataService.selectedSalesDay.value.id,
+        amount:this.quantity,
+        paidStatus:"false",
+
+        
+        
+      } as OrderDto;
+        this.orderService.orderOrderPost(order).subscribe(x=>{
+          console.log("Order sent to DB")
+          this.dataService.loadSalesDaysFromBackend();
+            this.customerChanged();
+        },error=>{
+          console.error("Error: ",error.error)
+        });
+      console.log(order);
     console.log(this.selectedMeatPiece.name);
   }
 

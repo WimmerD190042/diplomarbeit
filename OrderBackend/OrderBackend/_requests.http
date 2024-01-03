@@ -4,6 +4,8 @@
 ################################################## Category
 GET {{baseUrl}}/api/Category/getAllCategories
 #####
+GET {{baseUrl}}/api/Category/SubCategoriesByCategory?categoryId=1
+#####
 POST {{baseUrl}}/api/Category/readCategories
 #####
 
@@ -27,8 +29,6 @@ Content-type: application/json
    "address": "abc"
 }
 #####
-POST {{baseUrl}}/api/Customer/ReadCustomers
-#####
 PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
@@ -50,6 +50,8 @@ Content-type: application/json
 {
    "id": 1,
    "dateString": "abc",
+   "amount": 1,
+   "paidStatus": "abc",
    "customerId": 1,
    "salesDayId": 1,
    "notes": "abc",

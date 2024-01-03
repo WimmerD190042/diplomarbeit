@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 export const SWAGGER_salesDayService_TOKEN = new InjectionToken<SalesDayService>('swaggersalesDayService');
 
 
-class HeroListComponent {}
+
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,7 @@ export class DataService {
   public formattedDate: string | undefined;
 
   
+  selectedCategory = new BehaviorSubject<CategoryDto>({});
   categories= signal<CategoryDto[]>([]);
   customers= signal<CustomerDto[]>([]);
   salesDays= signal<SalesDayDto[]>([]);

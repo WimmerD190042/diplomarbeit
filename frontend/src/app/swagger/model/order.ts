@@ -18,6 +18,8 @@ export interface Order {
     id?: number;
     customerId?: number;
     salesDayId?: number;
+    amount?: number;
+    paidStatus?: string | null;
     date?: string;
     notes?: string | null;
     meatPieceId?: number;

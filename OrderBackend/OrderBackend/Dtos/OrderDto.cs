@@ -9,11 +9,13 @@
 
         public string DateString { get; set; }
 
-      
+        public double Amount { get; set; }  
+
+        public string PaidStatus { get; set; }
 
         public int CustomerId { get; set; }
 
-        public int salesDayId { get; set; }
+        public int SalesDayId { get; set; }
 
      
 
