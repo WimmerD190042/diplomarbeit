@@ -24,6 +24,9 @@ public changeDetectorRef = inject(ChangeDetectorRef);
 
   public orders= signal<OrderDto[]>([]);
 
+  
+
+  quantity: number = 0.0;
   notes: string = "";
 selectedCustomerId : Number = 0;
 
@@ -70,7 +73,8 @@ addOrder() {
         notes: this.notes,
         meatPieceId: this.selectedMeatPiece.id,
         salesDayId: this.dataService.selectedSalesDay.value.id,
-        
+        amount:this.quantity,
+        paidStatus:"false",
 
         
         

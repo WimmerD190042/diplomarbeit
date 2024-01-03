@@ -1,0 +1,29 @@
+<!-- meat-inventory.component.html -->
+<div class="meat-inventory">
+    <h2>Fleischbestand</h2>
+    <div *ngFor="let category of dataService.categories()">
+      <h3>{{ category.name }}</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Bestand</th>
+            <th>Umwandeln</th>
+            <!-- Weitere Spalten nach Bedarf -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let subcategory of category.subCategories">
+            <td>{{ subcategory.name }}</td>
+            <td> eooo </td>
+            <td>
+              <button (click)="(subcategory)">Umwandeln</button>
+              <!-- Oder ein Dropdown-Menü, je nach Bedarf -->
+            </td>
+            <!-- Weitere Spalten nach Bedarf -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

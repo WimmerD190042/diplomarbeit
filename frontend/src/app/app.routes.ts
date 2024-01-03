@@ -6,8 +6,10 @@ import { SalesDaysOverviewComponent } from './sales-days-overview/sales-days-ove
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { CustomersComponent } from './customers/customers.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { StockOverviewComponent } from './stock-overview/stock-overview.component';
 
 export const routes: Routes = [
+    {path:'stockOverview',component:StockOverviewComponent},
     {path:'dashboard',component:DashboardComponent},
     {path:'customers',component:CustomersComponent},
     {path:'salesDaysOverview',component:SalesDaysOverviewComponent},

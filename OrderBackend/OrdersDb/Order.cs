@@ -9,11 +9,11 @@ public partial class Order
 
     public int CustomerId { get; set; }
 
-    public int salesDayId { get; set; }
+    public int SalesDayId { get; set; }
 
-    //public double amount { get; set; }
+    public double amount { get; set; }
 
-    //public string status { get; set; }
+    public string PaidStatus { get; set; }
 
     public DateTime Date { get; set; }
 
