@@ -1,3 +1,8 @@
+.conOverview {
+    display: flex;
+    max-width: 100%;
+}
+
 body {
     background-color: #3e3c47ff;
 }
@@ -22,10 +27,6 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
-}
-
-.container {
-    display: flex;
 }
 
 .sidebar {

@@ -34,5 +34,11 @@ namespace OrderBackend.Controllers
         {
             _dbService.DeleteCustomer(editCustomerDto);
         }
+
+        [HttpPost("ReadCustomers")]
+        public void ReadCustomers()
+        {
+            _dbService.ReadCustomers();
+        }
     }
 }

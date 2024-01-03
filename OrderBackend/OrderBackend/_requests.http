@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:5000
+@baseUrl = https://localhost:5001
 
 
 ################################################## Category
@@ -26,6 +26,8 @@ Content-type: application/json
    "name": "abc",
    "address": "abc"
 }
+#####
+POST {{baseUrl}}/api/Customer/ReadCustomers
 #####
 PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
