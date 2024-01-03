@@ -4,9 +4,15 @@
 ################################################## Category
 GET {{baseUrl}}/api/Category/getAllCategories
 #####
+GET {{baseUrl}}/api/Category/stockOfSubcategory?subCategoryId=1
+#####
 GET {{baseUrl}}/api/Category/SubCategoriesByCategory?categoryId=1
 #####
 POST {{baseUrl}}/api/Category/readCategories
+#####
+PUT {{baseUrl}}/api/Category/updateStockForMeatPiece?meatPieceId=1&newStock=1
+#####
+PUT {{baseUrl}}/api/Category/updateStockForSubCategory?subCategoryId=1&newStock=1
 #####
 
 ################################################## Customer
@@ -14,10 +20,10 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-         "id": 1,
-         "name": "abc",
-      "address": "abc"
-}
+            "id": 1,
+            "name": "abc",
+            "address": "abc"
+         }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -25,8 +31,8 @@ POST {{baseUrl}}/api/Customer/addNewCustomer
 Content-type: application/json
 
 {
-         "name": "abc",
-         "address": "abc"
+      "name": "abc",
+      "address": "abc"
       }
 #####
 POST {{baseUrl}}/api/Customer/ReadCustomers
@@ -35,10 +41,10 @@ PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
 {
-      "id": 1,
-      "name": "abc",
-      "address": "abc"
-   }
+   "id": 1,
+   "name": "abc",
+   "address": "abc"
+}
 #####
 
 ################################################## Order
@@ -50,15 +56,15 @@ POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-      "id": 1,
-      "dateString": "abc",
-      "amount": 1,
-      "paidStatus": "abc",
-      "customerId": 1,
-      "salesDayId": 1,
-      "notes": "abc",
-      "meatPieceId": 1
-   }
+   "id": 1,
+   "dateString": "abc",
+   "amount": 1,
+   "paidStatus": "abc",
+   "customerId": 1,
+   "salesDayId": 1,
+   "notes": "abc",
+   "meatPieceId": 1
+}
 #####
 
 ################################################## SalesDay

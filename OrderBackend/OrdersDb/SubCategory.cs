@@ -9,6 +9,8 @@ public partial class SubCategory
 
     public string Name { get; set; } = null!;
 
+    public double Stock { get; set; }
+
     public int CategoryId { get; set; }
 
     public virtual Category Category { get; set; } = null!;

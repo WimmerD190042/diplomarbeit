@@ -17,6 +17,7 @@ export interface MeatPiece {
     id?: number;
     name?: string | null;
     pricePerKg?: number;
+    stock?: number;
     subCategoryId?: number;
     readonly articles?: Array<Article> | null;
     subCategory?: SubCategory;

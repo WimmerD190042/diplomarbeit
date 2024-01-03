@@ -7,7 +7,7 @@ namespace OrderBackend.Services
     {
         private readonly OrdersContext _db;
         public CategoryService(OrdersContext db) => _db = db;
-        string filePath = "D:\\diplomarbeit\\Daten\\GesamteTiere.TXT";
+        string filePath = "C:\\Users\\Megaport\\Desktop\\diplomarbeit\\diplomarbeit\\Daten\\GesamteTiere.TXT";
 
 
         public void ReadAndInsertCategories()
@@ -57,11 +57,11 @@ namespace OrderBackend.Services
                     var meatPiece = new MeatPiece
                     {
                         Name = meatPieceName,
-                        PricePerKg = 0.0, // Preis noch einfügen
+                        PricePerKg = 0.0,
                         SubCategory = currentSubCategory,
                         SubCategoryId = currentSubCategory.Id,
-                        
-                        
+
+
                     };
                     meatPieces.Add(meatPiece);
                     currentSubCategory.MeatPieces.Add(meatPiece);
@@ -127,7 +127,33 @@ namespace OrderBackend.Services
             return _db.SubCategories.Where(sc => sc.CategoryId == categoryId).ToList();
         }
 
-        public double getCategoryTotalStock(int categoryId)
+        public double GetSubCategoryTotalStock(int subCategoryId)
+        {
+
+            var totalStock = _db.SubCategories
+             .Where(sc => sc.Id == subCategoryId)
+             .SelectMany(sc => sc.MeatPieces)
+             .Sum(mp => mp.Stock);
+
+            return totalStock;
+        }
+
+        public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
+        {
+            var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
+            meatPiece.Stock = newStock;
+            _db.SaveChanges();
+        }
+
+        public void UpdateStockForSubCategory(int subCategoryId, double newStock)
+        {
+            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
+            subCategory.Stock = newStock;
+            _db.SaveChanges();
+        }
+
+
+        public double GetCategoryTotalStock(int categoryId)
         {
             //        var result = _db.Categories
             //.Where(c => c.Id == categoryId)
