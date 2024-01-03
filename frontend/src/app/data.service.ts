@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 export const SWAGGER_salesDayService_TOKEN = new InjectionToken<SalesDayService>('swaggersalesDayService');
 
 
-class HeroListComponent {}
+
 
 @Injectable({
   providedIn: 'root',

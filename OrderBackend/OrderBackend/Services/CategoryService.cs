@@ -105,7 +105,7 @@ namespace OrderBackend.Services
                 }).ToList()
             }).ToList();
 
-            
+
             return categoryDtos;
         }
 
@@ -116,28 +116,27 @@ namespace OrderBackend.Services
             //einkommentieren wenn categories neu geladen werden müssen
             ReadAndInsertCategories();
             _db.SaveChanges();
-            
+
 
         }
 
-        public string AddCustomer(NewCustomerDto newCustomer)
+        public double getCategoryTotalStock(int categoryId)
         {
-            Customer addCustomer = new Customer().CopyPropertiesFrom(newCustomer);
-            _db.Customers.Add(addCustomer);
-            _db.SaveChanges();
-            return "Customer added";
+            //        var result = _db.Categories
+            //.Where(c => c.Id == categoryId)
+            //.SelectMany(c => c.SubCategories)
+            //.Select(sc => new
+            //{
+            //    SubCategoryName = sc.Name,
+            //    MeatPieces = sc.MeatPieces.Select(mp => new
+            //    {
+            //        MeatPieceName = mp.Name,
+            //        Stock = mp.
+            //    })
+            //})
+            //.ToList();
+            //    }
 
-
-        }
-
-        public string EditCustomer(CustomerDto Customer)
-        {
-            Customer updateCustomer = _db.Customers.Where(x => x.Id == Customer.Id).First();
-            updateCustomer.Name = Customer.Name;
-            updateCustomer.Id = Customer.Id;
-            updateCustomer.Address = Customer.Address;
-            _db.SaveChanges();
-            return "Customer edited";
-        }
+            return null;
     }
 }
