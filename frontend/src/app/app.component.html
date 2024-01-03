@@ -38,6 +38,14 @@
             Kunden
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" (click)="handleNavLinkClick('stockOverview')"
+            [class.active-link]="activeLink === 'stockOverview'">
+            <mat-icon>person</mat-icon>
+            Fleischbestand
+          </a>
+        </li>
       </ul>
     </div>
   </div>

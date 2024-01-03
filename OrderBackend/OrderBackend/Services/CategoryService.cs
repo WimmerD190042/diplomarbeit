@@ -59,7 +59,9 @@ namespace OrderBackend.Services
                         Name = meatPieceName,
                         PricePerKg = 0.0, // Preis noch einfügen
                         SubCategory = currentSubCategory,
-                        SubCategoryId = currentSubCategory.Id
+                        SubCategoryId = currentSubCategory.Id,
+                        
+                        
                     };
                     meatPieces.Add(meatPiece);
                     currentSubCategory.MeatPieces.Add(meatPiece);

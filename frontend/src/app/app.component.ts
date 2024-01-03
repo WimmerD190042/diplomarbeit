@@ -22,6 +22,7 @@ export class AppComponent {
     this.activeLink = link;
     console.log(link)
     if (link == "dashboard") {
+      this.router.navigateByUrl('dashboard');
       //weiterleitung funktioniert nicht
       console.log("forwart do dashboard")
     } else if (link == "home") {
@@ -34,6 +35,10 @@ export class AppComponent {
     } else if (link == "customers") {
       //weiterleitung aktiviert
       this.router.navigateByUrl('customers');
+      //console.log("forwart do dashboard")
+    } else if (link == "stockOverview") {
+      //weiterleitung aktiviert
+      this.router.navigateByUrl('stockOverview');
       //console.log("forwart do dashboard")
     }
   }
