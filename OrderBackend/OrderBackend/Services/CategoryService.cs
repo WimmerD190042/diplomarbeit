@@ -7,7 +7,7 @@ namespace OrderBackend.Services
     {
         private readonly OrdersContext _db;
         public CategoryService(OrdersContext db) => _db = db;
-        string filePath = "C:\\Users\\Megaport\\Desktop\\diplomarbeit\\diplomarbeit\\Daten\\GesamteTiere.TXT";
+        string filePath = "D:\\diplomarbeit\\Daten\\GesamteTiere.TXT";
 
 
         public void ReadAndInsertCategories()

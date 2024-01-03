@@ -24,7 +24,7 @@ export class SalesDayComponent {
 
   public orders = signal<OrderDto[]>([]);
 
-  
+
 
   quantity: number = 0.0;
   notes: string = "";
@@ -40,27 +40,27 @@ export class SalesDayComponent {
   exportButton = document.getElementById("exportButton");
   handleButtonClick(): void {
     console.log('Export started');
-        //todo: Aktuelle Liste aus Backend holen
+    //todo: Aktuelle Liste aus Backend holen
 
-        // Holen der Liste
-        //let meineListe: string[] = ["a","b","c"];
-        //var meineListe = document.getElementById("meineListe").getElementsByTagName("li");
-        // Erstellen der CSV-Daten
-        var csvData = "Liste\n";
-        for (var i = 0; i < this.orders.length; i++) {
-          csvData += this.orders()[i].customerId + "\n";
-        }
-        // Erstellen eines Blob-Objekts
-        var blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-        // Erstellen eines Download-Links
-        var link = document.createElement("a");
-        // Verknüpfen des Download-Links mit dem Blob
-        link.href = window.URL.createObjectURL(blob);
-        // Festlegen des Dateinamens
-        link.download = "verkaufstag.csv";
-        // Klicken auf den Link, um den Download auszulösen
-        link.click();
-    
+    // Holen der Liste
+    //let meineListe: string[] = ["a","b","c"];
+    //var meineListe = document.getElementById("meineListe").getElementsByTagName("li");
+    // Erstellen der CSV-Daten
+    var csvData = "Liste\n";
+    for (var i = 0; i < this.orders.length; i++) {
+      csvData += this.orders()[i].customerId + "\n";
+    }
+    // Erstellen eines Blob-Objekts
+    var blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    // Erstellen eines Download-Links
+    var link = document.createElement("a");
+    // Verknüpfen des Download-Links mit dem Blob
+    link.href = window.URL.createObjectURL(blob);
+    // Festlegen des Dateinamens
+    link.download = "verkaufstag.csv";
+    // Klicken auf den Link, um den Download auszulösen
+    link.click();
+
   }
 
 
@@ -91,28 +91,26 @@ export class SalesDayComponent {
   addOrder() {
     console.log("addOrder clicked");
     const dateString = new Date().toISOString();
-      
 
-      const order = {
-        customerId: this.selectedCustomerId as number,
-        dateString: dateString,
-        notes: this.notes,
-        meatPieceId: this.selectedMeatPiece.id,
-        salesDayId: this.dataService.selectedSalesDay.value.id,
-        amount:this.quantity,
-        paidStatus:"false",
 
-        
-        
-      } as OrderDto;
-        this.orderService.orderOrderPost(order).subscribe(x=>{
-          console.log("Order sent to DB")
-          this.dataService.loadSalesDaysFromBackend();
-            this.customerChanged();
-        },error=>{
-          console.error("Error: ",error.error)
-        });
-      console.log(order);
+    const order = {
+      customerId: this.selectedCustomerId as number,
+      dateString: dateString,
+      notes: this.notes,
+      meatPieceId: this.selectedMeatPiece.id,
+      salesDayId: this.dataService.selectedSalesDay.value.id,
+      amount: this.quantity,
+      paidStatus: "false",
+
+    } as OrderDto;
+    this.orderService.orderOrderPost(order).subscribe(x => {
+      console.log("Order sent to DB")
+      this.dataService.loadSalesDaysFromBackend();
+      this.customerChanged();
+    }, error => {
+      console.error("Error: ", error.error)
+    });
+    console.log(order);
     console.log(this.selectedMeatPiece.name);
   }
 

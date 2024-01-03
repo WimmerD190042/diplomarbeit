@@ -2,20 +2,13 @@
   <h1>Verkaufstag: {{dataService.selectedSalesDay.value.name}}</h1>
   <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) }}</h5>
 
-  <!--Save File-->
+  <!--Save File todo-->
   <button (click)="handleButtonClick()">
     <mat-icon> local_printshop</mat-icon>
   </button>
-  
+
   <table class="table-secondary">
     <tr>
-      <!-- <td>
-            Ochse 1 
-        </td>
-        <td>
-            Ochse 2
-        </td> -->
-
       <td> Oxe</td>
       <td>
         <button class="btn btn-success" (click)="addNameField($event.target)">
@@ -31,41 +24,8 @@
       <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
         {{customer.name}}
       </option>
-
-
     </select>
-
   </div>
-
-
-
-  <!-- <div dropdown  class="d-inline-block">
-
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown button
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li *ngFor="let category of dataService.categories()" class="dropdown-submenu" (click)="$event.stopPropagation()">
-        <a class="dropdown-item" (click)="onCategorySelected(category)">{{category.name}}</a>
-        <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
-          <li *ngFor="let subcategory of selectedCategory?.subCategories" class="dropdown-submenu" (click)="$event.stopPropagation()">
-            <a class="dropdown-item" (click)="onSubCategorySelected(subcategory)">{{subcategory.name}}</a>
-            <ul [class.show]="selectedSubCategory === subcategory" class="dropdown-menu dropdown-submenu">
-              <li *ngFor="let meatpiece of selectedSubCategory?.meatPieces" (click)="$event.stopPropagation()">
-                <a class="dropdown-item">{{meatpiece.name}}</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-
-  </div> -->
-
-
 
   <table class="table table-hover">
     <thead>
@@ -83,38 +43,11 @@
         <td>
           <div dropdown class="d-inline-block">
 
-                    <div class="dropdown">
-                        <button #selectedMeatPiece class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          {{selectedMeatPiece.name ? selectedMeatPiece.name : 'Auswählen'}}
+            <div class="dropdown">
+              <button #selectedMeatPiece class="btn btn-secondary dropdown-toggle" type="button"
+                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                {{selectedMeatPiece.name ? selectedMeatPiece.name : 'Auswählen'}}
 
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li *ngFor="let category of dataService.categories()" class="dropdown-submenu" (click)="$event.stopPropagation()">
-                            <a class="dropdown-item" (click)="onCategorySelected(category)">{{category.name}}</a>
-                            <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
-                            <li *ngFor="let subcategory of selectedCategory?.subCategories" class="dropdown-submenu" (click)="$event.stopPropagation()">
-                                <a class="dropdown-item" (click)="onSubCategorySelected(subcategory)">{{subcategory.name}}</a>
-                                <ul [class.show]="selectedSubCategory === subcategory" class="dropdown-menu dropdown-submenu">
-                                <li *ngFor="let meatpiece of selectedSubCategory?.meatPieces"  >
-                                    <a class="dropdown-item" (click)="onMeatPieceSelected(meatpiece)">{{meatpiece.name}}</a>
-                                </li>
-                                </ul>
-                            </li>
-                            </ul>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-            </td>
-
-            <td>
-                <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" placeholder="0.0">
-            </td>
-            <td>
-              <textarea id="notes" class="form-control" rows="1" style="height: 36px; overflow-y: hidden;" oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';" [(ngModel)]="notes"></textarea>
-              <td>
-              <button  class="btn btn-success" (click)="addOrder()">
-                +
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
@@ -133,10 +66,12 @@
                   </ul>
                 </li>
               </ul>
+            </div>
+          </div>
         </td>
 
         <td>
-          <input type="number" class="form-control" id="quantity" placeholder="0.0">
+          <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" placeholder="0.0">
         </td>
         <td>
           <textarea id="notes" class="form-control" rows="1" style="height: 36px; overflow-y: hidden;"
@@ -146,16 +81,30 @@
           <button class="btn btn-success" (click)="addOrder()">
             +
           </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
+              (click)="$event.stopPropagation()">
+              <a class="dropdown-item" (click)="onCategorySelected(category)">{{category.name}}</a>
+              <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
+                <li *ngFor="let subcategory of selectedCategory?.subCategories" class="dropdown-submenu"
+                  (click)="$event.stopPropagation()">
+                  <a class="dropdown-item" (click)="onSubCategorySelected(subcategory)">{{subcategory.name}}</a>
+                  <ul [class.show]="selectedSubCategory === subcategory" class="dropdown-menu dropdown-submenu">
+                    <li *ngFor="let meatpiece of selectedSubCategory?.meatPieces">
+                      <a class="dropdown-item" (click)="onMeatPieceSelected(meatpiece)">{{meatpiece.name}}</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </td>
       </tr>
       <tr *ngFor="let order of orders()">
-        
-    
-          <td>{{order.id}}</td>
-          <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
+        <td>{{order.id}}</td>
+        <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
         <td>{{order.amount}}</td>
-        <td>  {{order.notes}}</td>
-        
+        <td>{{order.notes}}</td>
       </tr>
     </tbody>
   </table>

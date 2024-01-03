@@ -29,6 +29,8 @@ Content-type: application/json
    "address": "abc"
 }
 #####
+POST {{baseUrl}}/api/Customer/ReadCustomers
+#####
 PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
