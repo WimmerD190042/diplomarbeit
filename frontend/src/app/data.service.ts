@@ -20,6 +20,7 @@ export class DataService {
   public formattedDate: string | undefined;
 
   
+  selectedCategory = new BehaviorSubject<CategoryDto>({});
   categories= signal<CategoryDto[]>([]);
   customers= signal<CustomerDto[]>([]);
   salesDays= signal<SalesDayDto[]>([]);

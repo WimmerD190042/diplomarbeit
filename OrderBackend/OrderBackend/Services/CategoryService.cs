@@ -120,6 +120,11 @@ namespace OrderBackend.Services
 
         }
 
+        public List<SubCategory> GetSubCategoriesByCategory(int categoryId)
+        {
+            return _db.SubCategories.Where(sc => sc.CategoryId == categoryId).ToList();
+        }
+
         public double getCategoryTotalStock(int categoryId)
         {
             //        var result = _db.Categories
@@ -137,6 +142,7 @@ namespace OrderBackend.Services
             //.ToList();
             //    }
 
-            return null;
+            return 0.0;
+        }
     }
 }

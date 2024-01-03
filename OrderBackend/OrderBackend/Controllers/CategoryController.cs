@@ -23,5 +23,11 @@ namespace OrderBackend.Controllers
            _dbService.ReadCategories();
         }
 
+        [HttpGet("SubCategoriesByCategory")]
+        public List<SubCategory> GetSubCategoriesByCategory(int categoryId)
+        {
+            return _dbService.GetSubCategoriesByCategory(categoryId);
+        }
+
     }
 }
