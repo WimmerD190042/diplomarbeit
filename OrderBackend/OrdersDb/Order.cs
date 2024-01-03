@@ -11,6 +11,10 @@ public partial class Order
 
     public int salesDayId { get; set; }
 
+    //public double amount { get; set; }
+
+    //public string status { get; set; }
+
     public DateTime Date { get; set; }
 
     public string Notes { get; set; } 

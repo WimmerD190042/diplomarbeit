@@ -5,8 +5,10 @@ import { SalesDayComponent } from './sales-day/sales-day.component';
 import { SalesDaysOverviewComponent } from './sales-days-overview/sales-days-overview.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { CustomersComponent } from './customers/customers.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
+    {path:'dashboard',component:DashboardComponent},
     {path:'customers',component:CustomersComponent},
     {path:'salesDaysOverview',component:SalesDaysOverviewComponent},
     {path:'newSalesDay',component:CreateSalesDayComponent},

@@ -9,6 +9,8 @@
 
         public string DateString { get; set; }
 
+        public double amount { get; set; }  
+
       
 
         public int CustomerId { get; set; }

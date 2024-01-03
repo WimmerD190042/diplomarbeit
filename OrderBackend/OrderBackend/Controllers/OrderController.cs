@@ -19,7 +19,7 @@ public class OrderController : ControllerBase
     public string AddOrder(OrderDto newOrder)
     {
         _dbService.AddOrder(newOrder);
-        return "Customer added";
+        return "Order added";
     }
 
     [HttpGet("OrdersByCustomer")]
