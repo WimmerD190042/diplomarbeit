@@ -40,7 +40,8 @@ namespace OrderBackend.Services
         public void ReadCustomers()
         {
             //Kunden von File importieren -> filePath ersetzen, und einkommentieren
-            string filePath = "D:\\diplomarbeit\\Daten\\KundenData.csv";
+            DotNetEnv.Env.Load();
+            string filePath = Environment.GetEnvironmentVariable("CUSTOMERDATA");
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string content = reader.ReadToEnd();

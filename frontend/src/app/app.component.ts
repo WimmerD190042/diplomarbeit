@@ -30,11 +30,9 @@ export class AppComponent {
     } else if (link == "salesDays") {
       //weiterleitung aktiviert
       this.router.navigateByUrl('salesDaysOverview');
-      //console.log("forwart do salesDays")
     } else if (link == "customers") {
       //weiterleitung aktiviert
       this.router.navigateByUrl('customers');
-      //console.log("forwart do dashboard")
     }
   }
   title = 'Dashboard';

@@ -7,11 +7,12 @@ namespace OrderBackend.Services
     {
         private readonly OrdersContext _db;
         public CategoryService(OrdersContext db) => _db = db;
-        string filePath = "D:\\diplomarbeit\\Daten\\GesamteTiere.TXT";
-
 
         public void ReadAndInsertCategories()
         {
+            DotNetEnv.Env.Load();
+            var filePath = Environment.GetEnvironmentVariable("CATEGORYDATA");
+
             List<Category> categories = new List<Category>();
             List<SubCategory> subCategories = new List<SubCategory>();
             List<MeatPiece> meatPieces = new List<MeatPiece>();
