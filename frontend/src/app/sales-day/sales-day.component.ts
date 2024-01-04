@@ -23,7 +23,7 @@ export class SalesDayComponent {
   public categoryService = inject(CategoryService);
   public orderService = inject(OrderService);
   public orders = signal<OrderDto[]>([]);
-  public showOrders = signal<OrderDto[]>([]);
+  public filterOrders = signal<OrderDto[]>([]);
 
   quantity: number = 0.0;
   notes: string = "";
@@ -39,7 +39,7 @@ export class SalesDayComponent {
       return order.notes && order.notes.includes(this.searchTerm);
     });
     // Aktualisierung des WritableSignal mit der neuen Liste
-    this.showOrders.set(filteredOrders);
+    this.filterOrders.set(filteredOrders);
   }
 
 
@@ -71,7 +71,7 @@ export class SalesDayComponent {
   customerChanged() {
     this.orderService.orderOrdersByCustomerGet(this.selectedCustomerId as number).subscribe(x => {
       this.orders.set(x);
-      this.showOrders.set(x);
+      this.filterOrders.set(x);
     });
   }
 
@@ -123,5 +123,44 @@ export class SalesDayComponent {
     input.style.marginRight = "10px";
     tr.insertBefore(input, td);
     tr.classList.add("d-flex");
+  }
+
+  //sort
+  sortOrder: { column: string, direction: string } = { column: '', direction: 'asc' };
+
+  sortBy(column: string): void {
+    this.sortOrder.column = column;
+    this.sortOrder.direction = (this.sortOrder.direction === 'asc') ? 'desc' : 'asc';
+    if(column == "#") {
+      console.log("Sort after ID (nach unten)");
+    } else if(column == "Kategorie") {
+      console.log("Sort after Kategorie (nach unten)")
+    } else if(column == "Menge") {
+      console.log("Sort after Menge (nach unten)")
+    } else if(column == "Anmerkung") {
+      console.log("Sort after Anmerkung (nach unten)")
+    }
+  }
+
+  toggleSortDirection(column: string): void {
+    if (this.sortOrder.column === column) {
+      this.sortOrder.direction = (this.sortOrder.direction === 'asc') ? 'desc' : 'asc';
+      if(column == "#") {
+        console.log("Sort after ID (nach oben)");
+      } else if(column == "Kategorie") {
+        console.log("Sort after Kategorie (nach oben)")
+      } else if(column == "Menge") {
+        console.log("Sort after Menge (nach oben)")
+      } else if(column == "Anmerkung") {
+        console.log("Sort after Anmerkung (nach oben)")
+      }
+    }
+  }
+
+  getSortIcon(column: string): string {
+    if (this.sortOrder.column === column) {
+      return (this.sortOrder.direction === 'asc') ? '▲' : '▼';
+    }
+    return '';
   }
 }

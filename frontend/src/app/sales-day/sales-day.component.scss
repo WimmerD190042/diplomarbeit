@@ -30,13 +30,34 @@
     }
 }
 
-//Keine Ahnung
-.dropdown-menu {
-    position: static;
-    margin: 0;
-    padding: 0;
+//Sort buttons farbe
+// YourComponent.scss
+
+.sorting-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px; // Adjust the margin as needed
 }
 
+.sorting-buttons button {
+    color: black !important; // Set the color to black with !important
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.sorting-buttons button:hover {
+    text-decoration: underline;
+}
+
+th .btn-link {
+    color: black !important; // Apply the style to the buttons within th
+}
+
+
+
+//keine Ahnung
 #category-button,
 #notes {
     height: 10px; // Setzen Sie die Höhe auf den gewünschten Wert

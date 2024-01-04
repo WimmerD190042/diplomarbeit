@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <!--Oxe mit Button-->
+  <!-- Oxe mit Button -->
   <table class="table-secondary">
     <tr>
       <td> Oxe</td>
@@ -36,8 +36,9 @@
 
     <!--Search Bar-->
     <div class="input-group rounded">
-      <input id="searchNote" type="search" class="form-control rounded" placeholder="Suche nach Anmerkung" aria-label="Search"
-        aria-describedby="search-addon" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" />
+      <input id="searchNote" type="search" class="form-control rounded" placeholder="Suche nach Anmerkung"
+        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchChange()" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
@@ -48,16 +49,20 @@
   <table id="table" class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Kategorie</th>
-        <th scope="col">Menge (kg)</th>
-        <th scope="col">Anmerkung</th>
+        <th scope="col" (click)="sortBy('#')">ID <button class="btn btn-link"
+            (click)="toggleSortDirection('#')">{{getSortIcon('#')}}</button></th>
+        <th scope="col" (click)="sortBy('Kategorie')">Kategorie <button class="btn btn-link"
+            (click)="toggleSortDirection('Kategorie')">{{getSortIcon('Kategorie')}}</button></th>
+        <th scope="col" (click)="sortBy('Menge')">Menge (kg) <button class="btn btn-link"
+            (click)="toggleSortDirection('Menge')">{{getSortIcon('Menge')}}</button></th>
+        <th scope="col" (click)="sortBy('Anmerkung')">Anmerkung <button class="btn btn-link"
+            (click)="toggleSortDirection('Anmerkung')">{{getSortIcon('Anmerkung')}}</button></th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>no info</td>
+        <td>0</td>
         <td>
           <div dropdown class="d-inline-block">
             <div class="dropdown">
@@ -117,9 +122,8 @@
           </ul>
         </td>
       </tr>
-
       <!-- Orders werden in Liste geladen -->
-      <tr *ngFor="let order of showOrders()">
+      <tr *ngFor="let order of filterOrders()">
         <td>{{order.id}}</td>
         <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
         <td>{{order.amount}}</td>
