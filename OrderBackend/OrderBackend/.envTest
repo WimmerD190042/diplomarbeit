@@ -1,3 +1,0 @@
-CUSTOMERDATA=D:\\diplomarbeit\\Daten\\KundenData.csv
-CATEGORYDATA=D:\\diplomarbeit\\Daten\\GesamteTiere.TXT
-DBPATH="Server=(LocalDB)\\mssqllocaldb;attachdbfilename=D:\\Orders.mdf;database=Orders;integrated security=True"
