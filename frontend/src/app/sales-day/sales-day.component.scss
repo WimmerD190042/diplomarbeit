@@ -31,16 +31,14 @@
 }
 
 //Sort buttons farbe
-// YourComponent.scss
-
 .sorting-buttons {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px; // Adjust the margin as needed
+    margin-bottom: 10px;
 }
 
 .sorting-buttons button {
-    color: black !important; // Set the color to black with !important
+    color: black !important;
     text-decoration: none;
     background-color: transparent;
     border: none;
@@ -52,10 +50,8 @@
 }
 
 th .btn-link {
-    color: black !important; // Apply the style to the buttons within th
+    color: black !important;
 }
-
-
 
 //keine Ahnung
 #category-button,
