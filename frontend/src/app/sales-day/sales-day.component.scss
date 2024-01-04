@@ -1,13 +1,48 @@
+//Kunde: (Select Customer) 
+#kunde-wrapper {
+    display: flex;
+    align-items: center;
+
+    #kunde-label {
+        margin-right: 2%;
+    }
+
+    #selectPerson {
+        width: 40%;
+        margin-right: 2%;
+    }
+}
+
+//Export file:
+#save-file-button {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        mat-icon {
+            font-size: 24px;
+        }
+    }
+}
+
+//Keine Ahnung
 .dropdown-menu {
     position: static;
     margin: 0;
     padding: 0;
 }
-#category-button, #notes {
+
+#category-button,
+#notes {
     height: 10px; // Setzen Sie die Höhe auf den gewünschten Wert
 }
 
-#quantity{
+#quantity {
     width: 5em;
 }
 
@@ -21,10 +56,10 @@
     left: 100%;
     margin-top: -1px;
     margin-left: -1px;
-    
+
 }
 
-li.dropdown-menu{
-    padding: 0!important;
+li.dropdown-menu {
+    padding: 0 !important;
     margin: 0 !important;
 }
