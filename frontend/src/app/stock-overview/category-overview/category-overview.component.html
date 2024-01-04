@@ -1,3 +1,4 @@
+<h1>{{dataService.selectedCategory.value.name}}</h1>
 <div style="margin-bottom: 30px;" class="row row-cols-1 row-cols-md-6 g-6">
     <!-- <div  class="col">
         <div class="card h-100">
@@ -10,7 +11,8 @@
           </div>
         </div>
       </div> -->
-        <app-sub-category-info *ngFor="let subCategory of subCategories() " [subCategory]="subCategory">
+    
+        <app-sub-category-info *ngFor="let subCategory of dataService.subCategories()" [subCategory]="subCategory">
                    
         </app-sub-category-info>
 

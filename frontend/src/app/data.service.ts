@@ -19,7 +19,7 @@ import {
   SubCategoryDto,
 } from './swagger';
 import { HttpClientModule } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 export const SWAGGER_salesDayService_TOKEN =
   new InjectionToken<SalesDayService>('swaggersalesDayService');
 
@@ -34,6 +34,17 @@ export class DataService {
   private dateObject: Date | undefined;
   public formattedDate: string | undefined;
 
+  //?
+  private _subCategories = new BehaviorSubject<SubCategoryDto[]>([]);
+  public subCategories$: Observable<SubCategoryDto[]> =
+    this._subCategories.asObservable();
+
+  updateSubCategories(subCategories: SubCategoryDto[]) {
+    this._subCategories.next(subCategories);
+  }
+  //?
+
+  subCategories = signal<SubCategoryDto[]>([]);
   selectedSubCategory = signal<SubCategoryDto>({});
   selectedCategory = new BehaviorSubject<CategoryDto>({});
   categories = signal<CategoryDto[]>([]);
@@ -46,6 +57,16 @@ export class DataService {
   setSelectedSubCategory(subCategory: SubCategoryDto) {
     this.selectedSubCategory.set(subCategory);
     console.log('selectedSubCategory: ', this.selectedSubCategory());
+  }
+
+  getSubCategories() {
+    this.categoryService
+      .apiCategorySubCategoriesByCategoryGet(this.selectedCategory.value.id)
+      .subscribe((subCategories) => {
+        this.subCategories.set(subCategories);
+        this.updateSubCategories(subCategories);
+        console.log('subCategories: ', this.subCategories());
+      });
   }
 
   constructor() {

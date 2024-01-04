@@ -4,7 +4,7 @@ import { CategoryService, SubCategoryDto } from '../../swagger';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../../data.service';
-
+import { CategoryOverviewComponent } from '../category-overview/category-overview.component';
 
 @Component({
   selector: 'app-sub-category-info',
@@ -17,22 +17,20 @@ export class SubCategoryInfoComponent {
   public categoryService = inject(CategoryService);
   public dataService = inject(DataService);
   public stockInput: number = 0;
+   
 
   @Input() subCategory: SubCategoryDto = {};
   selectedSubCategoryId: number = 0;
   selectedSubCategoryName: string = '';
 
   subCategoryClicked() {
-          this.dataService.setSelectedSubCategory(this.subCategory);
+    this.dataService.setSelectedSubCategory(this.subCategory);
   }
 
- 
-
- 
+  
 
   addStock() {
     console.log('id' + this.dataService.selectedSubCategory().id);
-    
 
     console.log(this.dataService.selectedSubCategory().name + 'clicked');
     this.categoryService
@@ -41,7 +39,11 @@ export class SubCategoryInfoComponent {
         this.stockInput
       )
       .subscribe(() => {
+        this.dataService.getSubCategories();
         console.log('Stock added');
+        console.log(this.dataService.selectedSubCategory().stock + ' new stock');
       });
+
+   
   }
 }
