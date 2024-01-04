@@ -1,12 +1,18 @@
 <body style="margin-left: 10px;">
-  <h1>Verkaufstag: {{dataService.selectedSalesDay.value.name}}</h1>
-  <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) }}</h5>
+  <div>
+    <!-- Verkaufstag anzneige -->
+    <h1>Verkaufstag: {{dataService.selectedSalesDay.value.name}}</h1>
+    <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) }}</h5>
 
-  <!--Save File todo-->
-  <button (click)="handleButtonClick()">
-    <mat-icon> local_printshop</mat-icon>
-  </button>
+    <!-- Save File todo -->
+    <div id="save-file-button" (click)="handleButtonClick()">
+      <button>
+        <mat-icon>local_printshop</mat-icon>
+      </button>
+    </div>
+  </div>
 
+  <!-- Oxe mit Button -->
   <table class="table-secondary">
     <tr>
       <td> Oxe</td>
@@ -18,31 +24,47 @@
     </tr>
   </table>
 
-  <div style="display: flex;">
-    <label for="selectPerson">Kunde</label>
-    <select style="width: 20%;" class="form-select" [(ngModel)]="selectedCustomerId" (change)="customerChanged()">
+  <!-- Kunde mit Auswahl -->
+  <div id="kunde-wrapper">
+    <label id="kunde-label">Kunde:</label>
+    <select id="selectPerson" class="form-select" [(ngModel)]="selectedCustomerId" (change)="customerChanged()">
+      <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
       <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
         {{customer.name}}
       </option>
     </select>
+
+    <!--Search Bar-->
+    <div class="input-group rounded">
+      <input id="searchNote" type="search" class="form-control rounded" placeholder="Suche nach Anmerkung"
+        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchTerm"
+        (ngModelChange)="onSearchChange()" />
+      <span class="input-group-text border-0" id="search-addon">
+        <mat-icon>search</mat-icon>
+      </span>
+    </div>
   </div>
 
-  <table class="table table-hover">
+  <!-- Show Tabel infos -->
+  <table id="table" class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Kategorie</th>
-        <th scope="col">Menge (kg)</th>
-        <th scope="col">Anmerkung</th>
+        <th scope="col" (click)="sortBy('#')">ID <button class="btn btn-link"
+            (click)="toggleSortDirection('#')">{{getSortIcon('#')}}</button></th>
+        <th scope="col" (click)="sortBy('Kategorie')">Kategorie <button class="btn btn-link"
+            (click)="toggleSortDirection('Kategorie')">{{getSortIcon('Kategorie')}}</button></th>
+        <th scope="col" (click)="sortBy('Menge')">Menge (kg) <button class="btn btn-link"
+            (click)="toggleSortDirection('Menge')">{{getSortIcon('Menge')}}</button></th>
+        <th scope="col" (click)="sortBy('Anmerkung')">Anmerkung <button class="btn btn-link"
+            (click)="toggleSortDirection('Anmerkung')">{{getSortIcon('Anmerkung')}}</button></th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>abc</td>
+        <td>0</td>
         <td>
           <div dropdown class="d-inline-block">
-
             <div class="dropdown">
               <button #selectedMeatPiece class="btn btn-secondary dropdown-toggle" type="button"
                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -100,7 +122,8 @@
           </ul>
         </td>
       </tr>
-      <tr *ngFor="let order of orders()">
+      <!-- Orders werden in Liste geladen -->
+      <tr *ngFor="let order of filterOrders()">
         <td>{{order.id}}</td>
         <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
         <td>{{order.amount}}</td>

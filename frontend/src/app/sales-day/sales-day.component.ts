@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
+
 @Component({
   selector: 'app-sales-day',
   standalone: true,
@@ -21,23 +22,27 @@ export class SalesDayComponent {
   public dataService = inject(DataService);
   public categoryService = inject(CategoryService);
   public orderService = inject(OrderService);
-
   public orders = signal<OrderDto[]>([]);
-
-
+  public filterOrders = signal<OrderDto[]>([]);
 
   quantity: number = 0.0;
   notes: string = "";
   selectedCustomerId: Number = 0;
-
   selectedCategory: CategoryDto = {};
   selectedSubCategory: SubCategoryDto = {};
   selectedMeatPiece: MeatPieceDto = {};
+  searchTerm: string = '';
 
-  //button
-  //exportButton
+  onSearchChange() {
+    // Neue Liste mit den passenden Bestellungen erstellen
+    const filteredOrders = this.orders().filter((order: OrderDto) => {
+      return order.notes && order.notes.includes(this.searchTerm);
+    });
+    // Aktualisierung des WritableSignal mit der neuen Liste
+    this.filterOrders.set(filteredOrders);
+  }
 
-  exportButton = document.getElementById("exportButton");
+
   handleButtonClick(): void {
     console.log('Export started');
     //todo: Aktuelle Liste aus Backend holen
@@ -63,17 +68,14 @@ export class SalesDayComponent {
 
   }
 
-
   customerChanged() {
-    console.log("changingchangingchanging")
     this.orderService.orderOrdersByCustomerGet(this.selectedCustomerId as number).subscribe(x => {
       this.orders.set(x);
-      console.log("orders: ", this.orders);
+      this.filterOrders.set(x);
     });
   }
 
   onMeatPieceSelected(meatpiece: MeatPieceDto) {
-    console.log('meatpiece:', meatpiece);
     this.selectedMeatPiece = meatpiece;
     console.log('selectedMeatPiece:', this.selectedMeatPiece);
     this.changeDetectorRef.detectChanges();
@@ -89,9 +91,7 @@ export class SalesDayComponent {
   }
 
   addOrder() {
-    console.log("addOrder clicked");
     const dateString = new Date().toISOString();
-
 
     const order = {
       customerId: this.selectedCustomerId as number,
@@ -123,5 +123,44 @@ export class SalesDayComponent {
     input.style.marginRight = "10px";
     tr.insertBefore(input, td);
     tr.classList.add("d-flex");
+  }
+
+  //sort
+  sortOrder: { column: string, direction: string } = { column: '', direction: 'asc' };
+
+  sortBy(column: string): void {
+    this.sortOrder.column = column;
+    this.sortOrder.direction = (this.sortOrder.direction === 'asc') ? 'desc' : 'asc';
+    if(column == "#") {
+      console.log("Sort after ID (nach unten)");
+    } else if(column == "Kategorie") {
+      console.log("Sort after Kategorie (nach unten)")
+    } else if(column == "Menge") {
+      console.log("Sort after Menge (nach unten)")
+    } else if(column == "Anmerkung") {
+      console.log("Sort after Anmerkung (nach unten)")
+    }
+  }
+
+  toggleSortDirection(column: string): void {
+    if (this.sortOrder.column === column) {
+      this.sortOrder.direction = (this.sortOrder.direction === 'asc') ? 'desc' : 'asc';
+      if(column == "#") {
+        console.log("Sort after ID (nach oben)");
+      } else if(column == "Kategorie") {
+        console.log("Sort after Kategorie (nach oben)")
+      } else if(column == "Menge") {
+        console.log("Sort after Menge (nach oben)")
+      } else if(column == "Anmerkung") {
+        console.log("Sort after Anmerkung (nach oben)")
+      }
+    }
+  }
+
+  getSortIcon(column: string): string {
+    if (this.sortOrder.column === column) {
+      return (this.sortOrder.direction === 'asc') ? '▲' : '▼';
+    }
+    return '';
   }
 }
