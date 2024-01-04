@@ -17,7 +17,6 @@ export class SubCategoryInfoComponent {
   public categoryService = inject(CategoryService);
   public dataService = inject(DataService);
   public stockInput: number = 0;
-   
 
   @Input() subCategory: SubCategoryDto = {};
   selectedSubCategoryId: number = 0;
@@ -26,8 +25,6 @@ export class SubCategoryInfoComponent {
   subCategoryClicked() {
     this.dataService.setSelectedSubCategory(this.subCategory);
   }
-
-  
 
   addStock() {
     console.log('id' + this.dataService.selectedSubCategory().id);
@@ -41,9 +38,6 @@ export class SubCategoryInfoComponent {
       .subscribe(() => {
         this.dataService.getSubCategories();
         console.log('Stock added');
-        console.log(this.dataService.selectedSubCategory().stock + ' new stock');
       });
-
-   
   }
 }
