@@ -148,7 +148,7 @@ namespace OrderBackend.Services
         public void UpdateStockForSubCategory(int subCategoryId, double newStock)
         {
             var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            subCategory.Stock = newStock;
+            subCategory.Stock += newStock;
             _db.SaveChanges();
         }
 

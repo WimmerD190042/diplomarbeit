@@ -16,5 +16,6 @@ export interface SubCategoryDto {
     id?: number;
     name?: string | null;
     meatPieces?: Array<MeatPieceDto> | null;
+    stock?: number;
 }
 

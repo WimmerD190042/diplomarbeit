@@ -1,41 +1,77 @@
-
-<div  class="col">
-    <div  class="card h-100">
-      <img src="https://img.freepik.com/free-vector/abstract-minimal-white-background_23-2148887988.jpg?w=1060&t=st=1703333894~exp=1703334494~hmac=15f68c3ce86ae1f129e08e4148d966eaec36058ed117495411fdd35e1383862f" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{subCategory.name}}</h5>
-        <p class="card-text">Bestand: </p>
-              <div style="display: flex;justify-content: space-between;">
-                <button data-bs-target="#exampleModal" data-bs-toggle="modal" class="btn btn-secondary">	<mat-icon> border_color</mat-icon></button>
-          <!-- <button class="btn btn-secondary">Verkaufstag bearbeiten</button>
+<div class="col">
+  <div class="card h-100">
+    <img
+      src="https://img.freepik.com/free-vector/abstract-minimal-white-background_23-2148887988.jpg?w=1060&t=st=1703333894~exp=1703334494~hmac=15f68c3ce86ae1f129e08e4148d966eaec36058ed117495411fdd35e1383862f"
+      class="card-img-top"
+      alt="..."
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ subCategory.name }}</h5>
+      <p class="card-text">Bestand: {{ subCategory.stock }} kg</p>
+      <div style="display: flex; justify-content: space-between">
+        <button
+          (click)="subCategoryClicked()"
+          data-bs-target="#exampleModal"
+          data-bs-toggle="modal"
+          class="btn btn-secondary"
+        >
+          <mat-icon> border_color</mat-icon>
+        </button>
+        <!-- <button class="btn btn-secondary">Verkaufstag bearbeiten</button>
           <button  class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">
             Löschen
                 
           </button> -->
-     
-        </div>
-        
-  
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Bestand hinzufügen</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Wie viel {{subCategory.name}} möchtest du hinzufügen?
-          <input type="number" class="form-control" placeholder="Menge" aria-label="Menge" aria-describedby="basic-addon1">
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-          <button (click)="addStock()"  type="button" data-bs-dismiss="modal" class="btn btn-success">Bestand hinzufügen</button>
-        </div>
+<div
+  #exampleModal
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Bestand hinzufügen
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Wie viel {{ dataService.selectedSubCategory().name }} möchtest du hinzufügen?
+        <input
+          [(ngModel)]="stockInput"
+          type="number"
+          class="form-control"
+          placeholder="Menge"
+          aria-label="Menge"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Abbrechen
+        </button>
+        <button
+          (click)="addStock()"
+          type="button"
+          data-bs-dismiss="modal"
+          class="btn btn-success"
+        >
+          Bestand hinzufügen
+        </button>
       </div>
     </div>
   </div>
+</div>

@@ -5,5 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public List<MeatPieceDto> MeatPieces { get; set; }
+
+        public double Stock { get; set; }
     }
 }
