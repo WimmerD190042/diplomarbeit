@@ -4,6 +4,7 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Kunde</th>
+      <th scope="col">Kategorie</th>
       <th scope="col">Datum</th>
       <th scope="col">Menge</th>
       <th scope="col">Status</th>
@@ -17,7 +18,8 @@
       <td>
         {{ order.customerId }}
       </td>
-      <td>{{ order.date | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>Kategorie to do</td>
+      <td>{{ order.date | date : "dd.MM.yyyy HH:mm" }}</td>
       <td>{{ order.amount }} kg</td>
       <td>
         {{ order.paidStatus === "false" ? "Nicht bezahlt" : "Bezahlt" }}

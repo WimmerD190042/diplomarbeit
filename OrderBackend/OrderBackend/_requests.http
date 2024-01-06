@@ -24,9 +24,9 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-         "id": 1,
-         "name": "abc",
-      "address": "abc"
+   "id": 1,
+   "name": "abc",
+   "address": "abc"
 }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
@@ -45,8 +45,8 @@ PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
 {
-      "id": 1,
-      "name": "abc",
+   "id": 1,
+   "name": "abc",
    "address": "abc"
 }
 #####
@@ -66,10 +66,10 @@ POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-      "id": 1,
-      "dateString": "abc",
-      "amount": 1,
-      "paidStatus": "abc",
+   "id": 1,
+   "dateString": "abc",
+   "amount": 1,
+   "paidStatus": "abc",
    "customerId": 1,
    "salesDayId": 1,
    "notes": "abc",

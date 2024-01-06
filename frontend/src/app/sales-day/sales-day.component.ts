@@ -147,8 +147,6 @@ export class SalesDayComponent {
               console.error('Error: ', error.error);
             }
           );
-          console.log(order);
-          console.log(this.selectedMeatPiece.name);
         }
       });
   }

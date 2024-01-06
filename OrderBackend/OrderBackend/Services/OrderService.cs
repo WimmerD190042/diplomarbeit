@@ -45,6 +45,10 @@
 
             };
             _db.Orders.Add(addOrder);
+            //Find me the subcategory of the newOrder from the meatpiece
+           var meatPiece= _db.MeatPieces.Find(newOrder.MeatPieceId);
+            var subCategory = _db.SubCategories.Find(meatPiece.SubCategoryId);
+            subCategory.Stock -= newOrder.Amount;
             _db.SaveChanges();
             return "Order added";
         }
