@@ -22,6 +22,12 @@ public class OrderController : ControllerBase
         return "Order added";
     }
 
+    [HttpDelete("Order")]
+    public void DeleteOrder(int deleteOrderId)
+    {
+        _dbService.DeleteOrder(deleteOrderId);
+    }
+
     [HttpGet("OrdersByCustomer")]
     public List<Order> getOrdersByCustomerId(int customerId)
     {

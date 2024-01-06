@@ -29,6 +29,14 @@
             return "Order added";
         }
 
+        public void DeleteOrder(int deleteOrderId)
+        {
+            var deleteOrder = _db.Orders.Find(deleteOrderId);
+            _db.Orders.Remove(deleteOrder);
+            _db.SaveChanges();
+           
+        }
+
         public List<Order> getOrdersByCustomer(int customerId)
         {
             return _db.Orders.Where(o => o.Customer.Id == customerId).ToList();
