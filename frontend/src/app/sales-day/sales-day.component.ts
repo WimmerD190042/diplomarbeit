@@ -78,11 +78,17 @@ export class SalesDayComponent {
   }
 
   customerChanged() {
+    console.log('heo');
+
     this.orderService
-      .orderOrdersByCustomerGet(this.selectedCustomerId as number)
+      .orderOrdersFromCustomerForSalesDayGet(
+        this.selectedCustomerId as number,
+        this.dataService.selectedSalesDay.value.id
+      )
       .subscribe((x) => {
         this.orders.set(x);
         this.filterOrders.set(x);
+        console.log('Orders: ', this.orders(), this.filterOrders());
       });
   }
 

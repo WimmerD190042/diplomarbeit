@@ -26,8 +26,8 @@ Content-type: application/json
 {
          "id": 1,
          "name": "abc",
-         "address": "abc"
-      }
+      "address": "abc"
+}
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -35,9 +35,9 @@ POST {{baseUrl}}/api/Customer/addNewCustomer
 Content-type: application/json
 
 {
-         "name": "abc",
-         "address": "abc"
-      }
+   "name": "abc",
+   "address": "abc"
+}
 #####
 POST {{baseUrl}}/api/Customer/ReadCustomers
 #####
@@ -47,7 +47,7 @@ Content-type: application/json
 {
       "id": 1,
       "name": "abc",
-      "address": "abc"
+   "address": "abc"
 }
 #####
 
@@ -58,18 +58,22 @@ GET {{baseUrl}}/Order/Orders
 #####
 GET {{baseUrl}}/Order/OrdersByCustomer?customerId=1
 #####
+GET {{baseUrl}}/Order/OrdersForSalesDay?salesDayId=1
+#####
+GET {{baseUrl}}/Order/OrdersFromCustomerForSalesDay?customerId=1&salesDayId=1
+#####
 POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-   "id": 1,
-   "dateString": "abc",
+      "id": 1,
+      "dateString": "abc",
       "amount": 1,
       "paidStatus": "abc",
-      "customerId": 1,
-      "salesDayId": 1,
-      "notes": "abc",
-      "meatPieceId": 1
+   "customerId": 1,
+   "salesDayId": 1,
+   "notes": "abc",
+   "meatPieceId": 1
 }
 #####
 
@@ -82,8 +86,8 @@ POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-      "id": 1,
-      "name": "abc",
-      "dateString": "abc"
-   }
+   "id": 1,
+   "name": "abc",
+   "dateString": "abc"
+}
 #####

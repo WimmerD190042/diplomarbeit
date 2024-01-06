@@ -52,7 +52,7 @@ export class SubCategoryInfoComponent {
 
     console.log(this.dataService.selectedSubCategory().name + 'clicked');
     this.categoryService
-      .apiCategoryUpdateStockForSubCategoryPut(
+      .apiCategoryAddStockForSubCategoryPut(
         this.dataService.selectedSubCategory().id,
         this.stockInput
       )

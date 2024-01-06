@@ -22,6 +22,18 @@ public class OrderController : ControllerBase
         return "Order added";
     }
 
+    [HttpGet("OrdersForSalesDay")]
+    public List<Order> getOrdersForSalesDay(int salesDayId)
+    {
+        return _dbService.getOrdersForSalesDay(salesDayId);
+    }
+
+    [HttpGet("OrdersFromCustomerForSalesDay")]
+    public List<OrderDto> getOrdersFromCustomerForSalesDay(int customerId, int salesDayId)
+    {
+        return _dbService.getOrdersFromCustomerForSalesDay(customerId, salesDayId);
+    }
+
     [HttpDelete("Order")]
     public void DeleteOrder(int deleteOrderId)
     {
