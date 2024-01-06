@@ -10,13 +10,13 @@ import { StockOverviewComponent } from './stock-overview/stock-overview.componen
 import { CategoryOverviewComponent } from './stock-overview/category-overview/category-overview.component';
 
 export const routes: Routes = [
-    {path:'category-overview/:id',component:CategoryOverviewComponent},
-    {path:'stockOverview',component:StockOverviewComponent},
-    {path:'dashboard',component:DashboardComponent},
-    {path:'customers',component:CustomersComponent},
-    {path:'salesDaysOverview',component:SalesDaysOverviewComponent},
-    {path:'newSalesDay',component:CreateSalesDayComponent},
-    {path:'salesDay',component:SalesDayComponent},
-    {path:'Home',component:AppComponent},
-    {path:'**',component:WelcomePageComponent},
+  { path: 'category-overview/:id', component: CategoryOverviewComponent },
+  { path: 'stockOverview', component: StockOverviewComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'customers', component: CustomersComponent },
+  { path: 'salesDaysOverview', component: SalesDaysOverviewComponent },
+  { path: 'newSalesDay', component: CreateSalesDayComponent },
+  { path: 'salesDay', component: SalesDayComponent },
+  { path: 'Home', component: AppComponent },
+  { path: '**', component: WelcomePageComponent },
 ];

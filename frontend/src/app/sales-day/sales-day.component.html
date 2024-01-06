@@ -66,9 +66,9 @@
         <td>
           <div dropdown class="d-inline-block">
             <div class="dropdown">
-              <button #selectedMeatPiece class="btn btn-secondary dropdown-toggle" type="button"
+              <button  class="btn btn-secondary dropdown-toggle" type="button"
                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                {{selectedMeatPiece.name ? selectedMeatPiece.name : 'Auswählen'}}
+                {{selectedMeatPiece?.name && selectedMeatPiece?.name!.length > 3 ? selectedMeatPiece.name : 'Auswählen'}}
 
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

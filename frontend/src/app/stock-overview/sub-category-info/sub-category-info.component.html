@@ -7,7 +7,18 @@
     />
     <div class="card-body">
       <h5 class="card-title">{{ subCategory.name }}</h5>
-      <p class="card-text">Bestand: {{ subCategory.stock }} kg</p>
+      <div style="display: flex">
+        <p class="card-text">Bestand:&nbsp;</p>
+        <p class="card-text" *ngIf="!editMode">{{ subCategory.stock }}</p>
+        <input
+          type="number"
+          [(ngModel)]="subCategory.stock"
+          *ngIf="editMode"
+          style="width: auto; min-width: 50px"
+        />
+        <p class="card-text">&nbsp;kg</p>
+      </div>
+
       <div style="display: flex; justify-content: space-between">
         <button
           (click)="subCategoryClicked()"
@@ -15,7 +26,13 @@
           data-bs-toggle="modal"
           class="btn btn-secondary"
         >
-          <mat-icon> border_color</mat-icon>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          class="btn btn-secondary"
+          (click)="editMode ? saveClicked() : editClicked()"
+        >
+          <mat-icon>{{ editMode ? "save" : "border_color" }}</mat-icon>
         </button>
         <!-- <button class="btn btn-secondary">Verkaufstag bearbeiten</button>
           <button  class="btn btn-danger"data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -49,7 +66,8 @@
         ></button>
       </div>
       <div class="modal-body">
-        Wie viel (kg) {{ dataService.selectedSubCategory().name }} möchtest du hinzufügen?
+        Wie viel (kg) {{ dataService.selectedSubCategory().name }} möchtest du
+        hinzufügen?
         <input
           [(ngModel)]="stockInput"
           type="number"

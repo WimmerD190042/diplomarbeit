@@ -128,6 +128,12 @@ namespace OrderBackend.Services
             return _db.SubCategories.Where(sc => sc.CategoryId == categoryId).ToList();
         }
 
+        public List<MeatPiece> GetMeatPiecesBySubCategory(int subCategoryId)
+        {
+            return _db.MeatPieces.Where(mp => mp.SubCategoryId == subCategoryId).ToList();
+            
+        }
+
         public double GetSubCategoryTotalStock(int subCategoryId)
         {
 
@@ -146,12 +152,20 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
-        public void UpdateStockForSubCategory(int subCategoryId, double newStock)
+        public void AddStockForSubCategory(int subCategoryId, double addStock)
         {
             var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            subCategory.Stock += newStock;
+            subCategory.Stock += addStock;
             _db.SaveChanges();
         }
+
+        public void UpdateStockForCategory(int subCategoryId, double newStock)
+        {
+            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
+            subCategory.Stock = newStock;
+            _db.SaveChanges();
+        }
+
 
 
         public double GetCategoryTotalStock(int categoryId)

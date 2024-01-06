@@ -46,6 +46,7 @@ export class DataService {
   }
   //?
 
+  meatPieces= signal<MeatPieceDto[]>([]);
   subCategories = signal<SubCategoryDto[]>([]);
   selectedSubCategory = signal<SubCategoryDto>({});
   selectedCategory = new BehaviorSubject<CategoryDto>({});
@@ -59,6 +60,14 @@ export class DataService {
   setSelectedSubCategory(subCategory: SubCategoryDto) {
     this.selectedSubCategory.set(subCategory);
     console.log('selectedSubCategory: ', this.selectedSubCategory());
+  }
+
+  getMeatPieces()  {
+      console.log(this.selectedSubCategory().id+'id')
+      this.categoryService.apiCategoryMeatPiecesBySubCategoryGet(this.selectedSubCategory().id!).subscribe((meatPieces) => {
+        this.meatPieces.set(meatPieces);
+        console.log('meatPieces: ', this.meatPieces());
+      });
   }
 
   getSubCategories() {
