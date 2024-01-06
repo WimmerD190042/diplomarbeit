@@ -64,7 +64,7 @@ export class DataService {
 
   getMeatPieces()  {
       console.log(this.selectedSubCategory().id+'id')
-      this.categoryService.apiCategoryMeatPiecesBySubCategoryGet(this.selectedSubCategory().id!).subscribe((meatPieces) => {
+      this.categoryService.apiCategoryMeatPiecesBySubCategoryIdGet(this.selectedSubCategory().id!).subscribe((meatPieces) => {
         this.meatPieces.set(meatPieces);
         console.log('meatPieces: ', this.meatPieces());
       });
@@ -72,7 +72,7 @@ export class DataService {
 
   getSubCategories() {
     this.categoryService
-      .apiCategorySubCategoriesByCategoryGet(this.selectedCategory.value.id)
+      .apiCategorySubCategoriesByCategoryIdGet(this.selectedCategory.value.id)
       .subscribe((subCategories) => {
         this.subCategories.set(subCategories);
         this.updateSubCategories(subCategories);
@@ -87,7 +87,7 @@ export class DataService {
   }
 
   getSalesDayDate(salesDay: SalesDayDto) {
-    return this.formateDate(salesDay);
+    return salesDay.dateString;
   }
 
   getMeatPieceFromID(id: number): MeatPieceDto | undefined {
@@ -118,24 +118,5 @@ export class DataService {
     });
   }
 
-  formateDate(salesDay: SalesDayDto) {
-    if (salesDay && salesDay.dateString) {
-      if (!salesDay) {
-        return 'Kein Datum ausgewählt';
-      }
-      console.log('bin hieeer');
-      const dateObject = new Date(salesDay.dateString);
-      const options: Intl.DateTimeFormatOptions = {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      };
-      console.log(dateObject.toLocaleDateString('de-DE', options));
-      return dateObject.toLocaleDateString('de-DE', options);
-    } else {
-      // Handle the case when dateString is not available
 
-      return undefined;
-    }
-  }
 }

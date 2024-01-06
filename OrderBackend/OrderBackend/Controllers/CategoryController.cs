@@ -23,22 +23,22 @@ namespace OrderBackend.Controllers
            _dbService.ReadCategories();
         }
 
-        [HttpGet("SubCategoriesByCategory")]
+        [HttpGet("SubCategoriesByCategoryId")]
         public List<SubCategory> GetSubCategoriesByCategory(int categoryId)
         {
             return _dbService.GetSubCategoriesByCategory(categoryId);
         }
 
-        [HttpGet("MeatPiecesBySubCategory")]
+        [HttpGet("MeatPiecesBySubCategoryId")]
         public List<MeatPiece> GetMeatPiecesBySubcategory(int subCategoryId)
         {
             return _dbService.GetMeatPiecesBySubCategory(subCategoryId);
         }
 
-        [HttpGet("stockOfSubcategory")]
-        public double GetSubCategoryTotalStock(int subCategoryId)
+        [HttpGet("getStockForSubCategoryId")]
+        public double GetStockForSubCategory(int subCategoryId)
         {
-            return _dbService.GetSubCategoryTotalStock(subCategoryId);
+            return _dbService.GetStockForSubCategory(subCategoryId);
         }
 
         [HttpPut("updateStockForMeatPiece")]

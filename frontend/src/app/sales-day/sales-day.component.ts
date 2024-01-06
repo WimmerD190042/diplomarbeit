@@ -91,6 +91,8 @@ export class SalesDayComponent {
   }
 
   addOrder() {
+        
+
     const dateString = new Date().toISOString();
 
     const order = {

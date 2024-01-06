@@ -2,7 +2,7 @@
   <div>
     <!-- Verkaufstag anzneige -->
     <h1>Verkaufstag: {{dataService.selectedSalesDay.value.name}}</h1>
-    <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) }}</h5>
+    <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) | date:'dd.MM.YYYY' }}</h5>
 
     <!-- Save File todo -->
     <div id="save-file-button" (click)="handleButtonClick()">
@@ -62,13 +62,13 @@
     </thead>
     <tbody>
       <tr>
-        <td>0</td>
+        <td></td>
         <td>
           <div dropdown class="d-inline-block">
             <div class="dropdown">
               <button  class="btn btn-secondary dropdown-toggle" type="button"
                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                {{selectedMeatPiece?.name && selectedMeatPiece?.name!.length > 3 ? selectedMeatPiece.name : 'Auswählen'}}
+                {{selectedMeatPiece.name && selectedMeatPiece.name!.length > 1 ? selectedMeatPiece.name : 'Auswählen'}}
 
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

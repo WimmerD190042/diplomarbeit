@@ -14,7 +14,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './sales-day-info.component.html',
   styleUrl: './sales-day-info.component.scss'
 })
-export class SalesDayInfoComponent implements OnInit {
+export class SalesDayInfoComponent  {
 
 
 
@@ -24,18 +24,14 @@ export class SalesDayInfoComponent implements OnInit {
   public dataService = inject(DataService);
   public router = inject(Router);
 
-  public formattedDate: string | undefined;
+
   private subscription: Subscription = new Subscription();
 
 
 
   
 
-  ngOnInit(): void {
-    this.subscription = this.dataService.selectedSalesDay.subscribe(salesDay => {
-      this.formattedDate = salesDay ? this.dataService.getSalesDayDate(salesDay) : 'Kein Datum ausgewählt';
-    });
-  }
+  
 
   deleteClicked() {
     this.salesDayService.apiSalesDaySalesDayDelete(this.salesDay.id).subscribe(x => this.dataService.loadSalesDaysFromBackend());

@@ -145,6 +145,12 @@ namespace OrderBackend.Services
             return totalStock;
         }
 
+        public double GetStockForSubCategory(int subCategoryId)
+        {
+            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
+            return subCategory.Stock;
+        }
+
         public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
         {
             var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
