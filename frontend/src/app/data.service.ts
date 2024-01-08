@@ -112,7 +112,6 @@ export class DataService {
       if (!salesDay) {
         return 'Kein Datum ausgewählt';
       }
-      console.log('bin hieeer');
       const dateObject = new Date(salesDay.dateString);
       const options: Intl.DateTimeFormatOptions = {
         day: '2-digit',

@@ -20,10 +20,10 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-         "id": 1,
-         "name": "abc",
-         "address": "abc"
-      }
+   "id": 1,
+   "name": "abc",
+   "address": "abc"
+}
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -61,10 +61,10 @@ Content-type: application/json
    "amount": 1,
    "paidStatus": "abc",
    "customerId": 1,
-      "salesDayId": 1,
-      "notes": "abc",
-      "meatPieceId": 1
-   }
+   "salesDayId": 1,
+   "notes": "abc",
+   "meatPieceId": 1
+}
 #####
 
 ################################################## SalesDay
