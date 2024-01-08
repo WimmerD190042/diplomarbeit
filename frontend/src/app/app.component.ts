@@ -4,42 +4,18 @@ import { Router, RouterOutlet } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Dropdown } from 'flowbite';
 import { MatIconModule } from '@angular/material/icon';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, RouterOutlet, MatIconModule],
+  imports: [HttpClientModule, CommonModule, RouterOutlet, MatIconModule,NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
 
-  private router = inject(Router);
-  activeLink: string = 'home';
-
-  handleNavLinkClick(link: string) {
-    this.activeLink = link;
-    console.log(link)
-    if (link == "dashboard") {
-      this.router.navigateByUrl('dashboard');
-      //weiterleitung funktioniert nicht
-      console.log("forwart do dashboard")
-    } else if (link == "home") {
-      //weiterleitung funktioniert nicht
-      console.log("forwart do home")
-    } else if (link == "salesDays") {
-      //weiterleitung aktiviert
-      this.router.navigateByUrl('salesDaysOverview');
-    } else if (link == "customers") {
-      //weiterleitung aktiviert
-      this.router.navigateByUrl('customers');
-      //console.log("forwart do dashboard")
-    } else if (link == "stockOverview") {
-      //weiterleitung aktiviert
-      this.router.navigateByUrl('stockOverview');
-      //console.log("forwart do dashboard")
-    }
-  }
+  
   title = 'Dashboard';
 }

@@ -1,0 +1,36 @@
+.sidebar {
+  font-family: Poppins;
+  flex-direction: column;
+  align-items: center;
+    
+  display: flex;
+}
+
+
+
+.navbar-nav {
+
+    width: 100%;
+ 
+  margin-top: 300px;        //muss noch geändert werden von px auf responsive wert
+  margin-bottom: auto;
+ 
+ 
+}
+.nav-item{
+    width: 100%;
+ 
+}
+
+.nav-link{
+    text-decoration: none;
+    width: auto;
+  display: flex;
+ font-size: 20px;
+  align-items: center;
+  padding: 17px;
+}
+.active-link {
+  color: #fcaf00ff;
+  border-right: 2px solid #fcaf00ff;
+}

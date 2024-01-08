@@ -1,46 +1,26 @@
 .conOverview {
-    display: flex;
-    max-width: 100%;
-    height: 100%;
-}
-
-
-
-.centered-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.mat-nav-list {
-    list-style: none;
-    padding: 0;
-}
-
-.nav-item {
-    margin: 0;
-}
-
-.nav-link {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.sidebar {
-    /* Adjust the width and other styles as needed */
-    width: 260px;
-    background: #060606;
-    /* Add any other styles you want for the sidebar container */
+  display: flex;
+  max-width: 100%;
+  height: 100%;
 }
 
 .main-content {
-    /* Adjust the styles for the main content area */
-    flex: 1;
-    /* Add any other styles you want for the main content container */
+  /* Adjust the styles for the main content area */
+  flex: 1;
+  /* Add any other styles you want for the main content container */
 }
 
 .active-link {
-    color: orange;
+  color: #fcaf00ff;
 }
+
+.sidebar {
+  background: #f1f2f6 !important;
+}
+
+//colors:
+// $white: #FFFFFFff;
+// $onyx: #404142ff;
+// $antiflash-white: #F2F3F6ff;
+// $antiflash-white-2: #F1F2F6ff;
+// $selective-yellow: #FCAF00ff;
