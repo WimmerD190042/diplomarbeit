@@ -45,35 +45,25 @@ export class SalesDayComponent {
   searchTerm: string = '';
 
   onSearchChange() {
-    // Neue Liste mit den passenden Bestellungen erstellen
     const filteredOrders = this.orders().filter((order: OrderDto) => {
       return order.notes && order.notes.includes(this.searchTerm);
     });
-    // Aktualisierung des WritableSignal mit der neuen Liste
     this.filterOrders.set(filteredOrders);
   }
 
   handleButtonClick(): void {
-    console.log('Export started');
-    //todo: Aktuelle Liste aus Backend holen
-
-    // Holen der Liste
-    //let meineListe: string[] = ["a","b","c"];
-    //var meineListe = document.getElementById("meineListe").getElementsByTagName("li");
-    // Erstellen der CSV-Daten
-    var csvData = 'Liste\n';
-    for (var i = 0; i < this.orders.length; i++) {
-      csvData += this.orders()[i].customerId + '\n';
+    var csvData = 'Customer;Menge;Anmerkung\n';
+    for (var i = 0; i < this.filterOrders().length; i++) {
+      const customerId = this.filterOrders().at(i)?.customerId;
+      const meatPieceId = this.filterOrders().at(i)?.meatPieceId;
+      csvData += `${customerId};${meatPieceId}\n`;
+      
     }
-    // Erstellen eines Blob-Objekts
     var blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-    // Erstellen eines Download-Links
     var link = document.createElement('a');
-    // Verknüpfen des Download-Links mit dem Blob
     link.href = window.URL.createObjectURL(blob);
-    // Festlegen des Dateinamens
+    //TODO: Verkaufstag welcher bei der Datei hinzufügen!
     link.download = 'verkaufstag.csv';
-    // Klicken auf den Link, um den Download auszulösen
     link.click();
   }
 

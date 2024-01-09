@@ -71,10 +71,10 @@ Content-type: application/json
    "amount": 1,
    "paidStatus": "abc",
    "customerId": 1,
-      "salesDayId": 1,
-      "notes": "abc",
-      "meatPieceId": 1
-   }
+   "salesDayId": 1,
+   "notes": "abc",
+   "meatPieceId": 1
+}
 #####
 
 ################################################## SalesDay
