@@ -36,6 +36,8 @@ export class SalesDayComponent {
   public orders = signal<OrderDto[]>([]);
   public filterOrders = signal<OrderDto[]>([]);
 
+  price: number = 0.0;
+  deposit: number = 0.0;
   quantity: number = 0.0;
   notes: string = '';
   selectedCustomerId: Number = 0;
@@ -78,8 +80,6 @@ export class SalesDayComponent {
   }
 
   customerChanged() {
-    console.log('heo');
-
     this.orderService
       .orderOrdersFromCustomerForSalesDayGet(
         this.selectedCustomerId as number,
@@ -136,6 +136,8 @@ export class SalesDayComponent {
             salesDayId: this.dataService.selectedSalesDay.value.id,
             amount: this.quantity,
             paidStatus: 'false',
+            price: this.price,
+            deposit: this.deposit,
           } as OrderDto;
           this.orderService.orderOrderPost(order).subscribe(
             (x) => {

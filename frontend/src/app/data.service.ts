@@ -16,6 +16,7 @@ import {
   CustomerService,
   MeatPieceDto,
   OrderDto,
+  OrderService,
   SalesDayDto,
   SalesDayService,
   SubCategoryDto,
@@ -29,6 +30,7 @@ export const SWAGGER_salesDayService_TOKEN =
   providedIn: 'root',
 })
 export class DataService {
+  private orderService = inject(OrderService);
   private salesDayService = inject(SalesDayService);
   private customerService = inject(CustomerService);
   private categoryService = inject(CategoryService);
@@ -46,6 +48,7 @@ export class DataService {
   }
   //?
 
+  selectedCustomer = new BehaviorSubject<CustomerDto>({}); 
   meatPieces= signal<MeatPieceDto[]>([]);
   subCategories = signal<SubCategoryDto[]>([]);
   selectedSubCategory = signal<SubCategoryDto>({});
@@ -68,6 +71,21 @@ export class DataService {
         this.meatPieces.set(meatPieces);
         console.log('meatPieces: ', this.meatPieces());
       });
+  }
+  getRevenue(): Promise<number> {
+    return new Promise((resolve, reject) => {
+      let revenue = 0;
+      this.orderService.orderOrdersGet().subscribe((orders) => {
+        orders.forEach((order) => {
+          console.log(order.price);
+          revenue += order.price!;
+        });
+        console.log(revenue+'revenue');
+        resolve(revenue);
+      }, error => {
+        reject(error);
+      });
+    });
   }
 
   getSubCategories() {

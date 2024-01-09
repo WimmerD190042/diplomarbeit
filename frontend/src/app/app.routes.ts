@@ -8,8 +8,10 @@ import { CustomersComponent } from './customers/customers.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StockOverviewComponent } from './stock-overview/stock-overview.component';
 import { CategoryOverviewComponent } from './stock-overview/category-overview/category-overview.component';
+import { SingleCustomerComponent } from './customers/single-customer/single-customer.component';
 
 export const routes: Routes = [
+  { path: 'singleCustomer', component: SingleCustomerComponent },
   { path: 'category-overview/:id', component: CategoryOverviewComponent },
   { path: 'stockOverview', component: StockOverviewComponent },
   { path: 'dashboard', component: DashboardComponent },

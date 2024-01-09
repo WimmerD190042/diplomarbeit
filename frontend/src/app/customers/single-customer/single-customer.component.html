@@ -1,0 +1,29 @@
+<h1>{{dataService.selectedCustomer.value.name}}</h1>
+<table  class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Kategorie</th>
+            <th>Menge (kg)</th>
+            <th>Preis (€)</th>
+            <th>Pfand (€)</th>
+            <th>Anmerkung</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+        <tr *ngFor="let order of customerOrders()">
+            <td>{{order.id}}</td>
+        <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
+        <td>{{order.amount}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.deposit}}</td>
+        <td>{{order.notes}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteOrder(order)">
+            -
+          </button>
+        </td>
+        </tr>
+    </tbody>
+</table>

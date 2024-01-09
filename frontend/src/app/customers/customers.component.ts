@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
 import { CustomerDto, CustomerService } from '../swagger';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -12,6 +13,7 @@ import { CustomerDto, CustomerService } from '../swagger';
 })
 export class CustomersComponent {
 
+
 //schreib mir die eine Methode, die die Customer in die Datenbank schreibt  
     
 
@@ -20,7 +22,14 @@ export class CustomersComponent {
   
   public dataService = inject(DataService);
   public customerService= inject(CustomerService);
+  router= inject(Router);
 
+
+  moveToSingleCustomer(customer : CustomerDto) {
+
+    this.dataService.selectedCustomer.next(customer);
+    this.router.navigateByUrl(`singleCustomer`);
+  }
 
 
 

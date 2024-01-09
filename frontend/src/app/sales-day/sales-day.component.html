@@ -55,9 +55,13 @@
             (click)="toggleSortDirection('Kategorie')">{{getSortIcon('Kategorie')}}</button></th>
         <th scope="col" (click)="sortBy('Menge')">Menge (kg) <button class="btn btn-link"
             (click)="toggleSortDirection('Menge')">{{getSortIcon('Menge')}}</button></th>
+            <th scope="col" (click)="sortBy('Menge')">Preis (€) <button class="btn btn-link"
+              (click)="toggleSortDirection('Preis')"></button></th>
+              <th scope="col" (click)="sortBy('Menge')">Pfand (€) <button class="btn btn-link"
+                (click)="toggleSortDirection('Pfand')"></button></th>
         <th scope="col" (click)="sortBy('Anmerkung')">Anmerkung <button class="btn btn-link"
             (click)="toggleSortDirection('Anmerkung')">{{getSortIcon('Anmerkung')}}</button></th>
-        <th scope="col"></th>
+       
       </tr>
     </thead>
     <tbody>
@@ -93,7 +97,13 @@
         </td>
 
         <td>
-          <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" placeholder="0.0">
+          <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" min="0" placeholder="0.0">
+        </td>
+        <td>
+          <input [(ngModel)]="price" type="number" class="form-control" id="price" min="0" placeholder="0.0">
+        </td>
+        <td>
+          <input [(ngModel)]="deposit" type="number" class="form-control" id="deposit" min="0" placeholder="0.0">
         </td>
         <td>
           <textarea id="notes" class="form-control" rows="1" style="height: 36px; overflow-y: hidden;"
@@ -127,6 +137,8 @@
         <td>{{order.id}}</td>
         <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
         <td>{{order.amount}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.deposit}}</td>
         <td>{{order.notes}}</td>
         <td>
           <button class="btn btn-danger" (click)="deleteOrder(order)">

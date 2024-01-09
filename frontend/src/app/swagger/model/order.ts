@@ -17,6 +17,8 @@ import { SalesDay } from './salesDay';
 export interface Order { 
     id?: number;
     customerId?: number;
+    deposit?: number;
+    price?: number;
     salesDayId?: number;
     amount?: number;
     paidStatus?: string | null;
