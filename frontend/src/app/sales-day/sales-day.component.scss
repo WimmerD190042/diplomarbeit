@@ -59,7 +59,19 @@ th .btn-link {
     color: white;
 }
 
-//keine Ahnung
+//Horizontal und Vertikal Centered Table Infos
+th {
+    //text-align: center;
+    vertical-align: middle;
+}
+
+//Horizontal und Vertikal Centered Table Infos
+td {
+    //text-align: center;
+    vertical-align: middle;
+}
+
+//Keine Ahnung
 #category-button,
 #notes {
     height: 10px; // Setzen Sie die Höhe auf den gewünschten Wert
@@ -87,6 +99,40 @@ th .btn-link {
     left: 100%;
     margin-top: -1px;
     margin-left: -1px;
+}
+
+li.dropdown-menu {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+//keine Ahnung
+#category-button,
+#notes {
+    height: 10px; // Setzen Sie die Höhe auf den gewünschten Wert
+}
+
+#quantity {
+    width: 5em;
+}
+#deposit {
+    width: 5em;
+}
+#price {
+    width: 5em;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+    margin-left: -1px;
+
 }
 
 li.dropdown-menu {

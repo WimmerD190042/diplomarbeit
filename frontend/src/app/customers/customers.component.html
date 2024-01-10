@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr>
-      <td></td> <!-- ID wird vom Server generiert -->
+      <td>ID</td> <!-- ID wird vom Server generiert -->
       <td>
         <input class="form-control" placeholder="Name" #newName type="text">
       </td>
@@ -30,7 +30,6 @@
         <form>
           <div class="form-group">
             <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
-
             <input class="form-control" placeholder="Name" *ngIf="editingCustomer === customer" #nameInput type="text"
               [value]="customer.name" (input)="customer.name = nameInput.value">
             <span *ngIf="editingCustomer !== customer">{{customer.name}}</span>
@@ -42,7 +41,6 @@
         <form>
           <div class="form-group">
             <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
-
             <input class="form-control" placeholder="Addresse" *ngIf="editingCustomer === customer" #addressInput
               type="text" [value]="customer.address" (input)="customer.address = addressInput.value">
             <span *ngIf="editingCustomer !== customer">{{customer.address}}</span>

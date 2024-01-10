@@ -8,12 +8,9 @@
         <h5 class="card-title">Neuer Verkaufstag</h5>
         <p class="card-text">Hiermit wird ein neuer Verkaufstag erstellt</p>
         <a (click)="newSalesDayClick()" class="btn btn-secondary">Verkaufstag anlegen</a>
-
       </div>
     </div>
   </div>
   <app-sales-day-info *ngFor="let salesDay of dataService.salesDays()" [salesDay]="salesDay">
-
   </app-sales-day-info>
-
 </div>
