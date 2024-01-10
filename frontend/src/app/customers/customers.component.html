@@ -17,11 +17,10 @@
       <td>
         <input class="form-control" placeholder="Addresse" #newAddress type="text">
       </td>
-      <td>
+      <td colspan="2">
         <button class="btn btn-success"
           (click)="createCustomerFromInput(newName.value, newAddress.value)">Hinzufügen</button>
       </td>
-      <td></td>
     </tr>
 
     <tr *ngFor="let customer of dataService.customers()">
