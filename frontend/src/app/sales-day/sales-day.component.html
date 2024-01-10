@@ -4,8 +4,8 @@
     <h1>Verkaufstag: {{dataService.selectedSalesDay.value.name}}</h1>
     <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) | date:'dd.MM.YYYY' }}</h5>
 
-    <!-- Save File todo -->
-    <div id="save-file-button" (click)="handleButtonClick()">
+    <!-- Save File -->
+    <div id="save-file-button" (click)="exportButtonClick()">
       <button>
         <mat-icon>local_printshop</mat-icon>
       </button>
@@ -49,16 +49,26 @@
   <table id="table" class="table table-hover">
     <thead>
       <tr>
-        <th class="header" scope="col" (click)="sortBy('#')">ID <button class="btn btn-link"
-            (click)="toggleSortDirection('#')">{{getSortIcon('#')}}</button></th>
-        <th class="header" scope="col" (click)="sortBy('Kategorie')">Kategorie <button class="btn btn-link"
-            (click)="toggleSortDirection('Kategorie')">{{getSortIcon('Kategorie')}}</button></th>
-        <th class="header" scope="col" (click)="sortBy('Menge')">Menge (kg) <button class="btn btn-link"
-            (click)="toggleSortDirection('Menge')">{{getSortIcon('Menge')}}</button></th>
-        <th class="header" scope="col" (click)="sortBy('Menge')">Preis (€) <button class="btn btn-link"
-            (click)="toggleSortDirection('Preis')"></button></th>
-        <th class="header" scope="col" (click)="sortBy('Menge')">Pfand (€) <button class="btn btn-link"
-            (click)="toggleSortDirection('Pfand')"></button></th>
+        <th class="header" scope="col" (click)="sortBy('#')">
+          ID
+          <button class="btn btn-link" (click)="toggleSortDirection('#')">{{getSortIcon('#')}}</button>
+        </th>
+        <th class="header" scope="col" (click)="sortBy('Kategorie')">
+          Kategorie
+          <button class="btn btn-link" (click)="toggleSortDirection('Kategorie')">{{getSortIcon('Kategorie')}}</button>
+        </th>
+        <th class="header" scope="col" (click)="sortBy('Menge')">
+          Menge (kg)
+          <button class="btn btn-link" (click)="toggleSortDirection('Menge')">{{getSortIcon('Menge')}}</button>
+        </th>
+        <th class="header" scope="col" (click)="sortBy('Menge')">
+          Preis (€)
+          <button class="btn btn-link" (click)="toggleSortDirection('Preis')"></button>
+        </th>
+        <th class="header" scope="col" (click)="sortBy('Menge')">
+          Pfand (€)
+          <button class="btn btn-link" (click)="toggleSortDirection('Pfand')"></button>
+        </th>
         <th class="header" scope="col" (click)="sortBy('Anmerkung')">Anmerkung <button class="btn btn-link"
             (click)="toggleSortDirection('Anmerkung')">{{getSortIcon('Anmerkung')}}</button></th>
         <th class="header"></th>

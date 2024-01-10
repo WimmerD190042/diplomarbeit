@@ -53,19 +53,19 @@ export class SalesDayComponent {
     this.filterOrders.set(filteredOrders);
   }
 
-  handleButtonClick(): void {
+  exportButtonClick(): void {
     var csvData = 'Customer;Menge;Anmerkung\n';
     for (var i = 0; i < this.filterOrders().length; i++) {
       const customerId = this.filterOrders().at(i)?.customerId;
       const meatPieceId = this.filterOrders().at(i)?.meatPieceId;
-      csvData += `${customerId};${meatPieceId}\n`;
-      
+      const note = this.filterOrders().at(i)?.notes;
+      csvData += `${customerId};${meatPieceId};${note}\n`;
     }
     var blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
     var link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
-    //TODO: Verkaufstag welcher bei der Datei hinzufügen!
-    link.download = 'verkaufstag.csv';
+    var salesDay = this.dataService.selectedSalesDay.value.name;
+    link.download = 'verkaufstag' + salesDay + '.csv';
     link.click();
   }
 

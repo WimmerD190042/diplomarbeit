@@ -15,3 +15,10 @@ td {
     text-align: center;
     vertical-align: middle;
 }
+
+//Div mit H1 (Kürzliche Bestellungen) und Export Button
+#DivHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
