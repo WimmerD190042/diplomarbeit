@@ -13,7 +13,7 @@ export class WelcomePageComponent implements OnInit {
 
  
   i: number = 0;
-  welcomeText: string = 'Willkommen Karin.';
+  welcomeText: string = 'Willkommen Karin';
   speed: number = 150;
 
   constructor() { }
