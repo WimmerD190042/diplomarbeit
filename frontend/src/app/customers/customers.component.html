@@ -1,62 +1,64 @@
 <table style="border-radius: 10px;" class="table table-hover">
-    <thead>
-    
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Addresse</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-      
-    </thead>
-    <tbody>
+  <thead>
+    <tr>
+      <th class="header" scope="col">ID</th>
+      <th class="header" scope="col">Name</th>
+      <th class="header" scope="col">Addresse</th>
+      <th class="header" scope="col"></th>
+      <th class="header" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td> <!-- ID wird vom Server generiert -->
+      <td>
+        <input class="form-control" placeholder="Name" #newName type="text">
+      </td>
+      <td>
+        <input class="form-control" placeholder="Addresse" #newAddress type="text">
+      </td>
+      <td>
+        <button class="btn btn-success"
+          (click)="createCustomerFromInput(newName.value, newAddress.value)">Hinzufügen</button>
+      </td>
+      <td></td>
+    </tr>
 
-      <tr>
-        <td></td> <!-- ID wird vom Server generiert -->
-        <td>
-          <input class="form-control" placeholder="Name" #newName type="text">
-        </td>
-        <td>
-          <input class="form-control" placeholder="Addresse" #newAddress type="text">
-        </td>
-        <td>
-          <button class="btn btn-success" (click)="createCustomerFromInput(newName.value, newAddress.value)">Hinzufügen</button>
-        </td>
-        <td></td>
-      </tr>
+    <tr *ngFor="let customer of dataService.customers()">
+      <th scope="row">{{customer.id}}</th>
+      <td (click)="moveToSingleCustomer(customer)">
+        <form>
+          <div class="form-group">
+            <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
 
-      <tr *ngFor="let customer of dataService.customers()">
-        <th scope="row">{{customer.id}}</th>
-        <td (click)="moveToSingleCustomer(customer)">
-          <form>
-            <div class="form-group">
-              <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+            <input class="form-control" placeholder="Name" *ngIf="editingCustomer === customer" #nameInput type="text"
+              [value]="customer.name" (input)="customer.name = nameInput.value">
+            <span *ngIf="editingCustomer !== customer">{{customer.name}}</span>
+          </div>
+        </form>
 
-              <input class="form-control" placeholder="Name" *ngIf="editingCustomer === customer" #nameInput type="text" [value]="customer.name" (input)="customer.name = nameInput.value">
-              <span *ngIf="editingCustomer !== customer">{{customer.name}}</span>
-              </div>
-          </form>
-       
-        </td>
-        <td>
-          <form>
-            <div class="form-group">
-              <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+      </td>
+      <td>
+        <form>
+          <div class="form-group">
+            <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
 
-              <input class="form-control" placeholder="Addresse" *ngIf="editingCustomer === customer" #addressInput type="text" [value]="customer.address" (input)="customer.address = addressInput.value">
-              <span *ngIf="editingCustomer !== customer">{{customer.address}}</span>
-              </div>
-          </form>
+            <input class="form-control" placeholder="Addresse" *ngIf="editingCustomer === customer" #addressInput
+              type="text" [value]="customer.address" (input)="customer.address = addressInput.value">
+            <span *ngIf="editingCustomer !== customer">{{customer.address}}</span>
+          </div>
+        </form>
 
-        
-        </td>
-        <td>
-          <button *ngIf="editingCustomer === customer" class="btn btn-success btn-sm" (click)="saveChanges(customer)">Speichern</button>
-          <button *ngIf="editingCustomer !== customer" class="btn btn-secondary btn-sm" (click)="editCustomer(customer)">Bearbeiten</button>
-        </td>
-        <td><button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer)">Löschen</button></td>
-      </tr>
-    
-    </tbody>
-  </table>
+
+      </td>
+      <td>
+        <button *ngIf="editingCustomer === customer" class="btn btn-success btn-sm"
+          (click)="saveChanges(customer)">Speichern</button>
+        <button *ngIf="editingCustomer !== customer" class="btn btn-secondary btn-sm"
+          (click)="editCustomer(customer)">Bearbeiten</button>
+      </td>
+      <td><button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer)">Löschen</button></td>
+    </tr>
+
+  </tbody>
+</table>

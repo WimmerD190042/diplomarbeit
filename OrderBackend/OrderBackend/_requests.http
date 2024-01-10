@@ -1,4 +1,4 @@
-@baseUrl = https://localhost:5001
+@baseUrl = http://localhost:5000
 
 
 ################################################## Category
@@ -24,10 +24,10 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "address": "abc"
-}
+      "id": 1,
+         "name": "abc",
+         "address": "abc"
+      }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -35,9 +35,9 @@ POST {{baseUrl}}/api/Customer/addNewCustomer
 Content-type: application/json
 
 {
-   "name": "abc",
-   "address": "abc"
-}
+      "name": "abc",
+         "address": "abc"
+      }
 #####
 POST {{baseUrl}}/api/Customer/ReadCustomers
 #####
@@ -45,10 +45,10 @@ PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "address": "abc"
-}
+      "id": 1,
+      "name": "abc",
+      "address": "abc"
+   }
 #####
 
 ################################################## Order
@@ -66,15 +66,15 @@ POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-   "id": 1,
-   "dateString": "abc",
-   "amount": 1,
-   "paidStatus": "abc",
-   "customerId": 1,
-   "deposit": 1,
-   "price": 1,
-   "salesDayId": 1,
-   "notes": "abc",
+      "id": 1,
+      "dateString": "abc",
+      "amount": 1,
+      "paidStatus": "abc",
+      "customerId": 1,
+      "deposit": 1,
+      "price": 1,
+      "salesDayId": 1,
+      "notes": "abc",
    "meatPieceId": 1
 }
 #####
