@@ -9,9 +9,13 @@ public partial class Order
 
     public int CustomerId { get; set; }
 
+    public double Deposit { get; set; }
+
+    public double Price { get; set; }
+
     public int SalesDayId { get; set; }
 
-    public double amount { get; set; }
+    public double Amount { get; set; }
 
     public string PaidStatus { get; set; }
 

@@ -25,8 +25,11 @@
                 DateString = o.Date.ToString(),
                 Notes = o.Notes,
                 MeatPieceId = o.MeatPiece.Id,
-                Amount = o.amount,
-                PaidStatus = o.PaidStatus
+                Amount = o.Amount,
+                PaidStatus = o.PaidStatus,
+                Deposit = o.Deposit,
+                Price = o.Price,
+
             }).ToList();
         }
 
@@ -40,8 +43,11 @@
                 Date = DateTime.Parse(newOrder.DateString),
                 Notes = newOrder.Notes,
                 MeatPiece = _db.MeatPieces.Find(newOrder.MeatPieceId),
-                amount = newOrder.Amount,
-                PaidStatus = newOrder.PaidStatus
+                Amount = newOrder.Amount,
+                PaidStatus = newOrder.PaidStatus,
+                Deposit = newOrder.Deposit,
+                Price = newOrder.Price,
+                
 
             };
             _db.Orders.Add(addOrder);

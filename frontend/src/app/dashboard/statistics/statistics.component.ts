@@ -14,11 +14,14 @@ export class StatisticsComponent {
       public dataService= inject(DataService);
       public orderService= inject(OrderService);
 
-      totalSales: number = 0;
 
-      ngOnInit() {
-        this.orderService.orderOrdersGet().subscribe((data) => {
+      totalSales: number = 0;
+      revenue: number=0;
+
+      async ngOnInit() {
+        this.orderService.orderOrdersGet().subscribe(async (data) => {
           this.totalSales = data.length;
+          this.revenue = await this.dataService.getRevenue();
         });
       }
 }
