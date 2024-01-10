@@ -20,5 +20,5 @@ export const routes: Routes = [
   { path: 'newSalesDay', component: CreateSalesDayComponent },
   { path: 'salesDay', component: SalesDayComponent },
   { path: 'Home', component: AppComponent },
-  { path: 'WelcomePage', component: WelcomePageComponent },
+  { path: '**', component: WelcomePageComponent },
 ];

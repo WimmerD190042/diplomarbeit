@@ -26,6 +26,7 @@ export class NavbarComponent {
       console.log("forwart do dashboard")
     } else if (link == "home") {
       //weiterleitung funktioniert nicht
+      this.router.navigateByUrl('#');
       console.log("forwart do home")
     } else if (link == "salesDays") {
       //weiterleitung aktiviert
