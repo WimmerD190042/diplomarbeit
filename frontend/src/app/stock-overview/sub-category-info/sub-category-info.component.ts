@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 export class SubCategoryInfoComponent {
   public categoryService = inject(CategoryService);
   public dataService = inject(DataService);
-  public router= inject(Router);
+  public router = inject(Router);
   public stockInput: number = 0;
 
   @Input() subCategory: SubCategoryDto = {};
@@ -32,16 +32,18 @@ export class SubCategoryInfoComponent {
   }
 
   saveClicked() {
-   
     this.editMode = false;
-    this.stockInput= this.subCategory.stock!;
-    this.categoryService.apiCategoryUpdateStockForSubCategoryPut(this.subCategory.id, this.stockInput).subscribe(() => {
-      this.dataService.getSubCategories();
-      console.log('Stock updated');
-    });
+    this.stockInput = this.subCategory.stock!;
+    this.categoryService
+      .apiCategoryUpdateStockForSubCategoryPut(
+        this.subCategory.id,
+        this.stockInput
+      )
+      .subscribe(() => {
+        this.dataService.getSubCategories();
+        console.log('Stock updated');
+      });
   }
-
- 
 
   subCategoryClicked() {
     this.dataService.setSelectedSubCategory(this.subCategory);

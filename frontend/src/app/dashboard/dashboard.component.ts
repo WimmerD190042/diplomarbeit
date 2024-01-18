@@ -6,10 +6,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule,RecentOrdersComponent,StatisticsComponent],
+  imports: [CommonModule, RecentOrdersComponent, StatisticsComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
-
-}
+export class DashboardComponent {}

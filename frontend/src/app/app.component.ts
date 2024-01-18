@@ -6,16 +6,19 @@ import { Dropdown } from 'flowbite';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './navbar/navbar.component';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, RouterOutlet, MatIconModule,NavbarComponent],
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    RouterOutlet,
+    MatIconModule,
+    NavbarComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-
-  
   title = 'Dashboard';
 }

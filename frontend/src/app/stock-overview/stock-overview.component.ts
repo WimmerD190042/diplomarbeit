@@ -8,27 +8,18 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-stock-overview',
   standalone: true,
-  imports: [CommonModule,SingleCategoryInfoComponent],
+  imports: [CommonModule, SingleCategoryInfoComponent],
   templateUrl: './stock-overview.component.html',
-  styleUrl: './stock-overview.component.scss'
+  styleUrl: './stock-overview.component.scss',
 })
-export class StockOverviewComponent  {
-
+export class StockOverviewComponent {
   public dataService = inject(DataService);
-  public categoryService= inject(CategoryService);
-  public router= inject(Router);
+  public categoryService = inject(CategoryService);
+  public router = inject(Router);
 
   categoryClicked(category: CategoryDto) {
-    console.log("categoryClicked " + category.name);
+    console.log('categoryClicked ' + category.name);
     this.dataService.selectedCategory.next(category);
     this.router.navigateByUrl(`category-overview/${category.id}`);
   }
-      
-
-
-
- 
- 
-
-
 }

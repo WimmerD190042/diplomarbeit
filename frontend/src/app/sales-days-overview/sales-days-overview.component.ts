@@ -8,22 +8,19 @@ import { SalesDayInfoComponent } from '../sales-day-info/sales-day-info.componen
 @Component({
   selector: 'app-sales-days-overview',
   standalone: true,
-  imports: [CommonModule,SalesDayInfoComponent],
+  imports: [CommonModule, SalesDayInfoComponent],
   templateUrl: './sales-days-overview.component.html',
-  styleUrl: './sales-days-overview.component.scss'
+  styleUrl: './sales-days-overview.component.scss',
 })
 export class SalesDaysOverviewComponent {
   public dataService = inject(DataService);
   router = inject(Router);
 
-salesDayClicked() {
-      console.log("clickeeeedd")
-      this.router.navigateByUrl('salesDay')
-}
-  
+  salesDayClicked() {
+    this.router.navigateByUrl('salesDay');
+  }
+
   newSalesDayClick() {
     this.router.navigateByUrl('newSalesDay');
-    console.log("new SalesDay clicked")
-}
-
+  }
 }

@@ -8,12 +8,12 @@ import { environment } from './environments/environment';
 import { FormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
- 
   providers: [
     FormsModule,
     provideHttpClient(),
-    provideRouter(routes), provideAnimations(),
+    provideRouter(routes),
+    provideAnimations(),
     { provide: BASE_PATH, useValue: environment.apiRoot },
-    provideAnimations()
-]
+    provideAnimations(),
+  ],
 };

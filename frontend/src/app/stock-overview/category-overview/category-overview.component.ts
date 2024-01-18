@@ -21,11 +21,7 @@ import { DataService } from '../../data.service';
 export class CategoryOverviewComponent implements OnInit {
   public categoryService = inject(CategoryService);
   public dataService = inject(DataService);
-  subCategories: SubCategoryDto[]=[];
-
-  
-
-
+  subCategories: SubCategoryDto[] = [];
 
   ngOnInit(): void {
     this.loadSubCategories();
@@ -37,5 +33,4 @@ export class CategoryOverviewComponent implements OnInit {
   loadSubCategories() {
     this.dataService.getSubCategories();
   }
-  
 }

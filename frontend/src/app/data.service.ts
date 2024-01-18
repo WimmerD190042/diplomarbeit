@@ -48,8 +48,8 @@ export class DataService {
   }
   //?
 
-  selectedCustomer = new BehaviorSubject<CustomerDto>({}); 
-  meatPieces= signal<MeatPieceDto[]>([]);
+  selectedCustomer = new BehaviorSubject<CustomerDto>({});
+  meatPieces = signal<MeatPieceDto[]>([]);
   subCategories = signal<SubCategoryDto[]>([]);
   selectedSubCategory = signal<SubCategoryDto>({});
   selectedCategory = new BehaviorSubject<CategoryDto>({});
@@ -65,9 +65,11 @@ export class DataService {
     console.log('selectedSubCategory: ', this.selectedSubCategory());
   }
 
-  getMeatPieces()  {
-      console.log(this.selectedSubCategory().id+'id')
-      this.categoryService.apiCategoryMeatPiecesBySubCategoryIdGet(this.selectedSubCategory().id!).subscribe((meatPieces) => {
+  getMeatPieces() {
+    console.log(this.selectedSubCategory().id + 'id');
+    this.categoryService
+      .apiCategoryMeatPiecesBySubCategoryIdGet(this.selectedSubCategory().id!)
+      .subscribe((meatPieces) => {
         this.meatPieces.set(meatPieces);
         console.log('meatPieces: ', this.meatPieces());
       });
@@ -75,16 +77,19 @@ export class DataService {
   getRevenue(): Promise<number> {
     return new Promise((resolve, reject) => {
       let revenue = 0;
-      this.orderService.orderOrdersGet().subscribe((orders) => {
-        orders.forEach((order) => {
-          console.log(order.price);
-          revenue += order.price!;
-        });
-        console.log(revenue+'revenue');
-        resolve(revenue);
-      }, error => {
-        reject(error);
-      });
+      this.orderService.orderOrdersGet().subscribe(
+        (orders) => {
+          orders.forEach((order) => {
+            console.log(order.price);
+            revenue += order.price!;
+          });
+          console.log(revenue + 'revenue');
+          resolve(revenue);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
     });
   }
 
@@ -135,5 +140,4 @@ export class DataService {
       this.salesDays.set(x);
     });
   }
-
 }
