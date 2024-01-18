@@ -18,11 +18,15 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-sales-day',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [CommonModule, FormsModule, MatIconModule, MatAutocompleteModule, MatFormFieldModule, ReactiveFormsModule],
   templateUrl: './sales-day.component.html',
   styleUrl: './sales-day.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,
@@ -35,7 +39,7 @@ export class SalesDayComponent {
   public orders = signal<OrderDto[]>([]);
   public filterOrders = signal<OrderDto[]>([]);
 
-  //TODO: Preis ändern
+  //TODO: Preis für alle ändern -> Wimmer seine Aufgabe
   price: number = 1;
   deposit: number = 0.0;
   quantity: number = 0.0;
@@ -47,19 +51,35 @@ export class SalesDayComponent {
   selectedMeatPiece: MeatPieceDto = {};
   partsSearchTerm: string = '';
   notesSearchTerm: string = '';
+  control = new FormControl('');
+  allMeatPiecesSearch: string[] = [];
+  filteredAllMeatPiecesSearch: Observable<string[]> | undefined;
 
-  onPartsChanged() {
+  ngOnInit() {
     this.dataService.loadMeatPiecedFromBackend();
     var allMeatPieces = this.dataService.allMeatPieces();
-    
-    console.log(this.partsSearchTerm);
-    //if contains name give me the id
-    const filteredPartsOrders = this.orders().filter((order: OrderDto) => {
-      console.log(order.meatPieceId);
-      return order.notes && order.notes.includes(this.partsSearchTerm);
+    allMeatPieces.forEach(meatPiece => {
+      if (meatPiece.name !== null && meatPiece.name !== undefined) {
+        this.allMeatPiecesSearch.push(meatPiece.name);
+      }
     });
-    
-    this.filterOrders.set(filteredPartsOrders);
+
+    this.filteredAllMeatPiecesSearch = this.control.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+
+  onPartsChanged() {
+    //TODO: mit anfangsbuchstaben suchen? soll ich das überhaupt machen?
+  }
+
+  onMeatPieceSelectedMat(event: MatAutocompleteSelectedEvent): void {
+    const selectedMeatPiece = event.option.viewValue;
+    console.log('Selected Meat Piece:', selectedMeatPiece);
+  
+    //TODO wenn eins ausgewählt ist, sollen die Listen gefilter werden
+    //viel spaß :)
   }
 
   onNoteChanged() {
@@ -172,5 +192,14 @@ export class SalesDayComponent {
     input.style.marginRight = '10px';
     tr.insertBefore(input, td);
     tr.classList.add('d-flex');
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    return this.allMeatPiecesSearch.filter(allMeatPiecesSearch => this._normalizeValue(allMeatPiecesSearch).includes(filterValue));
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
   }
 }

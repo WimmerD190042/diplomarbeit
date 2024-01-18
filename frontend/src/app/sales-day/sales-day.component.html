@@ -37,12 +37,18 @@
     <!-- Teilstücke Search Bar -->
     <div class="input-group rounded" id="searchPartsDiv">
       <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Teilstücke"
-        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="partsSearchTerm"
-        (ngModelChange)="onPartsChanged()" />
+        aria-label="Search" aria-describedby="search-addon" (ngModelChange)="onPartsChanged()" [formControl]="control"
+        [matAutocomplete]="auto" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
     </div>
+    <!-- Autocomplete für Teilstück Suche -->
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onMeatPieceSelectedMat($event)">
+      @for (meatPiece of filteredAllMeatPiecesSearch | async; track meatPiece) {
+      <mat-option [value]="meatPiece">{{meatPiece}}</mat-option>
+      }
+    </mat-autocomplete>
 
     <!-- Anmerkung Search Bar-->
     <div class="input-group rounded" id="searchNoteDiv">
