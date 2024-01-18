@@ -108,19 +108,19 @@ namespace OrderBackend.Services
                 }).ToList()
             }).ToList();
 
-
             return categoryDtos;
         }
 
+        public List<MeatPieceDto> GetAllMeatPieces()
+        {
+            return _db.MeatPieces.OrderBy(x => x.Name).Select(x => new MeatPieceDto().CopyPropertiesFrom(x)).ToList();
+        }
 
         public void ReadCategories()
         {
-
             //einkommentieren wenn categories neu geladen werden müssen
             ReadAndInsertCategories();
             _db.SaveChanges();
-
-
         }
 
         public List<SubCategory> GetSubCategoriesByCategory(int categoryId)
@@ -131,12 +131,11 @@ namespace OrderBackend.Services
         public List<MeatPiece> GetMeatPiecesBySubCategory(int subCategoryId)
         {
             return _db.MeatPieces.Where(mp => mp.SubCategoryId == subCategoryId).ToList();
-            
+
         }
 
         public double GetSubCategoryTotalStock(int subCategoryId)
         {
-
             var totalStock = _db.SubCategories
              .Where(sc => sc.Id == subCategoryId)
              .SelectMany(sc => sc.MeatPieces)
@@ -172,8 +171,6 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
-
-
         public double GetCategoryTotalStock(int categoryId)
         {
             //        var result = _db.Categories
@@ -190,7 +187,6 @@ namespace OrderBackend.Services
             //})
             //.ToList();
             //    }
-
             return 0.0;
         }
     }

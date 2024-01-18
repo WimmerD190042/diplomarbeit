@@ -56,6 +56,7 @@ export class DataService {
   categories = signal<CategoryDto[]>([]);
   customers = signal<CustomerDto[]>([]);
   salesDays = signal<SalesDayDto[]>([]);
+  allMeatPieces = signal<MeatPieceDto[]>([]);
   selectedSalesDay = new BehaviorSubject<SalesDayDto>({});
 
   salesDayDateString = signal('');
@@ -138,6 +139,12 @@ export class DataService {
   loadSalesDaysFromBackend() {
     this.salesDayService.apiSalesDayGetSalesDaysGet().subscribe((x) => {
       this.salesDays.set(x);
+    });
+  }
+
+  loadMeatPiecedFromBackend() {
+    this.categoryService.apiCategoryGetAllMeatPieacesGet().subscribe((x) => {
+      this.allMeatPieces.set(x);
     });
   }
 }

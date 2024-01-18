@@ -4,6 +4,8 @@
 ################################################## Category
 GET {{baseUrl}}/api/Category/getAllCategories
 #####
+GET {{baseUrl}}/api/Category/getAllMeatPieaces
+#####
 GET {{baseUrl}}/api/Category/getStockForSubCategoryId?subCategoryId=1
 #####
 GET {{baseUrl}}/api/Category/MeatPiecesBySubCategoryId?subCategoryId=1

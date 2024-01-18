@@ -24,8 +24,8 @@
     </tr>
   </table>
 
-  <!-- Kunde mit Auswahl -->
   <div id="kunde-wrapper">
+    <!-- Kunde mit Auswahl -->
     <label id="kunde-label">Kunde:</label>
     <select id="selectPerson" class="form-select" [(ngModel)]="selectedCustomerId" (change)="customerChanged()">
       <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
@@ -34,11 +34,21 @@
       </option>
     </select>
 
-    <!--Search Bar-->
-    <div class="input-group rounded">
+    <!-- Teilstücke Search Bar -->
+    <div class="input-group rounded" id="searchPartsDiv">
+      <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Teilstücke"
+        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="partsSearchTerm"
+        (ngModelChange)="onPartsChanged()" />
+      <span class="input-group-text border-0" id="search-addon">
+        <mat-icon>search</mat-icon>
+      </span>
+    </div>
+
+    <!-- Anmerkung Search Bar-->
+    <div class="input-group rounded" id="searchNoteDiv">
       <input id="searchNote" type="search" class="form-control rounded" placeholder="Suche nach Anmerkung"
-        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchTerm"
-        (ngModelChange)="onSearchChange()" />
+        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="notesSearchTerm"
+        (ngModelChange)="onNoteChanged()" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
@@ -49,28 +59,20 @@
   <table id="table" class="table table-hover">
     <thead>
       <tr>
-        <th class="header" scope="col" (click)="sortBy('#')">
+        <th class="header" scope="col">
           ID
-          <button class="btn btn-link" (click)="toggleSortDirection('#')">{{getSortIcon('#')}}</button>
         </th>
-        <th class="header" scope="col" (click)="sortBy('Kategorie')">
+        <th class="header" scope="col">
           Kategorie
-          <button class="btn btn-link" (click)="toggleSortDirection('Kategorie')">{{getSortIcon('Kategorie')}}</button>
         </th>
-        <th class="header" scope="col" (click)="sortBy('Menge')">
+        <th class="header" scope="col">
           Menge (kg)
-          <button class="btn btn-link" (click)="toggleSortDirection('Menge')">{{getSortIcon('Menge')}}</button>
         </th>
-        <th class="header" scope="col" (click)="sortBy('Menge')">
-          Preis (€)
-          <button class="btn btn-link" (click)="toggleSortDirection('Preis')"></button>
-        </th>
-        <th class="header" scope="col" (click)="sortBy('Menge')">
+        <th class="header" scope="col">
           Pfand (€)
-          <button class="btn btn-link" (click)="toggleSortDirection('Pfand')"></button>
         </th>
-        <th class="header" scope="col" (click)="sortBy('Anmerkung')">Anmerkung <button class="btn btn-link"
-            (click)="toggleSortDirection('Anmerkung')">{{getSortIcon('Anmerkung')}}</button></th>
+        <th class="header" scope="col">Anmerkung
+        </th>
         <th class="header"></th>
       </tr>
     </thead>
@@ -83,7 +85,6 @@
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 {{selectedMeatPiece.name && selectedMeatPiece.name!.length > 1 ? selectedMeatPiece.name : 'Auswählen'}}
-
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
@@ -107,9 +108,6 @@
         </td>
         <td>
           <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" min="0" placeholder="0.0">
-        </td>
-        <td>
-          <input [(ngModel)]="price" type="number" class="form-control" id="price" min="0" placeholder="0.0">
         </td>
         <td>
           <input [(ngModel)]="deposit" type="number" class="form-control" id="deposit" min="0" placeholder="0.0">

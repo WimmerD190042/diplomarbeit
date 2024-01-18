@@ -17,10 +17,16 @@ namespace OrderBackend.Controllers
             return _dbService.GetAllCategories();
         }
 
+        [HttpGet("getAllMeatPieaces")]
+        public List<MeatPieceDto> GetAllMeatPieces()
+        {
+            return _dbService.GetAllMeatPieces();
+        }
+
         [HttpPost("readCategories")]
         public void ReadCategories()
         {
-           _dbService.ReadCategories();
+            _dbService.ReadCategories();
         }
 
         [HttpGet("SubCategoriesByCategoryId")]
@@ -58,7 +64,5 @@ namespace OrderBackend.Controllers
         {
             _dbService.UpdateStockForCategory(subCategoryId, newStock);
         }
-
-
     }
 }

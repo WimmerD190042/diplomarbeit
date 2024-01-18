@@ -15,7 +15,6 @@ import {
   OrderService,
   SubCategoryDto,
 } from '../swagger';
-import { Order } from '../swagger';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,21 +35,38 @@ export class SalesDayComponent {
   public orders = signal<OrderDto[]>([]);
   public filterOrders = signal<OrderDto[]>([]);
 
-  price: number = 0.0;
+  //TODO: Preis ändern
+  price: number = 1;
   deposit: number = 0.0;
   quantity: number = 0.0;
   notes: string = '';
   selectedCustomerId: Number = 0;
+  selectedPartsId: Number = 0;
   selectedCategory: CategoryDto = {};
   selectedSubCategory: SubCategoryDto = {};
   selectedMeatPiece: MeatPieceDto = {};
-  searchTerm: string = '';
+  partsSearchTerm: string = '';
+  notesSearchTerm: string = '';
 
-  onSearchChange() {
-    const filteredOrders = this.orders().filter((order: OrderDto) => {
-      return order.notes && order.notes.includes(this.searchTerm);
+  onPartsChanged() {
+    this.dataService.loadMeatPiecedFromBackend();
+    var allMeatPieces = this.dataService.allMeatPieces();
+    
+    console.log(this.partsSearchTerm);
+    //if contains name give me the id
+    const filteredPartsOrders = this.orders().filter((order: OrderDto) => {
+      console.log(order.meatPieceId);
+      return order.notes && order.notes.includes(this.partsSearchTerm);
     });
-    this.filterOrders.set(filteredOrders);
+    
+    this.filterOrders.set(filteredPartsOrders);
+  }
+
+  onNoteChanged() {
+    const filteredNotesOrders = this.orders().filter((order: OrderDto) => {
+      return order.notes && order.notes.includes(this.notesSearchTerm);
+    });
+    this.filterOrders.set(filteredNotesOrders);
   }
 
   exportButtonClick(): void {
@@ -80,6 +96,10 @@ export class SalesDayComponent {
         this.filterOrders.set(x);
         console.log('Orders: ', this.orders(), this.filterOrders());
       });
+  }
+
+  partsChanged() {
+    console.log("parts changed");
   }
 
   deleteOrder(Order: OrderDto) {
@@ -152,49 +172,5 @@ export class SalesDayComponent {
     input.style.marginRight = '10px';
     tr.insertBefore(input, td);
     tr.classList.add('d-flex');
-  }
-
-  //sort
-  sortOrder: { column: string; direction: string } = {
-    column: '',
-    direction: 'asc',
-  };
-
-  sortBy(column: string): void {
-    this.sortOrder.column = column;
-    this.sortOrder.direction =
-      this.sortOrder.direction === 'asc' ? 'desc' : 'asc';
-    if (column == '#') {
-      console.log('Sort after ID (nach unten)');
-    } else if (column == 'Kategorie') {
-      console.log('Sort after Kategorie (nach unten)');
-    } else if (column == 'Menge') {
-      console.log('Sort after Menge (nach unten)');
-    } else if (column == 'Anmerkung') {
-      console.log('Sort after Anmerkung (nach unten)');
-    }
-  }
-
-  toggleSortDirection(column: string): void {
-    if (this.sortOrder.column === column) {
-      this.sortOrder.direction =
-        this.sortOrder.direction === 'asc' ? 'desc' : 'asc';
-      if (column == '#') {
-        console.log('Sort after ID (nach oben)');
-      } else if (column == 'Kategorie') {
-        console.log('Sort after Kategorie (nach oben)');
-      } else if (column == 'Menge') {
-        console.log('Sort after Menge (nach oben)');
-      } else if (column == 'Anmerkung') {
-        console.log('Sort after Anmerkung (nach oben)');
-      }
-    }
-  }
-
-  getSortIcon(column: string): string {
-    if (this.sortOrder.column === column) {
-      return this.sortOrder.direction === 'asc' ? '▲' : '▼';
-    }
-    return '';
   }
 }
