@@ -14,7 +14,7 @@
         {
             return _db.Orders.Where(o => o.SalesDay.Id == salesDayId).Select(y => new OrderDto
             {
-                CustomerName = "Mustafa",
+                CustomerName = _db.Customers.Where(x => x.Id == y.CustomerId).Select(x => x.Name).First(),
             }.CopyPropertiesFrom(y)).ToList();
         }
 
@@ -68,10 +68,10 @@
 
         public List<OrderDto> getOrdersByCustomer(int customerId)
         {
-            return _db.Orders.Where(o => o.Customer.Id == customerId).Select(x => new OrderDto()
+            return _db.Orders.Where(o => o.Customer.Id == customerId).Select(y => new OrderDto()
             {
-                CustomerName = "Mustafa",
-            }.CopyPropertiesFrom(x)).ToList();
+                CustomerName = _db.Customers.Where(x => x.Id == y.CustomerId).Select(x => x.Name).First(),
+            }.CopyPropertiesFrom(y)).ToList();
         }
     }
 }

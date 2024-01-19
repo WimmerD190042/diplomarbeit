@@ -135,21 +135,13 @@ export class SalesDayComponent {
 
   customerChanged() {
     if (this.searchSelectedCustomerId == -1) {
-      console.log('Hello');
-      //ToDo: get SalesDayId
-      this.orderService.orderOrdersForSalesDayGet(1).subscribe((x) => {
+      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
         this.orders.set(x);
         this.filterOrders.set(x);
         console.log('Orders: ', this.orders(), this.filterOrders());
       });
-      var listOfAllOrdersOfSalesDay = this.dataService.allOrders();
-      //this.orders.set(listOfAllOrdersOfSalesDay);
-      //ToDo: set orders to the list
-      //public filterOrders = signal<OrderDto[]>([]);
-      console.log('length: ' + listOfAllOrdersOfSalesDay.length);
-    }
-
-    this.orderService
+    } else {
+      this.orderService
       .orderOrdersFromCustomerForSalesDayGet(
         this.searchSelectedCustomerId as number,
         this.dataService.selectedSalesDay.value.id
@@ -157,8 +149,8 @@ export class SalesDayComponent {
       .subscribe((x) => {
         this.orders.set(x);
         this.filterOrders.set(x);
-        console.log('Orders: ', this.orders(), this.filterOrders());
       });
+    }
   }
 
   partsChanged() {

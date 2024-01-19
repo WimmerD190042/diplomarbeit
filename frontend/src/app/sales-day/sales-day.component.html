@@ -160,7 +160,7 @@
       <!-- Orders werden in Liste geladen -->
       <tr *ngFor="let order of filterOrders()">
         <td>{{order.id}}</td>
-        <td>ToDo</td> <!-- customer Name -->
+        <td>{{order.customerName}}</td>
         <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
         <td>{{order.amount}}</td>
         <td>{{order.deposit}}</td>
