@@ -23,7 +23,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("OrdersForSalesDay")]
-    public List<Order> getOrdersForSalesDay(int salesDayId)
+    public List<OrderDto> getOrdersForSalesDay(int salesDayId)
     {
         return _dbService.getOrdersForSalesDay(salesDayId);
     }
@@ -41,9 +41,8 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("OrdersByCustomer")]
-    public List<Order> getOrdersByCustomerId(int customerId)
+    public List<OrderDto> getOrdersByCustomerId(int customerId)
     {
         return _dbService.getOrdersByCustomer(customerId);
     }
-
 }

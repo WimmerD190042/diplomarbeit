@@ -58,7 +58,7 @@ export class DataService {
   salesDays = signal<SalesDayDto[]>([]);
   allMeatPieces = signal<MeatPieceDto[]>([]);
   selectedSalesDay = new BehaviorSubject<SalesDayDto>({});
-
+  allOrders = signal<OrderDto[]>([]);
   salesDayDateString = signal('');
 
   setSelectedSubCategory(subCategory: SubCategoryDto) {
@@ -145,6 +145,12 @@ export class DataService {
   loadMeatPiecedFromBackend() {
     this.categoryService.apiCategoryGetAllMeatPieacesGet().subscribe((x) => {
       this.allMeatPieces.set(x);
+    });
+  }
+
+  loadOrdersOfSalesDayFromBackend(salesDayId: number) {
+    this.orderService.orderOrdersForSalesDayGet(salesDayId).subscribe((x) => {
+      this.allOrders.set(x);
     });
   }
 }

@@ -17,6 +17,7 @@ export interface OrderDto {
     amount?: number;
     paidStatus?: string | null;
     customerId?: number;
+    customerName?: string | null;
     deposit?: number;
     price?: number;
     salesDayId?: number;

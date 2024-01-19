@@ -19,14 +19,25 @@ import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable, map, startWith } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-sales-day',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, MatAutocompleteModule, MatFormFieldModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './sales-day.component.html',
   styleUrl: './sales-day.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,
@@ -44,21 +55,22 @@ export class SalesDayComponent {
   deposit: number = 0.0;
   quantity: number = 0.0;
   notes: string = '';
-  selectedCustomerId: Number = 0;
+  searchSelectedCustomerId: Number = 0;
   selectedPartsId: Number = 0;
   selectedCategory: CategoryDto = {};
   selectedSubCategory: SubCategoryDto = {};
   selectedMeatPiece: MeatPieceDto = {};
   partsSearchTerm: string = '';
   notesSearchTerm: string = '';
-  control = new FormControl('');
+  control = new FormControl();
   allMeatPiecesSearch: string[] = [];
   filteredAllMeatPiecesSearch: Observable<string[]> | undefined;
+  selectedCustomerId: Number = 0;
 
   ngOnInit() {
     this.dataService.loadMeatPiecedFromBackend();
     var allMeatPieces = this.dataService.allMeatPieces();
-    allMeatPieces.forEach(meatPiece => {
+    allMeatPieces.forEach((meatPiece) => {
       if (meatPiece.name !== null && meatPiece.name !== undefined) {
         this.allMeatPiecesSearch.push(meatPiece.name);
       }
@@ -66,8 +78,18 @@ export class SalesDayComponent {
 
     this.filteredAllMeatPiecesSearch = this.control.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map((value) => this._filter(value || ''))
     );
+
+    //get ALl Orders
+    this.dataService.loadOrdersOfSalesDayFromBackend(1);
+    var list = this.dataService.allOrders();
+    console.log('list length: ' + list.length);
+    console.log(this.dataService.allOrders);
+  }
+
+  convertIdToName() {
+    return 10;
   }
 
   onPartsChanged() {
@@ -76,8 +98,14 @@ export class SalesDayComponent {
 
   onMeatPieceSelectedMat(event: MatAutocompleteSelectedEvent): void {
     const selectedMeatPiece = event.option.viewValue;
-    console.log('Selected Meat Piece:', selectedMeatPiece);
+    /*console.log('Selected Meat Piece:', selectedMeatPiece);
   
+    const filteredMeatPiecesOrders = this.orders().filter((order: OrderDto) => {
+      return order.customerId && order.customerId == 230;
+    });
+    //Liste auf jetzt umändern
+    this.filterOrders.set(filteredMeatPiecesOrders);
+    */
     //TODO wenn eins ausgewählt ist, sollen die Listen gefilter werden
     //viel spaß :)
   }
@@ -106,9 +134,24 @@ export class SalesDayComponent {
   }
 
   customerChanged() {
+    if (this.searchSelectedCustomerId == -1) {
+      console.log('Hello');
+      //ToDo: get SalesDayId
+      this.orderService.orderOrdersForSalesDayGet(1).subscribe((x) => {
+        this.orders.set(x);
+        this.filterOrders.set(x);
+        console.log('Orders: ', this.orders(), this.filterOrders());
+      });
+      var listOfAllOrdersOfSalesDay = this.dataService.allOrders();
+      //this.orders.set(listOfAllOrdersOfSalesDay);
+      //ToDo: set orders to the list
+      //public filterOrders = signal<OrderDto[]>([]);
+      console.log('length: ' + listOfAllOrdersOfSalesDay.length);
+    }
+
     this.orderService
       .orderOrdersFromCustomerForSalesDayGet(
-        this.selectedCustomerId as number,
+        this.searchSelectedCustomerId as number,
         this.dataService.selectedSalesDay.value.id
       )
       .subscribe((x) => {
@@ -119,7 +162,7 @@ export class SalesDayComponent {
   }
 
   partsChanged() {
-    console.log("parts changed");
+    console.log('parts changed');
   }
 
   deleteOrder(Order: OrderDto) {
@@ -159,7 +202,7 @@ export class SalesDayComponent {
           const dateString = new Date().toISOString();
 
           const order = {
-            customerId: this.selectedCustomerId as number,
+            customerId: this.searchSelectedCustomerId as number,
             dateString: dateString,
             notes: this.notes,
             meatPieceId: this.selectedMeatPiece.id,
@@ -196,7 +239,9 @@ export class SalesDayComponent {
 
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
-    return this.allMeatPiecesSearch.filter(allMeatPiecesSearch => this._normalizeValue(allMeatPiecesSearch).includes(filterValue));
+    return this.allMeatPiecesSearch.filter((allMeatPiecesSearch) =>
+      this._normalizeValue(allMeatPiecesSearch).includes(filterValue)
+    );
   }
 
   private _normalizeValue(value: string): string {

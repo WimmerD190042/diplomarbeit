@@ -10,9 +10,12 @@
             return _db.Orders.ToList();
         }
 
-        public List<Order> getOrdersForSalesDay(int salesDayId)
+        public List<OrderDto> getOrdersForSalesDay(int salesDayId)
         {
-            return _db.Orders.Where(o => o.SalesDay.Id == salesDayId).ToList();
+            return _db.Orders.Where(o => o.SalesDay.Id == salesDayId).Select(y => new OrderDto
+            {
+                CustomerName = "Mustafa",
+            }.CopyPropertiesFrom(y)).ToList();
         }
 
         public List<OrderDto> getOrdersFromCustomerForSalesDay(int customerId, int salesDayId)
@@ -29,7 +32,6 @@
                 PaidStatus = o.PaidStatus,
                 Deposit = o.Deposit,
                 Price = o.Price,
-
             }).ToList();
         }
 
@@ -47,8 +49,6 @@
                 PaidStatus = newOrder.PaidStatus,
                 Deposit = newOrder.Deposit,
                 Price = newOrder.Price,
-                
-
             };
             _db.Orders.Add(addOrder);
             //Find me the subcategory of the newOrder from the meatpiece
@@ -64,12 +64,14 @@
             var deleteOrder = _db.Orders.Find(deleteOrderId);
             _db.Orders.Remove(deleteOrder);
             _db.SaveChanges();
-
         }
 
-        public List<Order> getOrdersByCustomer(int customerId)
+        public List<OrderDto> getOrdersByCustomer(int customerId)
         {
-            return _db.Orders.Where(o => o.Customer.Id == customerId).ToList();
+            return _db.Orders.Where(o => o.Customer.Id == customerId).Select(x => new OrderDto()
+            {
+                CustomerName = "Mustafa",
+            }.CopyPropertiesFrom(x)).ToList();
         }
     }
 }

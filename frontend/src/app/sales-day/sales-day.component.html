@@ -27,8 +27,9 @@
   <div id="kunde-wrapper">
     <!-- Kunde mit Auswahl -->
     <label id="kunde-label">Kunde:</label>
-    <select id="selectPerson" class="form-select" [(ngModel)]="selectedCustomerId" (change)="customerChanged()">
+    <select id="selectPerson" class="form-select" [(ngModel)]="searchSelectedCustomerId" (change)="customerChanged()">
       <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
+      <option [value]="-1">All Customers</option>
       <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
         {{customer.name}}
       </option>
@@ -69,6 +70,9 @@
           ID
         </th>
         <th class="header" scope="col">
+          Kunde
+        </th>
+        <th class="header" scope="col">
           Kategorie
         </th>
         <th class="header" scope="col">
@@ -77,7 +81,8 @@
         <th class="header" scope="col">
           Pfand (€)
         </th>
-        <th class="header" scope="col">Anmerkung
+        <th class="header" scope="col">
+          Anmerkung
         </th>
         <th class="header"></th>
       </tr>
@@ -85,6 +90,13 @@
     <tbody>
       <tr>
         <td>0</td>
+        <!-- Todo: -->
+        <select class="form-select" [(ngModel)]="selectedCustomerId" (change)="customerChanged()">
+          <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
+          <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
+            {{customer.name}}
+          </option>
+        </select>
         <td>
           <div dropdown class="d-inline-block">
             <div class="dropdown">
@@ -148,9 +160,9 @@
       <!-- Orders werden in Liste geladen -->
       <tr *ngFor="let order of filterOrders()">
         <td>{{order.id}}</td>
+        <td>ToDo</td> <!-- customer Name -->
         <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
         <td>{{order.amount}}</td>
-        <td>{{order.price}}</td>
         <td>{{order.deposit}}</td>
         <td>{{order.notes}}</td>
         <td>
