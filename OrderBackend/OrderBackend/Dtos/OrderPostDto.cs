@@ -1,8 +1,7 @@
 ﻿namespace OrderBackend.Dtos
 {
-    public class OrderDto
+    public class OrderPostDto
     {
-
         public int Id { get; set; }
 
         public string DateString { get; set; }
@@ -13,8 +12,6 @@
 
         public int CustomerId { get; set; }
 
-        public string CustomerName { get; set; }
-
         public double Deposit { get; set; }
 
         public double Price { get; set; }
@@ -24,7 +21,5 @@
         public string Notes { get; set; }
 
         public int MeatPieceId { get; set; }
-
-        public string MeatPieceName { get; set; }
     }
 }

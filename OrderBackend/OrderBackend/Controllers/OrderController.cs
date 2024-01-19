@@ -16,7 +16,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost("Order")]
-    public string AddOrder(OrderDto newOrder)
+    public string AddOrder(OrderPostDto newOrder)
     {
         _dbService.AddOrder(newOrder);
         return "Order added";

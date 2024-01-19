@@ -11,18 +11,16 @@
  */
 
 
-export interface OrderDto { 
+export interface OrderPostDto { 
     id?: number;
     dateString?: string | null;
     amount?: number;
     paidStatus?: string | null;
     customerId?: number;
-    customerName?: string | null;
     deposit?: number;
     price?: number;
     salesDayId?: number;
     notes?: string | null;
     meatPieceId?: number;
-    meatPieceName?: string | null;
 }
 

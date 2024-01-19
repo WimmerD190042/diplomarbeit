@@ -8,6 +8,7 @@ export * from './meatPieceDto';
 export * from './newCustomerDto';
 export * from './order';
 export * from './orderDto';
+export * from './orderPostDto';
 export * from './salesDay';
 export * from './salesDayDto';
 export * from './subCategory';

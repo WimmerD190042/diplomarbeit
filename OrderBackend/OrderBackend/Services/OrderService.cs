@@ -15,6 +15,7 @@
             return _db.Orders.Where(o => o.SalesDay.Id == salesDayId).Select(y => new OrderDto
             {
                 CustomerName = _db.Customers.Where(x => x.Id == y.CustomerId).Select(x => x.Name).First(),
+                MeatPieceName = _db.MeatPieces.Where(x => x.Id == y.MeatPieceId).Select(x => x.Name).First()
             }.CopyPropertiesFrom(y)).ToList();
         }
 
@@ -35,7 +36,7 @@
             }).ToList();
         }
 
-        public string AddOrder(OrderDto newOrder)
+        public string AddOrder(OrderPostDto newOrder)
         {
             Order addOrder = new Order
             {
@@ -71,6 +72,7 @@
             return _db.Orders.Where(o => o.Customer.Id == customerId).Select(y => new OrderDto()
             {
                 CustomerName = _db.Customers.Where(x => x.Id == y.CustomerId).Select(x => x.Name).First(),
+                MeatPieceName = _db.MeatPieces.Where(x => x.Id == y.MeatPieceId).Select(x => x.Name).First()
             }.CopyPropertiesFrom(y)).ToList();
         }
     }

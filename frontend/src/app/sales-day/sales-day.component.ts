@@ -97,17 +97,10 @@ export class SalesDayComponent {
   }
 
   onMeatPieceSelectedMat(event: MatAutocompleteSelectedEvent): void {
-    const selectedMeatPiece = event.option.viewValue;
-    /*console.log('Selected Meat Piece:', selectedMeatPiece);
-  
-    const filteredMeatPiecesOrders = this.orders().filter((order: OrderDto) => {
-      return order.customerId && order.customerId == 230;
+    const filteredMeatPiece = this.orders().filter((order: OrderDto) => {
+      return order.meatPieceName && order.meatPieceName.includes(event.option.viewValue);
     });
-    //Liste auf jetzt umändern
-    this.filterOrders.set(filteredMeatPiecesOrders);
-    */
-    //TODO wenn eins ausgewählt ist, sollen die Listen gefilter werden
-    //viel spaß :)
+    this.filterOrders.set(filteredMeatPiece);
   }
 
   onNoteChanged() {
@@ -120,8 +113,8 @@ export class SalesDayComponent {
   exportButtonClick(): void {
     var csvData = 'Customer;Menge;Anmerkung\n';
     for (var i = 0; i < this.filterOrders().length; i++) {
-      const customerId = this.filterOrders().at(i)?.customerId;
-      const meatPieceId = this.filterOrders().at(i)?.meatPieceId;
+      const customerId = this.filterOrders().at(i)?.customerName;
+      const meatPieceId = this.filterOrders().at(i)?.meatPieceName;
       const note = this.filterOrders().at(i)?.notes;
       csvData += `${customerId};${meatPieceId};${note}\n`;
     }
@@ -138,7 +131,6 @@ export class SalesDayComponent {
       this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
         this.orders.set(x);
         this.filterOrders.set(x);
-        console.log('Orders: ', this.orders(), this.filterOrders());
       });
     } else {
       this.orderService

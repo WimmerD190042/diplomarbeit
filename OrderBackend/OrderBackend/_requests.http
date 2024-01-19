@@ -27,9 +27,9 @@ Content-type: application/json
 
 {
    "id": 1,
-      "name": "abc",
-      "address": "abc"
-   }
+   "name": "abc",
+   "address": "abc"
+}
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -73,7 +73,6 @@ Content-type: application/json
    "amount": 1,
    "paidStatus": "abc",
    "customerId": 1,
-   "customerName": "abc",
    "deposit": 1,
    "price": 1,
    "salesDayId": 1,
