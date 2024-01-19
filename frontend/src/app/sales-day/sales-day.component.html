@@ -35,10 +35,26 @@
       </option>
     </select>
 
+    <!-- Kunde Search Bar -->
+    <div class="input-group rounded" id="searchPartsDiv">
+      <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Kunden"
+        aria-label="Search" aria-describedby="search-addon" (ngModelChange)="onPartsChanged()" [formControl]="control"
+        [matAutocomplete]="auto" />
+      <span class="input-group-text border-0" id="search-addon">
+        <mat-icon>search</mat-icon>
+      </span>
+    </div>
+    <!-- Autocomplete für Kunde Suche -->
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCustomerSelectMat($event)">
+      @for (customer of customerList | async; track customer) {
+      <mat-option [value]="customer">{{customer}}</mat-option>
+      }
+    </mat-autocomplete>
+
     <!-- Teilstücke Search Bar -->
     <div class="input-group rounded" id="searchPartsDiv">
       <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Teilstücke"
-        aria-label="Search" aria-describedby="search-addon" (ngModelChange)="onPartsChanged()" [formControl]="control"
+        aria-label="Search" aria-describedby="search-addon" [formControl]="control"
         [matAutocomplete]="auto" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
@@ -90,13 +106,15 @@
     <tbody>
       <tr>
         <td>0</td>
-        <!-- Todo: -->
-        <select class="form-select" [(ngModel)]="selectedCustomerId" (change)="customerChanged()">
-          <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
-          <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
-            {{customer.name}}
-          </option>
-        </select>
+        <!-- Todo: Kunde Select -->
+        <td>
+          <select id="selectPerson" class="form-select" [(ngModel)]="addSelectedCustomerId">
+            <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
+            <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
+              {{customer.name}}
+            </option>
+          </select>
+        </td>
         <td>
           <div dropdown class="d-inline-block">
             <div class="dropdown">

@@ -63,9 +63,16 @@ export class SalesDayComponent {
   partsSearchTerm: string = '';
   notesSearchTerm: string = '';
   control = new FormControl();
+  //teilstücke search
   allMeatPiecesSearch: string[] = [];
   filteredAllMeatPiecesSearch: Observable<string[]> | undefined;
-  selectedCustomerId: Number = 0;
+  //kunde search
+  allCustomerSearch: string[] = ["Test1", "Test2", "Test3"];
+  customerList: Observable<string[]> | undefined;
+  //rest
+  selectedCustomerId: Number = -1;
+  addSelectedCustomerId: Number = 0;
+
 
   ngOnInit() {
     this.dataService.loadMeatPiecedFromBackend();
@@ -76,7 +83,14 @@ export class SalesDayComponent {
       }
     });
 
+    //Teilstücke Search
     this.filteredAllMeatPiecesSearch = this.control.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || ''))
+    );
+
+    //Kunden Search
+    this.customerList = this.control.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
     );
@@ -96,11 +110,38 @@ export class SalesDayComponent {
     //TODO: mit anfangsbuchstaben suchen? soll ich das überhaupt machen?
   }
 
+  //Teilstücke Search
   onMeatPieceSelectedMat(event: MatAutocompleteSelectedEvent): void {
     const filteredMeatPiece = this.orders().filter((order: OrderDto) => {
       return order.meatPieceName && order.meatPieceName.includes(event.option.viewValue);
     });
     this.filterOrders.set(filteredMeatPiece);
+  }
+  
+  //Kunde Search
+  onCustomerSelectMat(event: MatAutocompleteSelectedEvent): void {
+    const filteredMeatPiece = this.orders().filter((order: OrderDto) => {
+      return order.meatPieceName && order.meatPieceName.includes(event.option.viewValue);
+    });
+    this.filterOrders.set(filteredMeatPiece);
+    /*
+    if (this.searchSelectedCustomerId == -1) {
+      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
+        this.orders.set(x);
+        this.filterOrders.set(x);
+      });
+    } else {
+      this.orderService
+      .orderOrdersFromCustomerForSalesDayGet(
+        this.searchSelectedCustomerId as number,
+        this.dataService.selectedSalesDay.value.id
+      )
+      .subscribe((x) => {
+        this.orders.set(x);
+        this.filterOrders.set(x);
+      });
+    }
+    */
   }
 
   onNoteChanged() {
@@ -111,7 +152,7 @@ export class SalesDayComponent {
   }
 
   exportButtonClick(): void {
-    var csvData = 'Customer;Menge;Anmerkung\n';
+    var csvData = 'Kunde;Menge;Anmerkung\n';
     for (var i = 0; i < this.filterOrders().length; i++) {
       const customerId = this.filterOrders().at(i)?.customerName;
       const meatPieceId = this.filterOrders().at(i)?.meatPieceName;
@@ -186,7 +227,7 @@ export class SalesDayComponent {
           const dateString = new Date().toISOString();
 
           const order = {
-            customerId: this.searchSelectedCustomerId as number,
+            customerId: this.addSelectedCustomerId as number,
             dateString: dateString,
             notes: this.notes,
             meatPieceId: this.selectedMeatPiece.id,
