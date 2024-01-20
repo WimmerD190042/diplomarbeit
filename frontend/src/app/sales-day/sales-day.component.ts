@@ -62,12 +62,13 @@ export class SalesDayComponent {
   selectedMeatPiece: MeatPieceDto = {};
   partsSearchTerm: string = '';
   notesSearchTerm: string = '';
-  control = new FormControl();
+  controlParts = new FormControl();
+  controlCustomer = new FormControl();
   //teilstücke search
   allMeatPiecesSearch: string[] = [];
   filteredAllMeatPiecesSearch: Observable<string[]> | undefined;
   //kunde search
-  allCustomerSearch: string[] = ["Test1", "Test2", "Test3"];
+  allCustomerSearch: string[] = ["All Customers"];
   customerList: Observable<string[]> | undefined;
   //rest
   selectedCustomerId: Number = -1;
@@ -75,39 +76,47 @@ export class SalesDayComponent {
 
 
   ngOnInit() {
+    //Load All Custers:
+    this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
+      this.orders.set(x);
+      this.filterOrders.set(x);
+    });
+
+    //Load Teilstücke
     this.dataService.loadMeatPiecedFromBackend();
     var allMeatPieces = this.dataService.allMeatPieces();
-    allMeatPieces.forEach((meatPiece) => {
-      if (meatPiece.name !== null && meatPiece.name !== undefined) {
-        this.allMeatPiecesSearch.push(meatPiece.name);
+    allMeatPieces.forEach((singleMeatPiece) => {
+      if (singleMeatPiece.name !== null && singleMeatPiece.name !== undefined) {
+        this.allMeatPiecesSearch.push(singleMeatPiece.name);
+      }
+    });
+
+    //Load Customers
+    this.dataService.loadCustomersFromBackend();
+    var allCustomers = this.dataService.customers();
+    allCustomers.forEach((singleCustomer) => {
+      if (singleCustomer.name !== null && singleCustomer.name !== undefined) {
+        this.allCustomerSearch.push(singleCustomer.name);
       }
     });
 
     //Teilstücke Search
-    this.filteredAllMeatPiecesSearch = this.control.valueChanges.pipe(
+    this.filteredAllMeatPiecesSearch = this.controlParts.valueChanges.pipe(
       startWith(''),
-      map((value) => this._filter(value || ''))
+      map((value) => this.filterParts(value || ''))
     );
 
     //Kunden Search
-    this.customerList = this.control.valueChanges.pipe(
+    this.customerList = this.controlCustomer.valueChanges.pipe(
       startWith(''),
-      map((value) => this._filter(value || ''))
+      map((value) => this.filterCustomers(value || ''))
     );
 
-    //get ALl Orders
+    //get ALl Orders -> ToDo brauchst du das noch?
     this.dataService.loadOrdersOfSalesDayFromBackend(1);
     var list = this.dataService.allOrders();
     console.log('list length: ' + list.length);
     console.log(this.dataService.allOrders);
-  }
-
-  convertIdToName() {
-    return 10;
-  }
-
-  onPartsChanged() {
-    //TODO: mit anfangsbuchstaben suchen? soll ich das überhaupt machen?
   }
 
   //Teilstücke Search
@@ -120,10 +129,17 @@ export class SalesDayComponent {
   
   //Kunde Search
   onCustomerSelectMat(event: MatAutocompleteSelectedEvent): void {
-    const filteredMeatPiece = this.orders().filter((order: OrderDto) => {
-      return order.meatPieceName && order.meatPieceName.includes(event.option.viewValue);
+    if(event.option.viewValue === "All Customers") {
+      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
+        this.orders.set(x);
+        this.filterOrders.set(x);
+      });
+    }
+    const filteredCustomer = this.orders().filter((order: OrderDto) => {
+      return order.customerName && order.customerName.includes(event.option.viewValue);
     });
-    this.filterOrders.set(filteredMeatPiece);
+    console.log("event:" + event.option.value);
+    this.filterOrders.set(filteredCustomer);
     /*
     if (this.searchSelectedCustomerId == -1) {
       this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
@@ -262,14 +278,29 @@ export class SalesDayComponent {
     tr.classList.add('d-flex');
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = this._normalizeValue(value);
+  //Search Teilstücke
+  private filterParts(value: string): string[] {
+    const filterValue = this.normalizeParts(value);
     return this.allMeatPiecesSearch.filter((allMeatPiecesSearch) =>
-      this._normalizeValue(allMeatPiecesSearch).includes(filterValue)
+      this.normalizeParts(allMeatPiecesSearch).includes(filterValue)
     );
   }
 
-  private _normalizeValue(value: string): string {
+  //Search Teilstücke
+  private normalizeParts(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  //Search Customers
+  private filterCustomers(value: string): string[] {
+    const filterValue = this.normalizeCustomers(value);
+    return this.allCustomerSearch.filter((allCustomerSearch) =>
+      this.normalizeCustomers(allCustomerSearch).includes(filterValue)
+    );
+  }
+
+  //Search Customers
+  private normalizeCustomers(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
   }
 }

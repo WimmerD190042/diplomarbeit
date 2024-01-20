@@ -25,27 +25,16 @@
   </table>
 
   <div id="kunde-wrapper">
-    <!-- Kunde mit Auswahl -->
-    <label id="kunde-label">Kunde:</label>
-    <select id="selectPerson" class="form-select" [(ngModel)]="searchSelectedCustomerId" (change)="customerChanged()">
-      <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
-      <option [value]="-1">All Customers</option>
-      <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
-        {{customer.name}}
-      </option>
-    </select>
-
     <!-- Kunde Search Bar -->
-    <div class="input-group rounded" id="searchPartsDiv">
-      <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Kunden"
-        aria-label="Search" aria-describedby="search-addon" (ngModelChange)="onPartsChanged()" [formControl]="control"
-        [matAutocomplete]="auto" />
+    <div class="input-group rounded" id="serachCustomerDiv">
+      <input id="searchCustomer" type="search" class="form-control rounded" placeholder="Suche nach Kunden"
+        aria-label="Search" aria-describedby="search-addon" [formControl]="controlCustomer" [matAutocomplete]="auto1" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
     </div>
     <!-- Autocomplete für Kunde Suche -->
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCustomerSelectMat($event)">
+    <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onCustomerSelectMat($event)">
       @for (customer of customerList | async; track customer) {
       <mat-option [value]="customer">{{customer}}</mat-option>
       }
@@ -54,14 +43,13 @@
     <!-- Teilstücke Search Bar -->
     <div class="input-group rounded" id="searchPartsDiv">
       <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Teilstücke"
-        aria-label="Search" aria-describedby="search-addon" [formControl]="control"
-        [matAutocomplete]="auto" />
+        aria-label="Search" aria-describedby="search-addon" [formControl]="controlParts" [matAutocomplete]="auto2" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
     </div>
     <!-- Autocomplete für Teilstück Suche -->
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onMeatPieceSelectedMat($event)">
+    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="onMeatPieceSelectedMat($event)">
       @for (meatPiece of filteredAllMeatPiecesSearch | async; track meatPiece) {
       <mat-option [value]="meatPiece">{{meatPiece}}</mat-option>
       }
