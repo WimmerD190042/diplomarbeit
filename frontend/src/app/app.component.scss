@@ -14,7 +14,21 @@
 
 .sidebar {
   background: #f1f2f6 !important;
+  width: 300px; /* Adjust this value based on the desired width of your sidebar */
+  position: fixed;
+  top: 0;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
 }
+
+/* Add margin to push the main content away from the sidebar */
+.main-content {
+  margin-left: 300px; /* Adjust this value based on the width of your sidebar */
+}
+
+
+
 
 //colors:
 // $white: #FFFFFFff;

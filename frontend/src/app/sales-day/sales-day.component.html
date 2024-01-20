@@ -1,28 +1,28 @@
 <body>
-  <div>
+  <div id="infoDiv">
     <!-- Verkaufstag anzneige -->
     <h1>Verkaufstag: {{dataService.selectedSalesDay.value.name}}</h1>
     <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) | date:'dd.MM.YYYY' }}</h5>
 
-    <!-- Save File -->
-    <div id="save-file-button" (click)="exportButtonClick()">
-      <button>
-        <mat-icon>local_printshop</mat-icon>
-      </button>
-    </div>
+    <!-- Oxe mit Button -->
+    <table class="table-secondary">
+      <tr>
+        <td>Oxe</td>
+        <td>
+          <button class="btn btn-success" (click)="addNameField($event.target)">
+            +
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
 
-  <!-- Oxe mit Button -->
-  <table class="table-secondary">
-    <tr>
-      <td>Oxe</td>
-      <td>
-        <button class="btn btn-success" (click)="addNameField($event.target)">
-          +
-        </button>
-      </td>
-    </tr>
-  </table>
+  <!-- Save File -->
+  <div id="save-file-button" (click)="exportButtonClick()">
+    <button>
+      <mat-icon>local_printshop</mat-icon>
+    </button>
+  </div>
 
   <div id="kunde-wrapper">
     <!-- Kunde Search Bar -->
@@ -177,7 +177,7 @@
           </button>
           <button (click)="deleteOrder(order)">
             <mat-icon color="warn" style="font-size: 24px;">clear</mat-icon>
-          </button>          
+          </button>
         </td>
       </tr>
     </tbody>
