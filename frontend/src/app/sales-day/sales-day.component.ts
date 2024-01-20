@@ -65,10 +65,10 @@ export class SalesDayComponent {
   controlParts = new FormControl();
   controlCustomer = new FormControl();
   //teilstücke search
-  allMeatPiecesSearch: string[] = [];
+  allMeatPiecesSearch: string[] = ["Alle Teilstücke"];
   filteredAllMeatPiecesSearch: Observable<string[]> | undefined;
   //kunde search
-  allCustomerSearch: string[] = ["All Customers"];
+  allCustomerSearch: string[] = ["Alle Kunden"];
   customerList: Observable<string[]> | undefined;
   //rest
   selectedCustomerId: Number = -1;
@@ -121,6 +121,12 @@ export class SalesDayComponent {
 
   //Teilstücke Search
   onMeatPieceSelectedMat(event: MatAutocompleteSelectedEvent): void {
+    if(event.option.viewValue === "Alle Teilstücke") {
+      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
+        this.orders.set(x);
+        this.filterOrders.set(x);
+      });
+    }
     const filteredMeatPiece = this.orders().filter((order: OrderDto) => {
       return order.meatPieceName && order.meatPieceName.includes(event.option.viewValue);
     });
@@ -129,7 +135,7 @@ export class SalesDayComponent {
   
   //Kunde Search
   onCustomerSelectMat(event: MatAutocompleteSelectedEvent): void {
-    if(event.option.viewValue === "All Customers") {
+    if(event.option.viewValue === "Alle Kunden") {
       this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
         this.orders.set(x);
         this.filterOrders.set(x);
