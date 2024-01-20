@@ -140,24 +140,6 @@ export class SalesDayComponent {
     });
     console.log("event:" + event.option.value);
     this.filterOrders.set(filteredCustomer);
-    /*
-    if (this.searchSelectedCustomerId == -1) {
-      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
-        this.orders.set(x);
-        this.filterOrders.set(x);
-      });
-    } else {
-      this.orderService
-      .orderOrdersFromCustomerForSalesDayGet(
-        this.searchSelectedCustomerId as number,
-        this.dataService.selectedSalesDay.value.id
-      )
-      .subscribe((x) => {
-        this.orders.set(x);
-        this.filterOrders.set(x);
-      });
-    }
-    */
   }
 
   onNoteChanged() {
@@ -167,13 +149,15 @@ export class SalesDayComponent {
     this.filterOrders.set(filteredNotesOrders);
   }
 
+  //Export funktion
   exportButtonClick(): void {
-    var csvData = 'Kunde;Menge;Anmerkung\n';
+    var csvData = 'Kunde;Kategorie;Menge;Anmerkung\n';
     for (var i = 0; i < this.filterOrders().length; i++) {
       const customerId = this.filterOrders().at(i)?.customerName;
-      const meatPieceId = this.filterOrders().at(i)?.meatPieceName;
+      const meatPieceName = this.filterOrders().at(i)?.meatPieceName
+      const amount = this.filterOrders().at(i)?.amount;
       const note = this.filterOrders().at(i)?.notes;
-      csvData += `${customerId};${meatPieceId};${note}\n`;
+      csvData += `${customerId};${meatPieceName};${amount}kg;${note}\n`;
     }
     var blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
     var link = document.createElement('a');
