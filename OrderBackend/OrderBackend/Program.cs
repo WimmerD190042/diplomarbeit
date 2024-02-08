@@ -16,7 +16,6 @@ string restClientFilename = "_requests.http";
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 #region -------------------------------------------- ConfigureServices
 builder.Services.AddControllers();
 builder.Services
@@ -41,25 +40,21 @@ builder.Services.AddLogging(x => x.AddCustomFormatter());
 string? connectionString = builder.Configuration.GetConnectionString("Orders");
 string location = System.Reflection.Assembly.GetEntryAssembly()!.Location;
 string dataDirectory = Path.GetDirectoryName(location)!;
-connectionString = connectionString?.Replace("|DataDirectory|", dataDirectory + Path.DirectorySeparatorChar);
-Console.WriteLine($"******** ConnectionString: {connectionString}");
-Console.ForegroundColor = ConsoleColor.Yellow;
-Console.WriteLine($"******** Don't forget to comment out OrdersContext.OnConfiguring !");
-Console.ResetColor();
+//connectionString = connectionString?.Replace("|DataDirectory|", dataDirectory + Path.DirectorySeparatorChar);
+//Console.WriteLine($"******** ConnectionString: {connectionString}");
+//Console.ForegroundColor = ConsoleColor.Yellow;
+//Console.WriteLine($"******** Don't forget to comment out OrdersContext.OnConfiguring !");
+//Console.ResetColor();
 builder.Services.AddDbContext<OrdersContext>(options => options.UseSqlServer(connectionString));
 #endregion
 var db = new OrdersContext();
 db.Database.EnsureCreated();
 
-
-
 builder.Services.AddScoped<SalesDayService>();
 builder.Services.AddScoped<CategoryService>();
-
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<OrderService>();
 var app = builder.Build();
-
 
 #region -------------------------------------------- Middleware pipeline
 app.UseHttpLogging();
@@ -68,7 +63,7 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 	Console.WriteLine("++++ Swagger enabled: http://localhost:5000 (to set as default route: see launchsettings.json)");
 	app.UseSwagger();
-	Console.WriteLine($@"++++ RestClient generating (after first request) to {restClientFolder}\{restClientFilename}");
+	//Console.WriteLine($@"++++ RestClient generating (after first request) to {restClientFolder}\{restClientFilename}");
 	app.UseRestClientGenerator(); //Note: must be used after UseSwagger
 	app.UseSwaggerUI(x => x.SwaggerEndpoint( $"/swagger/{swaggerVersion}/swagger.json", swaggerTitle));
 }

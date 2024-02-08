@@ -32,6 +32,4 @@ public partial class OrdersContext : DbContext
         var dbConnectionString = Environment.GetEnvironmentVariable("DBPATH");
         optionsBuilder.UseSqlServer(dbConnectionString);
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
