@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let category of categories">
+    <tr *ngFor="let category of dataService.categories()">
       <td (click)="toggleCategory(category)">
         {{ category.name }}
         <ul *ngIf="selectedCategory === category">
@@ -27,7 +27,7 @@
           </li>
         </ul>
       </td>
-      <td>Bestand anzeige KG (todo)</td>
+      <td>{{stockByCategory[category.id!]}}</td>
     </tr>
   </tbody>
 </table>

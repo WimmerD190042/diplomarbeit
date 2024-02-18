@@ -67,7 +67,7 @@
             _db.SaveChanges();
         }
 
-        public List<OrderDto> getOrdersByCustomer(int customerId)
+        public List<OrderDto> GetOrdersByCustomer(int customerId)
         {
             return _db.Orders.Where(o => o.Customer.Id == customerId).Select(y => new OrderDto()
             {
@@ -75,5 +75,7 @@
                 MeatPieceName = _db.MeatPieces.Where(x => x.Id == y.MeatPieceId).Select(x => x.Name).First()
             }.CopyPropertiesFrom(y)).ToList();
         }
+
+       
     }
 }

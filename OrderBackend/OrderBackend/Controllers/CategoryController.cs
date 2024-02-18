@@ -64,5 +64,12 @@ namespace OrderBackend.Controllers
         {
             _dbService.UpdateStockForCategory(subCategoryId, newStock);
         }
+
+        [HttpGet("StockByCategoryId")]
+        public double getStockByCategoryId(int categoryId)
+        {
+            double stock= _dbService.GetStockFromCategory(categoryId);
+            return stock;
+        }
     }
 }

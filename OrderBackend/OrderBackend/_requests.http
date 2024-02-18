@@ -10,6 +10,8 @@ GET {{baseUrl}}/api/Category/getStockForSubCategoryId?subCategoryId=1
 #####
 GET {{baseUrl}}/api/Category/MeatPiecesBySubCategoryId?subCategoryId=1
 #####
+GET {{baseUrl}}/api/Category/StockByCategoryId?categoryId=1
+#####
 GET {{baseUrl}}/api/Category/SubCategoriesByCategoryId?categoryId=1
 #####
 POST {{baseUrl}}/api/Category/readCategories
@@ -26,10 +28,10 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-         "id": 1,
-      "name": "abc",
-      "address": "abc"
-   }
+   "id": 1,
+   "name": "abc",
+   "address": "abc"
+}
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####

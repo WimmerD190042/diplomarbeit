@@ -171,6 +171,12 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
+        public double GetStockFromCategory(int categoryId)
+        {
+            var stock = _db.Categories.Where(c => c.Id == categoryId).SelectMany(c => c.SubCategories).SelectMany(sc => sc.MeatPieces).Sum(mp => mp.Stock);
+            return stock;
+        }
+
         public double GetCategoryTotalStock(int categoryId)
         {
             //        var result = _db.Categories
