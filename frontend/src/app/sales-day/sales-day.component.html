@@ -5,7 +5,7 @@
     <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) | date:'dd.MM.YYYY' }}</h5>
 
     <!-- Oxe mit Button -->
-    <table class="table-secondary">
+    <!-- <table class="table-secondary">
       <tr>
         <td>Oxe</td>
         <td>
@@ -15,7 +15,28 @@
         </td>
       </tr>
     </table>
+  </div> -->
   </div>
+<!-- Anzeige der hinzugefügten Ochsen -->
+<div class="oxen-container">
+  <h3>Ochsen:</h3>
+  <div class="oxen-list">
+    <div *ngFor="let ox of oxen" class="ox-item">{{ ox }}</div>
+    <!-- Plus-Symbol -->
+    <button *ngIf="showPlusButton" class="btn btn-plus" (click)="toggleOxInput()">+</button>
+  </div>
+</div>
+
+<!-- Texteingabefeld für den Namen des Ochsen -->
+<div *ngIf="showOxInput" class="ox-input-container">
+  <div class="input-group" style="display: flex!important;">
+    <input  type="text" class="form-control" placeholder="Name" [(ngModel)]="oxName">
+    <button class="btn btn-orange" (click)="addOx(); toggleOxInput()">Hinzufügen</button>
+  </div>
+</div>
+
+
+
 
   <!-- Save File -->
   <div id="save-file-button" (click)="exportButtonClick()">

@@ -40,5 +40,12 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
+        //public void addOx(int salesDayId, string ox)
+        //{
+        //    SalesDay salesDay = _db.SalesDays.Where(x => x.Id.Equals(salesDayId)).First();
+        //    salesDay.Oxes.Add(ox);
+        //    _db.SaveChanges();
+        //}
+
     }
 }

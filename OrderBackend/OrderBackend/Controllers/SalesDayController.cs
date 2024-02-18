@@ -28,5 +28,11 @@ namespace OrderBackend.Controllers
             _dbService.deleteSalesDay(salesDayId);
         }
 
+        //[HttpPost("addOx")]
+        //public void AddOx(int salesDayId, string ox)
+        //{
+        //    _dbService.addOx(salesDayId, ox);
+        //}
+
     }
 }

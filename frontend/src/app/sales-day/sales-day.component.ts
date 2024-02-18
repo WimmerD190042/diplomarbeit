@@ -51,6 +51,11 @@ export class SalesDayComponent {
   public filterOrders = signal<OrderDto[]>([]);
 
   //TODO: Preis für alle ändern -> Wimmer seine Aufgabe
+  showOxInput: boolean = false;
+  showPlusButton: boolean = true; 
+
+  oxName: string = '';
+  oxen: string[] = [];
   price: number = 1;
   deposit: number = 0.0;
   quantity: number = 0.0;
@@ -203,6 +208,19 @@ export class SalesDayComponent {
       this.customerChanged();
     });
   }
+  toggleOxInput() {
+    this.showOxInput = !this.showOxInput;
+  }
+
+  
+  addOx() {
+    if (this.oxName.trim() !== '') {
+      this.oxen.push(this.oxName);
+      this.oxName = ''; // Leer das Eingabefeld, damit der nächste Name eingegeben werden kann
+    }
+  }
+
+
 
   onMeatPieceSelected(meatpiece: MeatPieceDto) {
     this.selectedMeatPiece = meatpiece;

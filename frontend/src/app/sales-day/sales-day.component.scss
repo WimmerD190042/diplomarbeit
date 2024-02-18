@@ -164,3 +164,81 @@ li.dropdown-menu {
     padding: 0 !important;
     margin: 0 !important;
 }
+
+/* Stile für die Ochsenliste und das Eingabefeld */
+
+/* Stile für die Ochsenliste und das Eingabefeld */
+
+// Stile für die Ochsenliste
+.oxen-list {
+    list-style-type: none; /* Entfernen der Standard-Punkte */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .ox-item {
+    background-color: transparent; /* Transparenter Hintergrund */
+    padding: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex; /* Flexbox-Layout für zentrierte Ausrichtung */
+    align-items: center; /* Zentrierte Ausrichtung vertikal */
+  }
+  
+  .ox-item:before {
+    content: "🐂"; /* Ochsen-Emoji */
+    margin-right: 5px; /* Abstand zwischen Emoji und Text */
+    font-size: 24px;
+  }
+  
+  // Stile für das Eingabefeld
+  .ox-input-container {
+    margin-top: 10px; /* Abstand zum vorherigen Element */
+
+    display: flex;
+     /* Flexbox-Layout */
+  }
+  .btn-plus {
+    background-color: orange; /* Orange Hintergrund */
+    border: none; /* Kein Rand */
+    font-size: 20px; /* Kleinere Schriftgröße für das Pluszeichen */
+    color: white; /* Textfarbe */
+    cursor: pointer; /* Zeiger bei Hover */
+    margin-top: 10px; /* Abstand nach oben */
+    padding: 6px 10px; /* Anpassung des Innenabstands */
+    height: auto; /* Automatische Höhe */
+    align-self: flex-start; /* Ausrichtung am oberen Rand des Containers */
+  }
+  
+// Stile für das Eingabefeld
+.ox-input-container input {
+    width: 200px; /* Breite des Eingabefelds */
+    border: 1px solid #ff7f0e; /* Orange Border */
+    border-radius: 5px; /* Abgerundete Ecken */
+    padding: 8px; /* Innenabstand */
+    font-size: 14px; /* Schriftgröße */
+    max-width: 200px; /* Maximale Breite */
+  }
+  
+  .ox-input-container button {
+    background-color: #ff7f0e; /* Orange Hintergrund */
+    border: 1px solid #ff7f0e; /* Orange Rand */
+    border-radius: 5px; /* Abgerundete Ecken */
+    padding: 8px 16px; /* Innenabstand */
+    font-size: 14px; /* Schriftgröße */
+    color: #fff; /* Textfarbe */
+    cursor: pointer; /* Zeiger bei Hover */
+    transition: background-color 0.3s, border-color 0.3s; /* Übergangseffekt */
+    margin-left: 10px; /* Abstand zum Eingabefeld */
+  }
+  
+  
+  .ox-input-container button:hover {
+    background-color: #e65c00; /* Dunklere Farbe beim Hover */
+    border-color: #e65c00; /* Dunklere Randfarbe beim Hover */
+  }
+  
+  
