@@ -177,6 +177,11 @@ li.dropdown-menu {
     display: flex;
     flex-wrap: wrap;
   }
+  .oxText{
+    align-items: center;
+    display: flex;
+    padding-right: 10px;
+  }
   
   .ox-item {
     background-color: transparent; /* Transparenter Hintergrund */
@@ -191,7 +196,7 @@ li.dropdown-menu {
   .ox-item:before {
     content: "🐂"; /* Ochsen-Emoji */
     margin-right: 5px; /* Abstand zwischen Emoji und Text */
-    font-size: 24px;
+    font-size: 30px;
   }
   
   // Stile für das Eingabefeld
