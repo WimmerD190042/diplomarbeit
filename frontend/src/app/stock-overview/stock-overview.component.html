@@ -5,7 +5,6 @@
   </app-single-category-info>
 </div>
 -->
-
 <table id="table" class="table table-hover">
   <thead>
     <tr>
@@ -18,16 +17,29 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let category of dataService.categories()">
-      <td (click)="toggleCategory(category)">
-        {{ category.name }}
-        <ul *ngIf="selectedCategory === category">
-          <li *ngFor="let item of getItemsForCategory(category)">
-            {{ item }}
-          </li>
-        </ul>
-      </td>
-      <td>{{stockByCategory[category.id!]}}</td>
-    </tr>
+    <ng-container *ngFor="let category of dataService.categories()">
+      <tr>
+        <td >
+          <div (click)="toggleCategory(category)" style="padding-left: 20px;"> 
+            {{ category.name }}
+          </div>
+          <ul *ngIf="selectedCategory === category">
+            <li *ngFor="let subCategory of subCategories()">
+              <div (click)="toggleSubCategory(subCategory)" style="padding-left: 40px;"> <!-- Einrückung für Unterkategorie -->
+                {{ subCategory.name }} - {{ subCategory.stock }}
+                <ul *ngIf="selectedSubCategory === subCategory">
+                  <li *ngFor="let meatPiece of meatPieces()">
+                    <div style="padding-left: 60px;"> 
+                      {{ meatPiece.name }} - {{ meatPiece.stock }}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </td>
+        <td>{{ stockByCategory[category.id!] }}</td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>

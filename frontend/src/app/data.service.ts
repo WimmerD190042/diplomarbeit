@@ -43,6 +43,8 @@ export class DataService {
   public subCategories$: Observable<SubCategoryDto[]> =
     this._subCategories.asObservable();
 
+   
+
   updateSubCategories(subCategories: SubCategoryDto[]) {
     this._subCategories.next(subCategories);
   }
@@ -126,6 +128,7 @@ export class DataService {
   loadCategoriesFromBackend() {
     this.categoryService.apiCategoryGetAllCategoriesGet().subscribe((x) => {
       this.categories.set(x);
+   
       console.log(this.categories());
     });
   }
