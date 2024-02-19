@@ -24,7 +24,7 @@ import {
   MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, map, startWith, switchMap } from 'rxjs';
 import { of } from 'rxjs';
 
 @Component({
@@ -52,11 +52,11 @@ export class SalesDayComponent {
 
   //TODO: Preis für alle ändern -> Wimmer seine Aufgabe
   showOxInput: boolean = false;
-  showPlusButton: boolean = true; 
+  showPlusButton: boolean = true;
 
   oxName: string = '';
   oxen: string[] = [];
-  price: number = 1;
+  price: number = 51;
   deposit: number = 0.0;
   quantity: number = 0.0;
   notes: string = '';
@@ -70,22 +70,23 @@ export class SalesDayComponent {
   controlParts = new FormControl();
   controlCustomer = new FormControl();
   //teilstücke search
-  allMeatPiecesSearch: string[] = ["Alle Teilstücke"];
+  allMeatPiecesSearch: string[] = ['Alle Teilstücke'];
   filteredAllMeatPiecesSearch: Observable<string[]> | undefined;
   //kunde search
-  allCustomerSearch: string[] = ["Alle Kunden"];
+  allCustomerSearch: string[] = ['Alle Kunden'];
   customerList: Observable<string[]> | undefined;
   //rest
   selectedCustomerId: Number = -1;
   addSelectedCustomerId: Number = 0;
 
-
   ngOnInit() {
     //Load All Custers:
-    this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
-      this.orders.set(x);
-      this.filterOrders.set(x);
-    });
+    this.orderService
+      .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
+      .subscribe((x) => {
+        this.orders.set(x);
+        this.filterOrders.set(x);
+      });
 
     //Load Teilstücke
     this.dataService.loadMeatPiecedFromBackend();
@@ -126,30 +127,40 @@ export class SalesDayComponent {
 
   //Teilstücke Search
   onMeatPieceSelectedMat(event: MatAutocompleteSelectedEvent): void {
-    if(event.option.viewValue === "Alle Teilstücke") {
-      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
-        this.orders.set(x);
-        this.filterOrders.set(x);
-      });
+    if (event.option.viewValue === 'Alle Teilstücke') {
+      this.orderService
+        .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
+        .subscribe((x) => {
+          this.orders.set(x);
+          this.filterOrders.set(x);
+        });
     }
     const filteredMeatPiece = this.orders().filter((order: OrderDto) => {
-      return order.meatPieceName && order.meatPieceName.includes(event.option.viewValue);
+      return (
+        order.meatPieceName &&
+        order.meatPieceName.includes(event.option.viewValue)
+      );
     });
     this.filterOrders.set(filteredMeatPiece);
   }
-  
+
   //Kunde Search
   onCustomerSelectMat(event: MatAutocompleteSelectedEvent): void {
-    if(event.option.viewValue === "Alle Kunden") {
-      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
-        this.orders.set(x);
-        this.filterOrders.set(x);
-      });
+    if (event.option.viewValue === 'Alle Kunden') {
+      this.orderService
+        .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
+        .subscribe((x) => {
+          this.orders.set(x);
+          this.filterOrders.set(x);
+        });
     }
     const filteredCustomer = this.orders().filter((order: OrderDto) => {
-      return order.customerName && order.customerName.includes(event.option.viewValue);
+      return (
+        order.customerName &&
+        order.customerName.includes(event.option.viewValue)
+      );
     });
-    console.log("event:" + event.option.value);
+    console.log('event:' + event.option.value);
     this.filterOrders.set(filteredCustomer);
   }
 
@@ -165,7 +176,7 @@ export class SalesDayComponent {
     var csvData = 'Kunde;Kategorie;Menge;Anmerkung\n';
     for (var i = 0; i < this.filterOrders().length; i++) {
       const customerId = this.filterOrders().at(i)?.customerName;
-      const meatPieceName = this.filterOrders().at(i)?.meatPieceName
+      const meatPieceName = this.filterOrders().at(i)?.meatPieceName;
       const amount = this.filterOrders().at(i)?.amount;
       const note = this.filterOrders().at(i)?.notes;
       csvData += `${customerId};${meatPieceName};${amount}kg;${note}\n`;
@@ -180,20 +191,22 @@ export class SalesDayComponent {
 
   customerChanged() {
     if (this.searchSelectedCustomerId == -1) {
-      this.orderService.orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id).subscribe((x) => {
-        this.orders.set(x);
-        this.filterOrders.set(x);
-      });
+      this.orderService
+        .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
+        .subscribe((x) => {
+          this.orders.set(x);
+          this.filterOrders.set(x);
+        });
     } else {
       this.orderService
-      .orderOrdersFromCustomerForSalesDayGet(
-        this.searchSelectedCustomerId as number,
-        this.dataService.selectedSalesDay.value.id
-      )
-      .subscribe((x) => {
-        this.orders.set(x);
-        this.filterOrders.set(x);
-      });
+        .orderOrdersFromCustomerForSalesDayGet(
+          this.searchSelectedCustomerId as number,
+          this.dataService.selectedSalesDay.value.id
+        )
+        .subscribe((x) => {
+          this.orders.set(x);
+          this.filterOrders.set(x);
+        });
     }
   }
 
@@ -212,15 +225,12 @@ export class SalesDayComponent {
     this.showOxInput = !this.showOxInput;
   }
 
-  
   addOx() {
     if (this.oxName.trim() !== '') {
       this.oxen.push(this.oxName);
       this.oxName = ''; // Leer das Eingabefeld, damit der nächste Name eingegeben werden kann
     }
   }
-
-
 
   onMeatPieceSelected(meatpiece: MeatPieceDto) {
     this.selectedMeatPiece = meatpiece;
@@ -238,18 +248,15 @@ export class SalesDayComponent {
   }
 
   addOrder() {
-    const availableStock = this.categoryService
-      .apiCategoryGetStockForSubCategoryIdGet(
-        this.selectedSubCategory.id as number
-      )
-      .subscribe((x) => {
-        console.log('Stock: ', x);
-        if (x < this.quantity) {
-          alert('Nicht genügend Fleisch auf Lager!');
-          return;
-        } else {
-          const dateString = new Date().toISOString();
-
+    const dateString = new Date().toISOString();
+  
+    this.categoryService.apiCategoryMeatPieceByIdGet(this.selectedMeatPiece.id)
+      .pipe(
+        switchMap((meatPiece) => {
+          const kgPrice = meatPiece.pricePerKg;
+          const totalPrice = this.quantity * kgPrice!;
+          console.log('totalPrice: ', totalPrice);
+  
           const order = {
             customerId: this.addSelectedCustomerId as number,
             dateString: dateString,
@@ -258,21 +265,24 @@ export class SalesDayComponent {
             salesDayId: this.dataService.selectedSalesDay.value.id,
             amount: this.quantity,
             paidStatus: 'false',
-            price: this.price,
+            price: totalPrice,
             deposit: this.deposit,
           } as OrderDto;
-          this.orderService.orderOrderPost(order).subscribe(
-            (x) => {
-              console.log('Order sent to DB');
-              this.dataService.loadSalesDaysFromBackend();
-              this.customerChanged();
-            },
-            (error) => {
-              console.error('Error: ', error.error);
-            }
-          );
+  
+          return this.orderService.orderOrderPost(order);
+        })
+      )
+      .subscribe(
+        (x) => {
+          console.log('Order sent to DB');
+          console.log(x);
+          this.dataService.loadSalesDaysFromBackend();
+          this.customerChanged();
+        },
+        (error) => {
+          console.error('Error: ', error.error);
         }
-      });
+      );
   }
 
   addNameField(button: any) {

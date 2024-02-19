@@ -8,15 +8,21 @@ GET {{baseUrl}}/api/Category/getAllMeatPieaces
 #####
 GET {{baseUrl}}/api/Category/getStockForSubCategoryId?subCategoryId=1
 #####
+GET {{baseUrl}}/api/Category/MeatPieceById?meatPieceId=1
+#####
 GET {{baseUrl}}/api/Category/MeatPiecesBySubCategoryId?subCategoryId=1
 #####
 GET {{baseUrl}}/api/Category/StockByCategoryId?categoryId=1
+#####
+GET {{baseUrl}}/api/Category/StockByMeatPieceId?meatPieceId=1
 #####
 GET {{baseUrl}}/api/Category/SubCategoriesByCategoryId?categoryId=1
 #####
 POST {{baseUrl}}/api/Category/readCategories
 #####
 PUT {{baseUrl}}/api/Category/addStockForSubCategory?subCategoryId=1&newStock=1
+#####
+PUT {{baseUrl}}/api/Category/setMeatPiecePricePerKg?meatPieceId=1&pricePerKg=1
 #####
 PUT {{baseUrl}}/api/Category/updateStockForMeatPiece?meatPieceId=1&newStock=1
 #####
@@ -57,6 +63,8 @@ Content-type: application/json
 
 ################################################## Order
 DELETE {{baseUrl}}/Order/Order?deleteOrderId=1
+#####
+GET {{baseUrl}}/Order/CategoryNameFromOrder?orderId=1
 #####
 GET {{baseUrl}}/Order/Orders
 #####

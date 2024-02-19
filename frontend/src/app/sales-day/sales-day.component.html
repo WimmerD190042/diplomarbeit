@@ -1,8 +1,13 @@
 <body>
   <div id="infoDiv">
     <!-- Verkaufstag anzneige -->
-    <h1>Verkaufstag: {{dataService.selectedSalesDay.value.name}}</h1>
-    <h5>{{ dataService.getSalesDayDate(dataService.selectedSalesDay.value) | date:'dd.MM.YYYY' }}</h5>
+    <h1>Verkaufstag: {{ dataService.selectedSalesDay.value.name }}</h1>
+    <h5>
+      {{
+        dataService.getSalesDayDate(dataService.selectedSalesDay.value)
+          | date : "dd.MM.YYYY"
+      }}
+    </h5>
 
     <!-- Oxe mit Button -->
     <!-- <table class="table-secondary">
@@ -17,27 +22,37 @@
     </table>
   </div> -->
   </div>
-<!-- Anzeige der hinzugefügten Ochsen -->
-<div class="oxen-container">
-  <h3>Ochsen:</h3>
-  <div class="oxen-list">
-    <p class="oxText" *ngIf="oxen.length===0">Noch keiner vorhanden</p>
-    <div *ngFor="let ox of oxen" class="ox-item">{{ ox }}</div>
-    <!-- Plus-Symbol -->
-    <button *ngIf="showPlusButton" class="btn btn-plus" (click)="toggleOxInput()">+</button>
+  <!-- Anzeige der hinzugefügten Ochsen -->
+  <div class="oxen-container">
+    <h3>Ochsen:</h3>
+    <div class="oxen-list">
+      <p class="oxText" *ngIf="oxen.length === 0">Noch keiner vorhanden</p>
+      <div *ngFor="let ox of oxen" class="ox-item">{{ ox }}</div>
+      <!-- Plus-Symbol -->
+      <button
+        *ngIf="showPlusButton"
+        class="btn btn-plus"
+        (click)="toggleOxInput()"
+      >
+        +
+      </button>
+    </div>
   </div>
-</div>
 
-<!-- Texteingabefeld für den Namen des Ochsen -->
-<div *ngIf="showOxInput" class="ox-input-container">
-  <div class="input-group" style="display: flex!important;">
-    <input  type="text" class="form-control" placeholder="Name" [(ngModel)]="oxName">
-    <button class="btn btn-orange" (click)="addOx(); toggleOxInput()">Hinzufügen</button>
+  <!-- Texteingabefeld für den Namen des Ochsen -->
+  <div *ngIf="showOxInput" class="ox-input-container">
+    <div class="input-group" style="display: flex !important">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Name"
+        [(ngModel)]="oxName"
+      />
+      <button class="btn btn-orange" (click)="addOx(); toggleOxInput()">
+        Hinzufügen
+      </button>
+    </div>
   </div>
-</div>
-
-
-
 
   <!-- Save File -->
   <div id="save-file-button" (click)="exportButtonClick()">
@@ -49,39 +64,68 @@
   <div id="kunde-wrapper">
     <!-- Kunde Search Bar -->
     <div class="input-group rounded" id="serachCustomerDiv">
-      <input id="searchCustomer" type="search" class="form-control rounded" placeholder="Suche nach Kunden"
-        aria-label="Search" aria-describedby="search-addon" [formControl]="controlCustomer" [matAutocomplete]="auto1" />
+      <input
+        id="searchCustomer"
+        type="search"
+        class="form-control rounded"
+        placeholder="Suche nach Kunden"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        [formControl]="controlCustomer"
+        [matAutocomplete]="auto1"
+      />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
     </div>
     <!-- Autocomplete für Kunde Suche -->
-    <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onCustomerSelectMat($event)">
+    <mat-autocomplete
+      #auto1="matAutocomplete"
+      (optionSelected)="onCustomerSelectMat($event)"
+    >
       @for (customer of customerList | async; track customer) {
-      <mat-option [value]="customer">{{customer}}</mat-option>
+      <mat-option [value]="customer">{{ customer }}</mat-option>
       }
     </mat-autocomplete>
 
     <!-- Teilstücke Search Bar -->
     <div class="input-group rounded" id="searchPartsDiv">
-      <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Teilstücke"
-        aria-label="Search" aria-describedby="search-addon" [formControl]="controlParts" [matAutocomplete]="auto2" />
+      <input
+        id="searchParts"
+        type="search"
+        class="form-control rounded"
+        placeholder="Suche nach Teilstücke"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        [formControl]="controlParts"
+        [matAutocomplete]="auto2"
+      />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
     </div>
     <!-- Autocomplete für Teilstück Suche -->
-    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="onMeatPieceSelectedMat($event)">
+    <mat-autocomplete
+      #auto2="matAutocomplete"
+      (optionSelected)="onMeatPieceSelectedMat($event)"
+    >
       @for (meatPiece of filteredAllMeatPiecesSearch | async; track meatPiece) {
-      <mat-option [value]="meatPiece">{{meatPiece}}</mat-option>
+      <mat-option [value]="meatPiece">{{ meatPiece }}</mat-option>
       }
     </mat-autocomplete>
 
     <!-- Anmerkung Search Bar-->
     <div class="input-group rounded" id="searchNoteDiv">
-      <input id="searchNote" type="search" class="form-control rounded" placeholder="Suche nach Anmerkung"
-        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="notesSearchTerm"
-        (ngModelChange)="onNoteChanged()" />
+      <input
+        id="searchNote"
+        type="search"
+        class="form-control rounded"
+        placeholder="Suche nach Anmerkung"
+        aria-label="Search"
+        aria-describedby="search-addon"
+        [(ngModel)]="notesSearchTerm"
+        (ngModelChange)="onNoteChanged()"
+      />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
@@ -92,24 +136,13 @@
   <table id="table" class="table table-hover">
     <thead>
       <tr>
-        <th class="header" scope="col">
-          ID
-        </th>
-        <th class="header" scope="col">
-          Kunde
-        </th>
-        <th class="header" scope="col">
-          Kategorie
-        </th>
-        <th class="header" scope="col">
-          Menge (kg)
-        </th>
-        <th class="header" scope="col">
-          Pfand (€)
-        </th>
-        <th class="header" scope="col">
-          Anmerkung
-        </th>
+        <th class="header" scope="col">ID</th>
+        <th class="header" scope="col">Kunde</th>
+        <th class="header" scope="col">Kategorie</th>
+        <th class="header" scope="col">Summe (€)</th>
+        <th class="header" scope="col">Menge (kg)</th>
+        <th class="header" scope="col">Pfand (€)</th>
+        <th class="header" scope="col">Anmerkung</th>
         <th class="header"></th>
       </tr>
     </thead>
@@ -118,31 +151,79 @@
         <td>0</td>
         <!-- Todo: Kunde Select -->
         <td>
-          <select id="selectPerson" class="form-select" [(ngModel)]="addSelectedCustomerId">
-            <option value="" disabled selected>Wählen Sie bitte einen Kunden:</option>
-            <option *ngFor="let customer of dataService.customers()" [value]="customer.id">
-              {{customer.name}}
+          <select
+            id="selectPerson"
+            class="form-select"
+            [(ngModel)]="addSelectedCustomerId"
+          >
+            <option value="" disabled selected>
+              Wählen Sie bitte einen Kunden:
+            </option>
+            <option
+              *ngFor="let customer of dataService.customers()"
+              [value]="customer.id"
+            >
+              {{ customer.name }}
             </option>
           </select>
         </td>
         <td>
           <div dropdown class="d-inline-block">
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                {{selectedMeatPiece.name && selectedMeatPiece.name!.length > 1 ? selectedMeatPiece.name : 'Auswählen'}}
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{
+                  selectedMeatPiece.name && selectedMeatPiece.name!.length > 1
+                    ? selectedMeatPiece.name
+                    : "Auswählen"
+                }}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
-                  (click)="$event.stopPropagation()">
-                  <a class="dropdown-item" (click)="onCategorySelected(category)">{{category.name}}</a>
-                  <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
-                    <li *ngFor="let subcategory of selectedCategory?.subCategories" class="dropdown-submenu"
-                      (click)="$event.stopPropagation()">
-                      <a class="dropdown-item" (click)="onSubCategorySelected(subcategory)">{{subcategory.name}}</a>
-                      <ul [class.show]="selectedSubCategory === subcategory" class="dropdown-menu dropdown-submenu">
-                        <li *ngFor="let meatpiece of selectedSubCategory?.meatPieces">
-                          <a class="dropdown-item" (click)="onMeatPieceSelected(meatpiece)">{{meatpiece.name}}</a>
+                <li
+                  *ngFor="let category of dataService.categories()"
+                  class="dropdown-submenu"
+                  (click)="$event.stopPropagation()"
+                >
+                  <a
+                    class="dropdown-item"
+                    (click)="onCategorySelected(category)"
+                    >{{ category.name }}</a
+                  >
+                  <ul
+                    [class.show]="selectedCategory === category"
+                    class="dropdown-menu dropdown-submenu"
+                  >
+                    <li
+                      *ngFor="
+                        let subcategory of selectedCategory?.subCategories
+                      "
+                      class="dropdown-submenu"
+                      (click)="$event.stopPropagation()"
+                    >
+                      <a
+                        class="dropdown-item"
+                        (click)="onSubCategorySelected(subcategory)"
+                        >{{ subcategory.name }}</a
+                      >
+                      <ul
+                        [class.show]="selectedSubCategory === subcategory"
+                        class="dropdown-menu dropdown-submenu"
+                      >
+                        <li
+                          *ngFor="
+                            let meatpiece of selectedSubCategory?.meatPieces
+                          "
+                        >
+                          <a
+                            class="dropdown-item"
+                            (click)="onMeatPieceSelected(meatpiece)"
+                            >{{ meatpiece.name }}</a
+                          >
                         </li>
                       </ul>
                     </li>
@@ -152,31 +233,77 @@
             </div>
           </div>
         </td>
+        <td>Summe</td>
         <td>
-          <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" min="0" placeholder="0.0">
+          <input
+            [(ngModel)]="quantity"
+            type="number"
+            class="form-control"
+            id="quantity"
+            min="0"
+            placeholder="0.0"
+          />
         </td>
         <td>
-          <input [(ngModel)]="deposit" type="number" class="form-control" id="deposit" min="0" placeholder="0.0">
+          <input
+            [(ngModel)]="deposit"
+            type="number"
+            class="form-control"
+            id="deposit"
+            min="0"
+            placeholder="0.0"
+          />
         </td>
         <td>
-          <textarea id="notes" class="form-control" rows="1" style="height: 36px; overflow-y: hidden;"
+          <textarea
+            id="notes"
+            class="form-control"
+            rows="1"
+            style="height: 36px; overflow-y: hidden"
             oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"
-            [(ngModel)]="notes"></textarea>
-        <td style="text-align: center;">
+            [(ngModel)]="notes"
+          ></textarea>
+        </td>
+
+        <td style="text-align: center">
           <button (click)="addOrder()">
-            <mat-icon style="font-size: 24px;">add</mat-icon>
+            <mat-icon style="font-size: 24px">add</mat-icon>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
-              (click)="$event.stopPropagation()">
-              <a class="dropdown-item" (click)="onCategorySelected(category)">{{category.name}}</a>
-              <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
-                <li *ngFor="let subcategory of selectedCategory?.subCategories" class="dropdown-submenu"
-                  (click)="$event.stopPropagation()">
-                  <a class="dropdown-item" (click)="onSubCategorySelected(subcategory)">{{subcategory.name}}</a>
-                  <ul [class.show]="selectedSubCategory === subcategory" class="dropdown-menu dropdown-submenu">
-                    <li *ngFor="let meatpiece of selectedSubCategory?.meatPieces">
-                      <a class="dropdown-item" (click)="onMeatPieceSelected(meatpiece)">{{meatpiece.name}}</a>
+            <li
+              *ngFor="let category of dataService.categories()"
+              class="dropdown-submenu"
+              (click)="$event.stopPropagation()"
+            >
+              <a class="dropdown-item" (click)="onCategorySelected(category)">{{
+                category.name
+              }}</a>
+              <ul
+                [class.show]="selectedCategory === category"
+                class="dropdown-menu dropdown-submenu"
+              >
+                <li
+                  *ngFor="let subcategory of selectedCategory?.subCategories"
+                  class="dropdown-submenu"
+                  (click)="$event.stopPropagation()"
+                >
+                  <a
+                    class="dropdown-item"
+                    (click)="onSubCategorySelected(subcategory)"
+                    >{{ subcategory.name }}</a
+                  >
+                  <ul
+                    [class.show]="selectedSubCategory === subcategory"
+                    class="dropdown-menu dropdown-submenu"
+                  >
+                    <li
+                      *ngFor="let meatpiece of selectedSubCategory?.meatPieces"
+                    >
+                      <a
+                        class="dropdown-item"
+                        (click)="onMeatPieceSelected(meatpiece)"
+                        >{{ meatpiece.name }}</a
+                      >
                     </li>
                   </ul>
                 </li>
@@ -187,18 +314,19 @@
       </tr>
       <!-- Orders werden in Liste geladen -->
       <tr *ngFor="let order of filterOrders()">
-        <td>{{order.id}}</td>
-        <td>{{order.customerName}}</td>
-        <td>{{dataService.getMeatPieceFromID(order.meatPieceId!)?.name}}</td>
-        <td>{{order.amount}}</td>
-        <td>{{order.deposit}}</td>
-        <td>{{order.notes}}</td>
-        <td style="text-align: center;">
+        <td>{{ order.id }}</td>
+        <td>{{ order.customerName }}</td>
+        <td>{{ dataService.getMeatPieceFromID(order.meatPieceId!)?.name }}</td>
+        <td>{{(dataService.getMeatPieceFromID(order.meatPieceId!)?.pricePerKg ?? 0) * order.amount!}}€</td>
+        <td>{{ order.amount }}</td>
+        <td>{{ order.deposit }}</td>
+        <td>{{ order.notes }}</td>
+        <td style="text-align: center">
           <button>
-            <mat-icon color="primary" style="font-size: 24px;">create</mat-icon>
+            <mat-icon color="primary" style="font-size: 24px">create</mat-icon>
           </button>
           <button (click)="deleteOrder(order)">
-            <mat-icon color="warn" style="font-size: 24px;">clear</mat-icon>
+            <mat-icon color="warn" style="font-size: 24px">clear</mat-icon>
           </button>
         </td>
       </tr>

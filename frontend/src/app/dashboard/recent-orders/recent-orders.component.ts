@@ -24,6 +24,15 @@ export class RecentOrdersComponent {
     });
   }
 
+  // getCategoryName(orderId: number): string {
+  //   console.log('endlos')
+  //   let name = '';
+  //   this.orderService.orderCategoryNameFromOrderGet(orderId).subscribe((x) => {
+  //     name = x;
+  //   });
+  //   return name;
+  // }
+
   exportButtonClick() {
     var csvData = 'Customer;Menge;Anmerkung\n';
     this.recentOrders().forEach((order) => {

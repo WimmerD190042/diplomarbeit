@@ -71,5 +71,22 @@ namespace OrderBackend.Controllers
             double stock= _dbService.GetStockFromCategory(categoryId);
             return stock;
         }
+
+        [HttpGet("MeatPieceById")]
+        public MeatPiece GetMeatPieceById(int meatPieceId)
+        {
+            return _dbService.GetMeatPieceById(meatPieceId);
+        }
+        [HttpGet("StockByMeatPieceId")]
+        public double getStockByMeatPieceId(int meatPieceId)
+        {
+            return _dbService.GetStockForMeatPiece(meatPieceId);
+        }
+
+        [HttpPut("setMeatPiecePricePerKg")]
+        public void SetMeatPiecePricePerKg(int meatPieceId, double pricePerKg)
+        {
+            _dbService.SetMeatPiecePricePerKg(meatPieceId, pricePerKg);
+        }
     }
 }

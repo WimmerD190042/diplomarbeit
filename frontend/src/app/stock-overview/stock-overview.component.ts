@@ -1,29 +1,39 @@
 import { Component, Input, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
-import { CategoryDto, CategoryService, MeatPiece, SubCategory, SubCategoryDto } from '../swagger';
+import {
+  CategoryDto,
+  CategoryService,
+  MeatPiece,
+  SubCategory,
+  SubCategoryDto,
+} from '../swagger';
 import { SingleCategoryInfoComponent } from './single-category-info/single-category-info.component';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-stock-overview',
   standalone: true,
-  imports: [CommonModule, SingleCategoryInfoComponent],
+  imports: [CommonModule, FormsModule, SingleCategoryInfoComponent],
   templateUrl: './stock-overview.component.html',
   styleUrl: './stock-overview.component.scss',
 })
 export class StockOverviewComponent implements OnInit {
-
   public dataService = inject(DataService);
   public categoryService = inject(CategoryService);
   public router = inject(Router);
   categories: CategoryDto[] = [];
   stockByCategory: { [key: number]: number } = {};
-  subCategories= signal<SubCategory[]>([]);
+  subCategories = signal<SubCategory[]>([]);
   meatPieces = signal<MeatPiece[]>([]);
   selectedSubCategory: SubCategory | null = null;
+  public stockInput: number = 0;
+  public priceInput: number = 0;
 
+  selectedMeatPiece = signal<MeatPiece>({});
+  selectedCategory: CategoryDto | null = null;
 
   ngOnInit(): void {
     console.log('StockOverviewComponent.ngOnInit');
@@ -62,11 +72,7 @@ export class StockOverviewComponent implements OnInit {
           }
         );
     });
-
-    
   }
-
-  selectedCategory: CategoryDto | null = null;
 
   getStockForCategory(categoryId: number): number {
     var x = 0;
@@ -79,19 +85,70 @@ export class StockOverviewComponent implements OnInit {
     return x;
   }
 
-  getSubcategoriesForCategory(categoryId: number ): void {
-     this.categoryService.apiCategorySubCategoriesByCategoryIdGet(categoryId).subscribe((subCategories) => {
-      this.subCategories.set(subCategories)
-      console.log('subCategories: ', subCategories);
-    });
-   
+  getSubcategoriesForCategory(categoryId: number): void {
+    this.categoryService
+      .apiCategorySubCategoriesByCategoryIdGet(categoryId)
+      .subscribe((subCategories) => {
+        this.subCategories.set(subCategories);
+        console.log('subCategories: ', subCategories);
+      });
+  }
+
+  setPrice(event: Event, meatPiece: MeatPiece): void {
+    event.stopPropagation(); //sonst klappt es zu
+    this.selectedMeatPiece.set(meatPiece);
+    console.log('meatPieceSet: ', this.selectedMeatPiece());
+  }
+  updatePrice() {
+    console.log("lando")
+    this.categoryService
+      .apiCategorySetMeatPiecePricePerKgPut(
+        this.selectedMeatPiece().id,
+        this.priceInput
+      )
+      .subscribe(() => {
+        console.log('Price updated');
+        // Lade die Unterkategorien neu, um die aktualisierten Daten anzuzeigen
+        this.getSubcategoriesForCategory(this.selectedSubCategory!.categoryId!);
+        // Lade die Fleischstücke neu, um die aktualisierten Daten anzuzeigen
+        this.getMeatPieces(this.selectedSubCategory!.id!);
+        // this.getStockForCategory(this.selectedCategory?.id!);
+      });
+  }
+
+  updateStock() {
+    this.categoryService
+      .apiCategoryUpdateStockForMeatPiecePut(
+        this.selectedMeatPiece().id,
+        this.stockInput
+      )
+      .subscribe(() => {
+        console.log('Stock added');
+        // Lade die Unterkategorien neu, um die aktualisierten Daten anzuzeigen
+        this.getSubcategoriesForCategory(this.selectedSubCategory!.categoryId!);
+        // Lade die Fleischstücke neu, um die aktualisierten Daten anzuzeigen
+        this.getMeatPieces(this.selectedSubCategory!.id!);
+        // this.getStockForCategory(this.selectedCategory?.id!);
+      });
+  }
+
+  meatPieceClicked(meatPiece: MeatPiece) {
+    console.log('meatPieceClicked');
   }
 
   getMeatPieces(subCategoryId: number): void {
-    this.categoryService.apiCategoryMeatPiecesBySubCategoryIdGet(subCategoryId).subscribe((meatPieces) => {
-      this.meatPieces.set(meatPieces);
-      console.log('meatPieces: ', meatPieces);
-    });
+    this.categoryService
+      .apiCategoryMeatPiecesBySubCategoryIdGet(subCategoryId)
+      .subscribe((meatPieces) => {
+        this.meatPieces.set(meatPieces);
+        console.log('meatPieces: ', meatPieces);
+      });
+  }
+
+  increaseStockForMeatPiece(event: Event, meatPiece: MeatPiece): void {
+    event.stopPropagation(); //sonst klappt es zu
+    this.selectedMeatPiece.set(meatPiece);
+    console.log('meatPieceSet: ', this.selectedMeatPiece());
   }
 
   toggleCategory(category: CategoryDto): void {
@@ -103,7 +160,7 @@ export class StockOverviewComponent implements OnInit {
     this.getSubcategoriesForCategory(category.id!);
   }
   toggleSubCategory(subCategory: SubCategoryDto) {
-    console.log("toooooggle")
+    console.log('toooooggle');
     if (this.selectedSubCategory === subCategory) {
       this.selectedCategory = null;
     } else {
@@ -112,7 +169,5 @@ export class StockOverviewComponent implements OnInit {
     this.getMeatPieces(subCategory.id!);
   }
 }
-
-
 
 //subkategorie: id3 zb -> SubCategoriesByCategoryId

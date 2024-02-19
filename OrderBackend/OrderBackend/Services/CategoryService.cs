@@ -103,7 +103,9 @@ namespace OrderBackend.Services
                     MeatPieces = subCategory.MeatPieces.Select(meatPiece => new MeatPieceDto
                     {
                         Id = meatPiece.Id,
-                        Name = meatPiece.Name
+                        Name = meatPiece.Name,
+                        PricePerKg = meatPiece.PricePerKg,
+
                     }).ToList()
                 }).ToList()
             }).ToList();
@@ -177,6 +179,22 @@ namespace OrderBackend.Services
             return stock;
         }
 
+        public void SetMeatPiecePricePerKg(int meatPieceId, double pricePerKg)
+        {
+            var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
+            meatPiece.PricePerKg = pricePerKg;
+            _db.SaveChanges();
+        }
+
+        public MeatPiece GetMeatPieceById(int meatPieceId)
+        {
+            return _db.MeatPieces.Find(meatPieceId);
+        }
+        public double GetStockForMeatPiece(int meatPieceId)
+        {
+            var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
+            return meatPiece.Stock;
+        }
         public double GetCategoryTotalStock(int categoryId)
         {
             //        var result = _db.Categories

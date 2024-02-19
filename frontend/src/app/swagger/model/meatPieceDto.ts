@@ -14,5 +14,6 @@
 export interface MeatPieceDto { 
     id?: number;
     name?: string | null;
+    pricePerKg?: number;
 }
 

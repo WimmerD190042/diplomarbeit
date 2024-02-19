@@ -46,5 +46,9 @@ public class OrderController : ControllerBase
         return _dbService.GetOrdersByCustomer(customerId);
     }
 
-    
+    [HttpGet("CategoryNameFromOrder")]
+    public string GetCategoryNameFromOrder(int orderId)
+    {
+        return _dbService.GetCategoryNameFromOrder(orderId);
+    }
 }

@@ -19,6 +19,13 @@
             }.CopyPropertiesFrom(y)).ToList();
         }
 
+        public string GetCategoryNameFromOrder(int orderId)
+        {
+            var order = _db.Orders.Find(orderId);
+            var meatPiece = _db.MeatPieces.Find(order.MeatPieceId);
+            return meatPiece.Name;
+        }
+
         public List<OrderDto> getOrdersFromCustomerForSalesDay(int customerId, int salesDayId)
         {
             return _db.Orders.Where(o => o.Customer.Id == customerId && o.SalesDay.Id == salesDayId).Select(o => new OrderDto
@@ -55,7 +62,7 @@
             //Find me the subcategory of the newOrder from the meatpiece
            var meatPiece= _db.MeatPieces.Find(newOrder.MeatPieceId);
             var subCategory = _db.SubCategories.Find(meatPiece.SubCategoryId);
-            subCategory.Stock -= newOrder.Amount;
+            meatPiece.Stock -= newOrder.Amount;
             _db.SaveChanges();
             return "Order added";
         }
