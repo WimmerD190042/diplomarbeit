@@ -143,6 +143,7 @@
         <th class="header" scope="col">Menge (kg)</th>
         <th class="header" scope="col">Pfand (€)</th>
         <th class="header" scope="col">Anmerkung</th>
+        <th class="header" scope="col">Bezahlt?</th>
         <th class="header"></th>
       </tr>
     </thead>
@@ -264,6 +265,9 @@
             [(ngModel)]="notes"
           ></textarea>
         </td>
+        <td>
+          Status?
+        </td>
 
         <td style="text-align: center">
           <button (click)="addOrder()">
@@ -321,6 +325,7 @@
         <td>{{ order.amount }}</td>
         <td>{{ order.deposit }}</td>
         <td>{{ order.notes }}</td>
+        <td>{{order.paidStatus}}</td>
         <td style="text-align: center">
           <button>
             <mat-icon color="primary" style="font-size: 24px">create</mat-icon>

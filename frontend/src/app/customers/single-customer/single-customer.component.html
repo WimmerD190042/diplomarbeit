@@ -8,6 +8,8 @@
             <th class="header">Preis (€)</th>
             <th class="header">Pfand (€)</th>
             <th class="header">Anmerkung</th>
+            <th class="header">Bezahlt?</th>
+            <th class="header"></th>
             <th class="header"></th>
         </tr>
     </thead>
@@ -20,9 +22,15 @@
             <td>{{order.price}}</td>
             <td>{{order.deposit}}</td>
             <td>{{order.notes}}</td>
+            <td>{{order.paidStatus?'nein':'ja'}}</td>
             <td>
                 <button class="btn btn-danger" (click)="deleteOrder(order)">
                     -
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-success" (click)="payForOrder(order)">
+                    €
                 </button>
             </td>
         </tr>

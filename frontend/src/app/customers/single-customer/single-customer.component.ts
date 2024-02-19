@@ -11,6 +11,7 @@ import { DataService } from '../../data.service';
   styleUrl: './single-customer.component.scss',
 })
 export class SingleCustomerComponent implements OnInit {
+
   public customerOrders = signal<OrderDto[]>([]);
   orderService = inject(OrderService);
   dataService = inject(DataService);
@@ -22,8 +23,15 @@ export class SingleCustomerComponent implements OnInit {
       });
   }
 
-  deleteOrder(Order: OrderDto) {
-    this.orderService.orderOrderDelete(Order.id as number).subscribe((x) => {
+  payForOrder(order: OrderDto) {
+        this.orderService.orderPayForOrderPost(order.id).subscribe((x) => {
+          console.log('Order paid');
+          this.dataService.loadSalesDaysFromBackend();
+        });
+    }
+
+  deleteOrder(order: OrderDto) {
+    this.orderService.orderOrderDelete(order.id as number).subscribe((x) => {
       console.log('Order deleted');
       this.dataService.loadSalesDaysFromBackend();
     });

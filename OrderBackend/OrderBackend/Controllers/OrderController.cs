@@ -51,4 +51,10 @@ public class OrderController : ControllerBase
     {
         return _dbService.GetCategoryNameFromOrder(orderId);
     }
+
+    [HttpPost("PayForOrder")]
+    public void PayForOrder(int orderId)
+    {
+        _dbService.PayForOrder(orderId);
+    }
 }

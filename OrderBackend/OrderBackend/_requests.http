@@ -34,9 +34,9 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "address": "abc"
+         "id": 1,
+         "name": "abc",
+      "address": "abc"
 }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
@@ -78,17 +78,19 @@ POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-   "id": 1,
-   "dateString": "abc",
-   "amount": 1,
-   "paidStatus": "abc",
-   "customerId": 1,
+      "id": 1,
+      "dateString": "abc",
+      "amount": 1,
+      "paidStatus": "abc",
+      "customerId": 1,
    "deposit": 1,
    "price": 1,
    "salesDayId": 1,
    "notes": "abc",
    "meatPieceId": 1
 }
+#####
+POST {{baseUrl}}/Order/PayForOrder?orderId=1
 #####
 
 ################################################## SalesDay
@@ -100,8 +102,8 @@ POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "dateString": "abc"
+      "id": 1,
+      "name": "abc",
+      "dateString": "abc"
 }
 #####

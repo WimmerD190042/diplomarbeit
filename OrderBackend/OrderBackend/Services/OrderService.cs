@@ -26,6 +26,13 @@
             return meatPiece.Name;
         }
 
+        public void PayForOrder(int orderId)
+        {
+            var order = _db.Orders.Find(orderId);
+            order.PaidStatus = "true";
+            _db.SaveChanges();
+        }
+
         public List<OrderDto> getOrdersFromCustomerForSalesDay(int customerId, int salesDayId)
         {
             return _db.Orders.Where(o => o.Customer.Id == customerId && o.SalesDay.Id == salesDayId).Select(o => new OrderDto
