@@ -24,10 +24,11 @@
   </div>
   <!-- Anzeige der hinzugefügten Ochsen -->
   <div class="oxen-container">
-    <h3>Ochsen:</h3>
+    
     <div class="oxen-list">
-      <p class="oxText" *ngIf="oxen.length === 0">Noch keiner vorhanden</p>
-      <div *ngFor="let ox of oxen" class="ox-item">{{ ox }}</div>
+     <h3 class="heading" style="margin-right: 15px;">Ochsen:</h3>
+      <p class="oxText" *ngIf="oxes.length === 0">Noch keiner vorhanden</p>
+      <div *ngFor="let ox of oxes()" class="ox-item">{{ ox }}</div>
       <!-- Plus-Symbol -->
       <button
         *ngIf="showPlusButton"

@@ -15,5 +15,6 @@ export interface SalesDayDto {
     id?: number;
     name?: string | null;
     dateString?: string | null;
+    oxes?: Array<string> | null;
 }
 

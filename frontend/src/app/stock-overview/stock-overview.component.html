@@ -17,7 +17,7 @@
       <tr>
         <td>
           <div (click)="toggleCategory(category)" style="padding-left: 20px">
-            {{ category.name }} Gesamt-Bestand {{ stockByCategory[category.id!] }}
+            {{ category.name }} : {{ stockByCategory[category.id!] }}kg
           </div>
           <ul *ngIf="selectedCategory === category">
             <li *ngFor="let subCategory of subCategories()">
@@ -26,7 +26,7 @@
                 style="padding-left: 40px"
               >
                 <!-- Einrückung für Unterkategorie -->
-                {{ subCategory.name }} - {{ subCategory.stock }}
+                {{ subCategory.name }} : {{ subCategory.stock }}kg
                 <ul *ngIf="selectedSubCategory === subCategory">
                   <li *ngFor="let meatPiece of meatPieces()">
                     <div style="padding-left: 60px">

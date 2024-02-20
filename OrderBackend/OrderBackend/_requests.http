@@ -36,8 +36,8 @@ Content-type: application/json
 {
          "id": 1,
          "name": "abc",
-      "address": "abc"
-}
+         "address": "abc"
+      }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -78,11 +78,11 @@ POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-      "id": 1,
-      "dateString": "abc",
-      "amount": 1,
-      "paidStatus": "abc",
-      "customerId": 1,
+   "id": 1,
+   "dateString": "abc",
+   "amount": 1,
+   "paidStatus": "abc",
+   "customerId": 1,
    "deposit": 1,
    "price": 1,
    "salesDayId": 1,
@@ -96,14 +96,20 @@ POST {{baseUrl}}/Order/PayForOrder?orderId=1
 ################################################## SalesDay
 DELETE {{baseUrl}}/api/SalesDay/SalesDay?salesDayId=1
 #####
+GET {{baseUrl}}/api/SalesDay/getOxes?salesDayId=1
+#####
 GET {{baseUrl}}/api/SalesDay/getSalesDays
+#####
+POST {{baseUrl}}/api/SalesDay/addOx?salesDayId=1&ox=abc
 #####
 POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-      "id": 1,
-      "name": "abc",
-      "dateString": "abc"
-}
+   "id": 1,
+   "name": "abc",
+   "dateString": "abc",
+      "oxes": 
+      ["abc"]
+      }
 #####

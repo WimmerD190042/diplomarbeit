@@ -13,6 +13,7 @@ import {
   MeatPieceDto,
   OrderDto,
   OrderService,
+  SalesDayService,
   SubCategoryDto,
 } from '../swagger';
 import { FormsModule } from '@angular/forms';
@@ -50,14 +51,15 @@ export class SalesDayComponent {
   public orderService = inject(OrderService);
   public orders = signal<OrderDto[]>([]);
   public filterOrders = signal<OrderDto[]>([]);
-  public router= inject(Router);
+  public salesDayService = inject(SalesDayService);
+  public router = inject(Router);
 
   //TODO: Preis für alle ändern -> Wimmer seine Aufgabe
   showOxInput: boolean = false;
   showPlusButton: boolean = true;
 
   oxName: string = '';
-  oxen: string[] = [];
+  oxes = signal<string[]>([]);
   price: number = 51;
   deposit: number = 0.0;
   quantity: number = 0.0;
@@ -82,7 +84,7 @@ export class SalesDayComponent {
   addSelectedCustomerId: Number = 0;
 
   ngOnInit() {
-    //Load All Custers:
+    //Load All Orders:
     this.orderService
       .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
       .subscribe((x) => {
@@ -125,6 +127,35 @@ export class SalesDayComponent {
     var list = this.dataService.allOrders();
     console.log('list length: ' + list.length);
     console.log(this.dataService.allOrders);
+
+    //get ALl OXES
+    this.getOxes();
+   
+  }
+
+  getOxes(){
+    this.salesDayService
+    .apiSalesDayGetOxesGet(this.dataService.selectedSalesDay.value.id)
+    .subscribe((x) => {
+      this.oxes.set(x);
+      console.log('oxes:', x);
+    });
+  }
+
+  addOx() {
+    if (this.oxName.trim() !== '') {
+      this.salesDayService
+        .apiSalesDayAddOxPost(
+          this.dataService.selectedSalesDay.value.id,
+          this.oxName
+        )
+        .subscribe((x) => {
+          console.log('ox added');
+          console.log(this.oxes());
+          this.dataService.loadSalesDaysFromBackend();
+          this.getOxes();
+        });
+    }
   }
 
   //Teilstücke Search
@@ -227,12 +258,7 @@ export class SalesDayComponent {
     this.showOxInput = !this.showOxInput;
   }
 
-  addOx() {
-    if (this.oxName.trim() !== '') {
-      this.oxen.push(this.oxName);
-      this.oxName = ''; // Leer das Eingabefeld, damit der nächste Name eingegeben werden kann
-    }
-  }
+
 
   onMeatPieceSelected(meatpiece: MeatPieceDto) {
     this.selectedMeatPiece = meatpiece;
@@ -251,14 +277,15 @@ export class SalesDayComponent {
 
   addOrder() {
     const dateString = new Date().toISOString();
-  
-    this.categoryService.apiCategoryMeatPieceByIdGet(this.selectedMeatPiece.id)
+
+    this.categoryService
+      .apiCategoryMeatPieceByIdGet(this.selectedMeatPiece.id)
       .pipe(
         switchMap((meatPiece) => {
           const kgPrice = meatPiece.pricePerKg;
           const totalPrice = this.quantity * kgPrice!;
           console.log('totalPrice: ', totalPrice);
-  
+
           const order = {
             customerId: this.addSelectedCustomerId as number,
             dateString: dateString,
@@ -270,7 +297,7 @@ export class SalesDayComponent {
             price: totalPrice,
             deposit: this.deposit,
           } as OrderDto;
-  
+
           return this.orderService.orderOrderPost(order);
         })
       )
@@ -287,7 +314,9 @@ export class SalesDayComponent {
       );
   }
   moveToSingleCustomer(customerId: number) {
-    const customer = this.dataService.customers().find((c) => c.id === customerId);
+    const customer = this.dataService
+      .customers()
+      .find((c) => c.id === customerId);
     this.dataService.selectedCustomer.next(customer!);
     this.router.navigateByUrl(`singleCustomer`);
   }
