@@ -41,11 +41,7 @@ namespace OrderBackend.Controllers
             return _dbService.GetMeatPiecesBySubCategory(subCategoryId);
         }
 
-        [HttpGet("getStockForSubCategoryId")]
-        public double GetStockForSubCategory(int subCategoryId)
-        {
-            return _dbService.GetStockForSubCategory(subCategoryId);
-        }
+     
 
         [HttpPut("updateStockForMeatPiece")]
         public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
@@ -53,16 +49,12 @@ namespace OrderBackend.Controllers
             _dbService.UpdateStockForMeatPiece(meatPieceId, newStock);
         }
 
-        [HttpPut("addStockForSubCategory")]
-        public void AddStockForSubCategory(int subCategoryId, double newStock)
-        {
-            _dbService.AddStockForSubCategory(subCategoryId, newStock);
-        }
+   
 
-        [HttpPut("updateStockForSubCategory")]
-        public void UpdateStockForCategory(int subCategoryId, double newStock)
+        [HttpGet("SubCategoryTotalStock")]
+        public double GetSubCategoryTotalStock(int subCategoryId)
         {
-            _dbService.UpdateStockForCategory(subCategoryId, newStock);
+            return _dbService.GetStockFromSubCategory(subCategoryId);
         }
 
         [HttpGet("StockByCategoryId")]

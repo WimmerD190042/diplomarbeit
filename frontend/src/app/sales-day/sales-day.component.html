@@ -323,7 +323,7 @@
         <td>{{ order.id }}</td>
         <td (click)="moveToSingleCustomer(order.customerId!)">{{ order.customerName }}</td>
         <td>{{ dataService.getMeatPieceFromID(order.meatPieceId!)?.name }}</td>
-        <td>{{(dataService.getMeatPieceFromID(order.meatPieceId!)?.pricePerKg ?? 0) * order.amount!}}€</td>
+        <td>{{order.price}}€</td>
         <td>{{ order.amount }}</td>
         <td>{{ order.deposit }}</td>
         <td>{{ order.notes }}</td>

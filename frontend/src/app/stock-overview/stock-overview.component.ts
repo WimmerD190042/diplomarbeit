@@ -31,6 +31,7 @@ export class StockOverviewComponent implements OnInit {
   selectedSubCategory: SubCategory | null = null;
   public stockInput: number = 0;
   public priceInput: number = 0;
+  subCategoryStock = signal<number>(0);
 
   selectedMeatPiece = signal<MeatPiece>({});
   selectedCategory: CategoryDto | null = null;
@@ -43,11 +44,7 @@ export class StockOverviewComponent implements OnInit {
     console.log('loading!');
   }
 
-  categoryClicked(category: CategoryDto) {
-    console.log('categoryClicked ' + category.name);
-    this.dataService.selectedCategory.next(category);
-    this.router.navigateByUrl(`category-overview/${category.id}`);
-  }
+
 
   subCategoryClicked(subCategory: SubCategoryDto) {
     console.log('subCategoryClicked ' + subCategory.name);
@@ -74,16 +71,7 @@ export class StockOverviewComponent implements OnInit {
     });
   }
 
-  getStockForCategory(categoryId: number): number {
-    var x = 0;
-    this.categoryService
-      .apiCategoryStockByCategoryIdGet(categoryId)
-      .subscribe((stock) => {
-        x = stock;
-        console.log('stock: ', stock);
-      });
-    return x;
-  }
+ 
 
   getSubcategoriesForCategory(categoryId: number): void {
     this.categoryService
@@ -93,6 +81,18 @@ export class StockOverviewComponent implements OnInit {
         console.log('subCategories: ', subCategories);
       });
   }
+
+  // calculateSubCategoryStock(subCategory: SubCategory): number {
+    
+   
+  //   let totalStock = 0;
+  //   this.meatPieces().forEach((meatPiece) => {
+  //     if (meatPiece.subCategoryId === subCategory.id) {
+  //       totalStock += meatPiece.stock!;
+  //     }
+  //   });
+  //   return totalStock;
+  // }
 
   setPrice(event: Event, meatPiece: MeatPiece): void {
     event.stopPropagation(); //sonst klappt es zu
@@ -113,6 +113,8 @@ export class StockOverviewComponent implements OnInit {
         // Lade die Fleischstücke neu, um die aktualisierten Daten anzuzeigen
         this.getMeatPieces(this.selectedSubCategory!.id!);
         // this.getStockForCategory(this.selectedCategory?.id!);
+        this.loadStockForCategories();
+
       });
   }
 
@@ -129,6 +131,8 @@ export class StockOverviewComponent implements OnInit {
         // Lade die Fleischstücke neu, um die aktualisierten Daten anzuzeigen
         this.getMeatPieces(this.selectedSubCategory!.id!);
         // this.getStockForCategory(this.selectedCategory?.id!);
+        this.loadStockForCategories();
+
       });
   }
 

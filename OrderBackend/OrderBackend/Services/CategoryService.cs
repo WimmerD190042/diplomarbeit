@@ -100,6 +100,7 @@ namespace OrderBackend.Services
                 {
                     Id = subCategory.Id,
                     Name = subCategory.Name,
+                    Stock = subCategory.Stock,
                     MeatPieces = subCategory.MeatPieces.Select(meatPiece => new MeatPieceDto
                     {
                         Id = meatPiece.Id,
@@ -146,11 +147,7 @@ namespace OrderBackend.Services
             return totalStock;
         }
 
-        public double GetStockForSubCategory(int subCategoryId)
-        {
-            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            return subCategory.Stock;
-        }
+     
 
         public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
         {
@@ -159,23 +156,18 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
-        public void AddStockForSubCategory(int subCategoryId, double addStock)
-        {
-            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            subCategory.Stock += addStock;
-            _db.SaveChanges();
-        }
-
-        public void UpdateStockForCategory(int subCategoryId, double newStock)
-        {
-            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            subCategory.Stock = newStock;
-            _db.SaveChanges();
-        }
+       
 
         public double GetStockFromCategory(int categoryId)
         {
             var stock = _db.Categories.Where(c => c.Id == categoryId).SelectMany(c => c.SubCategories).SelectMany(sc => sc.MeatPieces).Sum(mp => mp.Stock);
+            return stock;
+        }
+
+       
+        public double GetStockFromSubCategory(int subCategoryId)
+        {
+            var stock = _db.SubCategories.Where(sc => sc.Id == subCategoryId).SelectMany(sc => sc.MeatPieces).Sum(mp => mp.Stock);
             return stock;
         }
 
@@ -195,23 +187,6 @@ namespace OrderBackend.Services
             var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
             return meatPiece.Stock;
         }
-        public double GetCategoryTotalStock(int categoryId)
-        {
-            //        var result = _db.Categories
-            //.Where(c => c.Id == categoryId)
-            //.SelectMany(c => c.SubCategories)
-            //.Select(sc => new
-            //{
-            //    SubCategoryName = sc.Name,
-            //    MeatPieces = sc.MeatPieces.Select(mp => new
-            //    {
-            //        MeatPieceName = mp.Name,
-            //        Stock = mp.
-            //    })
-            //})
-            //.ToList();
-            //    }
-            return 0.0;
-        }
+      
     }
 }

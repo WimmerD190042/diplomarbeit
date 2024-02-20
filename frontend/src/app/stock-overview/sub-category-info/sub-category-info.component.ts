@@ -31,36 +31,36 @@ export class SubCategoryInfoComponent {
     this.dataService.setSelectedSubCategory(this.subCategory);
   }
 
-  saveClicked() {
-    this.editMode = false;
-    this.stockInput = this.subCategory.stock!;
-    this.categoryService
-      .apiCategoryUpdateStockForSubCategoryPut(
-        this.subCategory.id,
-        this.stockInput
-      )
-      .subscribe(() => {
-        this.dataService.getSubCategories();
-        console.log('Stock updated');
-      });
-  }
+  // saveClicked() {
+  //   this.editMode = false;
+  //   this.stockInput = this.subCategory.stock!;
+  //   this.categoryService
+  //     .apiCategoryUpdateStockForSubCategoryPut(
+  //       this.subCategory.id,
+  //       this.stockInput
+  //     )
+  //     .subscribe(() => {
+  //       this.dataService.getSubCategories();
+  //       console.log('Stock updated');
+  //     });
+  // }
 
   subCategoryClicked() {
     this.dataService.setSelectedSubCategory(this.subCategory);
   }
 
-  addStock() {
-    console.log('id' + this.dataService.selectedSubCategory().id);
+  // addStock() {
+  //   console.log('id' + this.dataService.selectedSubCategory().id);
 
-    console.log(this.dataService.selectedSubCategory().name + 'clicked');
-    this.categoryService
-      .apiCategoryAddStockForSubCategoryPut(
-        this.dataService.selectedSubCategory().id,
-        this.stockInput
-      )
-      .subscribe(() => {
-        this.dataService.getSubCategories();
-        console.log('Stock added');
-      });
-  }
+  //   console.log(this.dataService.selectedSubCategory().name + 'clicked');
+  //   this.categoryService
+  //     .apiCategoryAddStockForSubCategoryPut(
+  //       this.dataService.selectedSubCategory().id,
+  //       this.stockInput
+  //     )
+  //     .subscribe(() => {
+  //       this.dataService.getSubCategories();
+  //       console.log('Stock added');
+  //     });
+  // }
 }

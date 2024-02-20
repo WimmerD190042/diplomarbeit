@@ -17,9 +17,9 @@
           class="btn btn-secondary">
           <mat-icon>add</mat-icon>
         </button>
-        <button class="btn btn-secondary" (click)="editMode ? saveClicked() : editClicked()">
+        <!-- <button class="btn btn-secondary" (click)="editMode ? saveClicked() : editClicked()">
           <mat-icon>{{ editMode ? "save" : "border_color" }}</mat-icon>
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -45,7 +45,8 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Abbrechen
         </button>
-        <button (click)="addStock()" type="button" data-bs-dismiss="modal" class="btn btn-success">
+        <button  type="button" data-bs-dismiss="modal" class="btn btn-success">
+          <!-- addstock click methode wurde entfnernt! -->
           Bestand hinzufügen
         </button>
       </div>
