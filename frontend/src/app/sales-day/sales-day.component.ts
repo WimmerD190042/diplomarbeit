@@ -273,6 +273,8 @@ export class SalesDayComponent {
           );
         }
       });
+      //todo:
+      //refresh list!
   }
 
   addNameField(button: any) {
@@ -311,4 +313,5 @@ export class SalesDayComponent {
   private normalizeCustomers(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
   }
+
 }
