@@ -57,8 +57,8 @@ export class SalesDayComponent {
   oxName: string = '';
   oxen: string[] = [];
   price: number = 1;
-  deposit: number = 0.0;
-  quantity: number = 0.0;
+  deposit: number = 1;
+  quantity: number = 1;
   notes: string = '';
   searchSelectedCustomerId: Number = 0;
   selectedPartsId: Number = 0;

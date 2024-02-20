@@ -26,10 +26,10 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-         "id": 1,
-      "name": "abc",
-      "address": "abc"
-   }
+   "id": 1,
+   "name": "abc",
+   "address": "abc"
+}
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
