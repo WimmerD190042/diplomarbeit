@@ -26,18 +26,32 @@
                 style="padding-left: 40px"
               >
                 <!-- Einrückung für Unterkategorie -->
-                {{ subCategory.name }} : {{ (subCategory.stock) }}kg
+                {{ subCategory.name }} : {{ subCategory.stock }}kg
                 <ul *ngIf="selectedSubCategory === subCategory">
                   <li *ngFor="let meatPiece of meatPieces()">
-                    <div style="padding-left: 60px">
+                    <div (click)="meatPieceClicked(meatPiece)" style="padding-left: 60px">
                       {{ meatPiece.name }} {{ meatPiece.stock }}
-                      <button (click)="increaseStockForMeatPiece($event, meatPiece)"  data-bs-target="#exampleModal" data-bs-toggle="modal">
-                        Bestand ändern
+                      <button
+                        (click)="increaseStockForMeatPiece($event, meatPiece)"
+                        data-bs-target="#exampleModal"
+                        data-bs-toggle="modal"
+                      >
+                        Teilstück erstellen
                       </button>
                       €/kg: {{ meatPiece.pricePerKg }}
-                      <button (click)="setPrice($event, meatPiece)"  data-bs-target="#priceModal" data-bs-toggle="modal">
-                      Preis/kg festlegen
+                      <button
+                        (click)="setPrice($event, meatPiece)"
+                        data-bs-target="#priceModal"
+                        data-bs-toggle="modal"
+                      >
+                        Preis/kg festlegen
                       </button>
+                      <li *ngFor="let meatPiecePart of selectedMeatPiece().parts">
+                        <div style="padding-left: 60px">
+                                eoo
+                        </div>
+
+                      </li>
                     </div>
                   </li>
                 </ul>
@@ -51,27 +65,56 @@
 </table>
 
 <!-- Bestand Modal -->
-<div #exampleModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div
+  #exampleModal
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Bestand ändern
-        </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Bestand ändern</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        Was sollte der neue Bestand von {{ selectedMeatPiece().name }} sein?
-        <input [(ngModel)]="stockInput" type="number" class="form-control" placeholder="Menge" aria-label="Menge"
-          aria-describedby="basic-addon1" />
+        Wie viel wiegt das {{ selectedMeatPiece().name }}?
+        <input
+          [(ngModel)]="stockInput"
+          type="number"
+          class="form-control"
+          placeholder="Menge"
+          aria-label="Menge"
+          aria-describedby="basic-addon1"
+        />
+        Notizen zum Teilstück?
+        <input
+          [(ngModel)]="notes"
+          type="text"
+          class="form-control"
+          placeholder="Notizen"
+          aria-label="notes"
+          aria-describedby="basic-addon1"
+        />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Abbrechen
         </button>
-        <button (click)="updateStock()" type="button" data-bs-dismiss="modal" class="btn btn-success">
-          Bestand hinzufügen
+        <button
+          (click)="createMeatPiecePart()"
+          type="button"
+          data-bs-dismiss="modal"
+          class="btn btn-success"
+        >
+          Teilstück erstellen
         </button>
       </div>
     </div>
@@ -79,29 +122,52 @@
 </div>
 
 <!-- Preis Modal -->
-<div #exampleModal class="modal fade" id="priceModal" tabindex="-1" 
-  aria-hidden="true">
+<div
+  #exampleModal
+  class="modal fade"
+  id="priceModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
           Preis pro KG festlegen
         </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-       Wie hoch sollte der Preis/kg für {{ selectedMeatPiece().name }} sein?
-        <input [(ngModel)]="priceInput" type="number" class="form-control" placeholder="€" aria-label="Menge"
-          aria-describedby="basic-addon1" />
+        Wie hoch sollte der Preis/kg für {{ selectedMeatPiece().name }} sein?
+        <input
+          [(ngModel)]="priceInput"
+          type="number"
+          class="form-control"
+          placeholder="€"
+          aria-label="Menge"
+          aria-describedby="basic-addon1"
+        />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Abbrechen
         </button>
-        <button (click)="updatePrice()" type="button" data-bs-dismiss="modal" class="btn btn-success">
-         Preis ändern
+        <button
+          (click)="updatePrice()"
+          type="button"
+          data-bs-dismiss="modal"
+          class="btn btn-success"
+        >
+          Preis ändern
         </button>
       </div>
     </div>
   </div>
 </div>
+
+

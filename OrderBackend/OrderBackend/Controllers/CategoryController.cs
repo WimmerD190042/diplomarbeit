@@ -49,6 +49,18 @@ namespace OrderBackend.Controllers
             _dbService.UpdateStockForMeatPiece(meatPieceId, newStock);
         }
 
+
+        [HttpGet("MeatPiecePartsFromMeatPiece")]
+        public List<MeatPiecePart> GetMeatPiecePartsFromMeatPiece(int meatPieceId)
+        {
+            return _dbService.GetAllMeatPieceParts(meatPieceId);
+        }
+
+        [HttpPost("addMeatPiecePart")]
+        public void AddMeatPiecePart(MeatPiecePartDto meatPiecePartDto)
+        {
+            _dbService.AddMeatPiecePart(meatPiecePartDto);
+        }
    
 
         [HttpGet("SubCategoryTotalStock")]

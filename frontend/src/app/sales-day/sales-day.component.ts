@@ -263,6 +263,8 @@ export class SalesDayComponent {
   onMeatPieceSelected(meatpiece: MeatPieceDto) {
     this.selectedMeatPiece = meatpiece;
     console.log('selectedMeatPiece:', this.selectedMeatPiece);
+    this.dataService.getMeatPiecePartsFromMeatPieceId(this.selectedMeatPiece.id!);
+    console.log('all parts'+this.dataService.meatPieceParts());
     this.changeDetectorRef.detectChanges();
   }
 

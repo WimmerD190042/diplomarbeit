@@ -22,7 +22,7 @@
     </table>
   </div> -->
   </div>
-  @if (selectedMeatPiece.name?.length! > 0) {
+  <!-- @if (selectedMeatPiece.name?.length! > 0) {
     <div class="container">
       <h4>Ausgewählt: {{selectedMeatPiece.name}}</h4>
       <ul class="list-group">
@@ -33,13 +33,12 @@
         <li class="list-group-item">Teilstück 5kg</li>
       </ul>
     </div>
-    }
+    } -->
 
   <!-- Anzeige der hinzugefügten Ochsen -->
   <div class="oxen-container">
-    
     <div class="oxen-list">
-     <h3 class="heading" style="margin-right: 15px;">Ochsen:</h3>
+      <h3 class="heading" style="margin-right: 15px">Ochsen:</h3>
       <p class="oxText" *ngIf="oxes.length === 0">Noch keiner vorhanden</p>
       <div *ngFor="let ox of oxes()" class="ox-item">{{ ox }}</div>
       <!-- Plus-Symbol -->
@@ -166,10 +165,19 @@
         <td>0</td>
         <!-- Todo: Kunde Select -->
         <td>
-          <select id="selectPerson" class="form-select" [(ngModel)]="addSelectedCustomerId">
-            <option value="" [selected]="!addSelectedCustomerId">Wählen Sie bitte einen Kunden:</option>
-            <option *ngFor="let customer of dataService.customers()" [ngValue]="customer.id">
-              {{customer.name}}
+          <select
+            id="selectPerson"
+            class="form-select"
+            [(ngModel)]="addSelectedCustomerId"
+          >
+            <option value="" [selected]="!addSelectedCustomerId">
+              Wählen Sie bitte einen Kunden:
+            </option>
+            <option
+              *ngFor="let customer of dataService.customers()"
+              [ngValue]="customer.id"
+            >
+              {{ customer.name }}
             </option>
           </select>
         </td>
@@ -227,6 +235,8 @@
                         >
                           <a
                             class="dropdown-item"
+                            data-bs-target="#MeatPiecePartsModal"
+                            data-bs-toggle="modal"
                             (click)="onMeatPieceSelected(meatpiece)"
                             >{{ meatpiece.name }}</a
                           >
@@ -271,9 +281,8 @@
           ></textarea>
         </td>
         <td>
-        <!-- leer -->
+          <!-- leer -->
         </td>
-        
 
         <td style="text-align: center">
           <button (click)="addOrder()">
@@ -325,13 +334,15 @@
       <!-- Orders werden in Liste geladen -->
       <tr *ngFor="let order of filterOrders()">
         <td>{{ order.id }}</td>
-        <td (click)="moveToSingleCustomer(order.customerId!)">{{ order.customerName }}</td>
+        <td (click)="moveToSingleCustomer(order.customerId!)">
+          {{ order.customerName }}
+        </td>
         <td>{{ dataService.getMeatPieceFromID(order.meatPieceId!)?.name }}</td>
-        <td>{{order.price}}€</td>
+        <td>{{ order.price }}€</td>
         <td>{{ order.amount }}</td>
         <td>{{ order.deposit }}</td>
         <td>{{ order.notes }}</td>
-        <td>{{order.paidStatus==='true'?'ja':'nein'}}</td>
+        <td>{{ order.paidStatus === "true" ? "ja" : "nein" }}</td>
         <td style="text-align: center">
           <button>
             <mat-icon color="primary" style="font-size: 24px">create</mat-icon>
@@ -345,37 +356,111 @@
   </table>
 
   <!-- Button trigger modal -->
-  <button  data-bs-target="#exampleModal" data-bs-toggle="modal"
-          class="btn btn-secondary">
-          <mat-icon>add</mat-icon>
-        </button>
+  <button
+    data-bs-target="#exampleModal"
+    data-bs-toggle="modal"
+    class="btn btn-secondary"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 
   <!-- Modal -->
-  <div #exampleModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Bestand hinzufügen
-        </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Wie viel (kg) {{ dataService.selectedSubCategory().name }} möchtest du
-        hinzufügen?
-        <input type="number" class="form-control" placeholder="Menge" aria-label="Menge"
-          aria-describedby="basic-addon1" />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Abbrechen
-        </button>
-        <button type="button" data-bs-dismiss="modal" class="btn btn-success">
-          Bestand hinzufügen
-        </button>
+  <div
+    #exampleModal
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Bestand hinzufügen
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Wie viel (kg) {{ dataService.selectedSubCategory().name }} möchtest du
+          hinzufügen?
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Menge"
+            aria-label="Menge"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Abbrechen
+          </button>
+          <button type="button" data-bs-dismiss="modal" class="btn btn-success">
+            Bestand hinzufügen
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Modal -->
+  <div
+    #exampleModal
+    class="modal fade"
+    id="MeatPiecePartsModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Teilstücke</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover">
+            <th>Gewicht</th>
+            <th>Notizen</th>
+
+            @for (meatPiecePart of dataService.meatPieceParts(); track
+            meatPiecePart) {
+            <tr>
+              <td>{{ meatPiecePart.weight }}</td>
+
+              eo
+            </tr>
+            }
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Abbrechen
+          </button>
+          <button type="button" data-bs-dismiss="modal" class="btn btn-success">
+            Bestand hinzufügen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>

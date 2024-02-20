@@ -20,9 +20,12 @@ public partial class OrdersContext : DbContext
 
     public virtual DbSet<MeatPiece> MeatPieces { get; set; }
 
+    public virtual DbSet<MeatPiecePart> MeatPieceParts { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<SalesDay> SalesDays { get; set; }
+
 
     public virtual DbSet<SubCategory> SubCategories { get; set; }
 

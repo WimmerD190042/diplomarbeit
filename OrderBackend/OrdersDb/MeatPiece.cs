@@ -17,5 +17,8 @@ public partial class MeatPiece
 
     public virtual ICollection<Article> Articles { get; } = new List<Article>();
 
+    public virtual ICollection<MeatPiecePart> Parts { get; } = new List<MeatPiecePart>();
+
+
     public virtual SubCategory SubCategory { get; set; } = null!;
 }

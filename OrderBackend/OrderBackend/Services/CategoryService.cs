@@ -77,6 +77,26 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
+        public List<MeatPiecePart> GetAllMeatPieceParts(int meatPieceId)
+        {
+            return _db.MeatPieceParts.Where(mp => mp.MeatPieceId == meatPieceId).ToList();
+        }
+
+        public void AddMeatPiecePart(MeatPiecePartDto meatPiecePartDto)
+        {
+            var meatPiece = _db.MeatPieces.Find(meatPiecePartDto.MeatPieceId);
+            var meatPiecePart = new MeatPiecePart
+            {
+                MeatPiece = meatPiece,
+                MeatPieceId = meatPiecePartDto.MeatPieceId,
+                Weight = meatPiecePartDto.Weight,
+                Notes = meatPiecePartDto.Notes,
+
+            };
+
+            _db.MeatPieceParts.Add(meatPiecePart);
+            _db.SaveChanges();
+        }
 
         public List<CategoryDto> GetAllCategories()
         {
@@ -106,6 +126,7 @@ namespace OrderBackend.Services
                         Id = meatPiece.Id,
                         Name = meatPiece.Name,
                         PricePerKg = meatPiece.PricePerKg,
+                        //Parts= new List<MeatPiecePartDto>(),
 
                     }).ToList()
                 }).ToList()
@@ -147,7 +168,7 @@ namespace OrderBackend.Services
             return totalStock;
         }
 
-     
+
 
         public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
         {
@@ -156,7 +177,7 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
-       
+
 
         public double GetStockFromCategory(int categoryId)
         {
@@ -164,7 +185,7 @@ namespace OrderBackend.Services
             return stock;
         }
 
-       
+
         public double GetStockFromSubCategory(int subCategoryId)
         {
             var stock = _db.SubCategories.Where(sc => sc.Id == subCategoryId).SelectMany(sc => sc.MeatPieces).Sum(mp => mp.Stock);
@@ -187,6 +208,6 @@ namespace OrderBackend.Services
             var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
             return meatPiece.Stock;
         }
-      
+
     }
 }

@@ -17,6 +17,8 @@ model/customer.ts
 model/customerDto.ts
 model/meatPiece.ts
 model/meatPieceDto.ts
+model/meatPiecePart.ts
+model/meatPiecePartDto.ts
 model/models.ts
 model/newCustomerDto.ts
 model/order.ts

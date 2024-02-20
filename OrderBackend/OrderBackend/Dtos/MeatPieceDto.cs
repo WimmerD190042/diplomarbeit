@@ -6,5 +6,7 @@
         public string Name { get; set; }
 
         public double PricePerKg { get; set; }
+
+        //public List<MeatPiecePartDto> Parts { get; set; }   
     }
 }

@@ -15,6 +15,7 @@ import {
   CustomerDto,
   CustomerService,
   MeatPieceDto,
+  MeatPiecePartDto,
   OrderDto,
   OrderService,
   SalesDayDto,
@@ -62,10 +63,21 @@ export class DataService {
   selectedSalesDay = new BehaviorSubject<SalesDayDto>({});
   allOrders = signal<OrderDto[]>([]);
   salesDayDateString = signal('');
+  meatPieceParts = signal<MeatPiecePartDto[]>([]);
 
   setSelectedSubCategory(subCategory: SubCategoryDto) {
     this.selectedSubCategory.set(subCategory);
     console.log('selectedSubCategory: ', this.selectedSubCategory());
+  }
+
+  getMeatPiecePartsFromMeatPieceId(meatPieceId: number) {
+    this.categoryService
+      .apiCategoryMeatPiecePartsFromMeatPieceGet(meatPieceId)
+      .subscribe((meatPieceParts) => {
+        this.meatPieceParts.set(meatPieceParts);
+        console.log('meatPieceParts: ', this.meatPieceParts());
+      });
+    
   }
 
   getMeatPieces() {

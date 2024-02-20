@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { MeatPiecePart } from './meatPiecePart';
 import { Article } from './article';
 import { SubCategory } from './subCategory';
 
@@ -20,6 +21,7 @@ export interface MeatPiece {
     stock?: number;
     subCategoryId?: number;
     readonly articles?: Array<Article> | null;
+    readonly parts?: Array<MeatPiecePart> | null;
     subCategory?: SubCategory;
 }
 

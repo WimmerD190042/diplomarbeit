@@ -5,6 +5,8 @@ export * from './customer';
 export * from './customerDto';
 export * from './meatPiece';
 export * from './meatPieceDto';
+export * from './meatPiecePart';
+export * from './meatPiecePartDto';
 export * from './newCustomerDto';
 export * from './order';
 export * from './orderDto';
