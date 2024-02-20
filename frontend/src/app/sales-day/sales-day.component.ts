@@ -26,6 +26,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable, map, startWith, switchMap } from 'rxjs';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sales-day',
@@ -49,6 +50,7 @@ export class SalesDayComponent {
   public orderService = inject(OrderService);
   public orders = signal<OrderDto[]>([]);
   public filterOrders = signal<OrderDto[]>([]);
+  public router= inject(Router);
 
   //TODO: Preis für alle ändern -> Wimmer seine Aufgabe
   showOxInput: boolean = false;
@@ -283,6 +285,11 @@ export class SalesDayComponent {
           console.error('Error: ', error.error);
         }
       );
+  }
+  moveToSingleCustomer(customerId: number) {
+    const customer = this.dataService.customers().find((c) => c.id === customerId);
+    this.dataService.selectedCustomer.next(customer!);
+    this.router.navigateByUrl(`singleCustomer`);
   }
 
   addNameField(button: any) {

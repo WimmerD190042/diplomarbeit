@@ -234,7 +234,7 @@
             </div>
           </div>
         </td>
-        <td>Summe</td>
+        <td></td>
         <td>
           <input
             [(ngModel)]="quantity"
@@ -266,8 +266,9 @@
           ></textarea>
         </td>
         <td>
-          Status?
+        <!-- leer -->
         </td>
+        
 
         <td style="text-align: center">
           <button (click)="addOrder()">
@@ -319,13 +320,13 @@
       <!-- Orders werden in Liste geladen -->
       <tr *ngFor="let order of filterOrders()">
         <td>{{ order.id }}</td>
-        <td>{{ order.customerName }}</td>
+        <td (click)="moveToSingleCustomer(order.customerId!)">{{ order.customerName }}</td>
         <td>{{ dataService.getMeatPieceFromID(order.meatPieceId!)?.name }}</td>
         <td>{{(dataService.getMeatPieceFromID(order.meatPieceId!)?.pricePerKg ?? 0) * order.amount!}}€</td>
         <td>{{ order.amount }}</td>
         <td>{{ order.deposit }}</td>
         <td>{{ order.notes }}</td>
-        <td>{{order.paidStatus}}</td>
+        <td>{{order.paidStatus==='true'?'ja':'nein'}}</td>
         <td style="text-align: center">
           <button>
             <mat-icon color="primary" style="font-size: 24px">create</mat-icon>

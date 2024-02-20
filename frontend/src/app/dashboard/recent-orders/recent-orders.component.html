@@ -34,7 +34,7 @@
       <td>{{order.price}} €</td>
       <td>{{order.deposit}} €</td>
       <td>
-        {{ order.paidStatus === "false" ? "Nicht bezahlt" : "Bezahlt" }}
+        <td>{{order.paidStatus==='true'?'ja':'nein'}}
       </td>
     </tr>
   </tbody>

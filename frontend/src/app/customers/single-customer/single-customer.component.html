@@ -22,7 +22,7 @@
             <td>{{order.price}}</td>
             <td>{{order.deposit}}</td>
             <td>{{order.notes}}</td>
-            <td>{{order.paidStatus?'nein':'ja'}}</td>
+            <td>{{order.paidStatus==='true'?'ja':'nein'}}</td>
             <td>
                 <button class="btn btn-danger" (click)="deleteOrder(order)">
                     -
