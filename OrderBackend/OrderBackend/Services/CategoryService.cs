@@ -100,10 +100,13 @@ namespace OrderBackend.Services
                 {
                     Id = subCategory.Id,
                     Name = subCategory.Name,
+                    Stock = subCategory.Stock,
                     MeatPieces = subCategory.MeatPieces.Select(meatPiece => new MeatPieceDto
                     {
                         Id = meatPiece.Id,
-                        Name = meatPiece.Name
+                        Name = meatPiece.Name,
+                        PricePerKg = meatPiece.PricePerKg,
+
                     }).ToList()
                 }).ToList()
             }).ToList();
@@ -144,11 +147,7 @@ namespace OrderBackend.Services
             return totalStock;
         }
 
-        public double GetStockForSubCategory(int subCategoryId)
-        {
-            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            return subCategory.Stock;
-        }
+     
 
         public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
         {
@@ -157,37 +156,37 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
-        public void AddStockForSubCategory(int subCategoryId, double addStock)
+       
+
+        public double GetStockFromCategory(int categoryId)
         {
-            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            subCategory.Stock += addStock;
+            var stock = _db.Categories.Where(c => c.Id == categoryId).SelectMany(c => c.SubCategories).SelectMany(sc => sc.MeatPieces).Sum(mp => mp.Stock);
+            return stock;
+        }
+
+       
+        public double GetStockFromSubCategory(int subCategoryId)
+        {
+            var stock = _db.SubCategories.Where(sc => sc.Id == subCategoryId).SelectMany(sc => sc.MeatPieces).Sum(mp => mp.Stock);
+            return stock;
+        }
+
+        public void SetMeatPiecePricePerKg(int meatPieceId, double pricePerKg)
+        {
+            var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
+            meatPiece.PricePerKg = pricePerKg;
             _db.SaveChanges();
         }
 
-        public void UpdateStockForCategory(int subCategoryId, double newStock)
+        public MeatPiece GetMeatPieceById(int meatPieceId)
         {
-            var subCategory = _db.SubCategories.Where(mp => mp.Id == subCategoryId).First();
-            subCategory.Stock = newStock;
-            _db.SaveChanges();
+            return _db.MeatPieces.Find(meatPieceId);
         }
-
-        public double GetCategoryTotalStock(int categoryId)
+        public double GetStockForMeatPiece(int meatPieceId)
         {
-            //        var result = _db.Categories
-            //.Where(c => c.Id == categoryId)
-            //.SelectMany(c => c.SubCategories)
-            //.Select(sc => new
-            //{
-            //    SubCategoryName = sc.Name,
-            //    MeatPieces = sc.MeatPieces.Select(mp => new
-            //    {
-            //        MeatPieceName = mp.Name,
-            //        Stock = mp.
-            //    })
-            //})
-            //.ToList();
-            //    }
-            return 0.0;
+            var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
+            return meatPiece.Stock;
         }
+      
     }
 }

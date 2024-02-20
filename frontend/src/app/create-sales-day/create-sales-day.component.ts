@@ -49,6 +49,7 @@ export class CreateSalesDayComponent {
     const salesDay = {
       name: dayName,
       dateString: this.dataService.salesDayDateString(),
+      oxes: [],
     } as SalesDayDto;
     console.log(salesDay);
     this.salesDayService.apiSalesDayAddSalesDayPost(salesDay).subscribe(

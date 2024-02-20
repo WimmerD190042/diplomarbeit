@@ -171,6 +171,7 @@ li.dropdown-menu {
 
 // Stile für die Ochsenliste
 .oxen-list {
+    align-items: center;
     list-style-type: none; /* Entfernen der Standard-Punkte */
     padding: 0;
     margin: 0;
@@ -187,13 +188,17 @@ li.dropdown-menu {
     background-color: transparent; /* Transparenter Hintergrund */
     padding: 10px;
     margin-right: 10px;
-    margin-bottom: 10px;
+ 
     font-size: 14px;
     display: flex; /* Flexbox-Layout für zentrierte Ausrichtung */
     align-items: center; /* Zentrierte Ausrichtung vertikal */
   }
-  
+  .heading{
+    align-items: center;
+  }
+
   .ox-item:before {
+    align-items: center;
     content: "🐂"; /* Ochsen-Emoji */
     margin-right: 5px; /* Abstand zwischen Emoji und Text */
     font-size: 30px;
@@ -207,6 +212,7 @@ li.dropdown-menu {
      /* Flexbox-Layout */
   }
   .btn-plus {
+    align-items: center;
     background-color: orange; /* Orange Hintergrund */
     border: none; /* Kein Rand */
     font-size: 20px; /* Kleinere Schriftgröße für das Pluszeichen */

@@ -14,7 +14,8 @@ namespace OrdersDb
 
         public string Name { get; set; }
 
-    
+        public virtual ICollection<string> Oxes { get; } = new List<string>();
+
 
         public virtual ICollection<Order> Orders { get; } = new List<Order>();
 

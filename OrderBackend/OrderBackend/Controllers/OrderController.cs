@@ -43,6 +43,18 @@ public class OrderController : ControllerBase
     [HttpGet("OrdersByCustomer")]
     public List<OrderDto> getOrdersByCustomerId(int customerId)
     {
-        return _dbService.getOrdersByCustomer(customerId);
+        return _dbService.GetOrdersByCustomer(customerId);
+    }
+
+    [HttpGet("CategoryNameFromOrder")]
+    public string GetCategoryNameFromOrder(int orderId)
+    {
+        return _dbService.GetCategoryNameFromOrder(orderId);
+    }
+
+    [HttpPost("PayForOrder")]
+    public void PayForOrder(int orderId)
+    {
+        _dbService.PayForOrder(orderId);
     }
 }

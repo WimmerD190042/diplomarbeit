@@ -1,34 +1,107 @@
-
+<!-- 
 <div style="margin-bottom: 30px;" class="row row-cols-1 row-cols-md-6 g-6">
   <app-single-category-info *ngFor="let category of dataService.categories()" [category]="category"
     (click)="categoryClicked(category)">
   </app-single-category-info>
-</div>
+</div> -->
 
-<!--
 <table id="table" class="table table-hover">
   <thead>
     <tr>
-      <th class="header" scope="col">
-        Kategorie
-      </th>
-      <th class="header" scope="col">
-        Bestand
-      </th>
+      <th class="header" scope="col">Kategorie</th>
+      <!-- <th class="header" scope="col">Bestand</th> -->
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let category of categories">
-      <td (click)="toggleCategory(category)">
-        {{ category.name }}
-        <ul *ngIf="selectedCategory === category">
-          <li *ngFor="let item of getItemsForCategory(category)">
-            {{ item }}
-          </li>
-        </ul>
-      </td>
-      <td>Bestand anzeige KG (todo)</td>
-    </tr>
+    <ng-container *ngFor="let category of dataService.categories()">
+      <tr>
+        <td>
+          <div (click)="toggleCategory(category)" style="padding-left: 20px">
+            {{ category.name }} : {{ stockByCategory[category.id!] }}kg
+          </div>
+          <ul *ngIf="selectedCategory === category">
+            <li *ngFor="let subCategory of subCategories()">
+              <div
+                (click)="toggleSubCategory(subCategory)"
+                style="padding-left: 40px"
+              >
+                <!-- Einrückung für Unterkategorie -->
+                {{ subCategory.name }} : {{ (subCategory.stock) }}kg
+                <ul *ngIf="selectedSubCategory === subCategory">
+                  <li *ngFor="let meatPiece of meatPieces()">
+                    <div style="padding-left: 60px">
+                      {{ meatPiece.name }} {{ meatPiece.stock }}
+                      <button (click)="increaseStockForMeatPiece($event, meatPiece)"  data-bs-target="#exampleModal" data-bs-toggle="modal">
+                        Bestand ändern
+                      </button>
+                      €/kg: {{ meatPiece.pricePerKg }}
+                      <button (click)="setPrice($event, meatPiece)"  data-bs-target="#priceModal" data-bs-toggle="modal">
+                      Preis/kg festlegen
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
--->
+
+<!-- Bestand Modal -->
+<div #exampleModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Bestand ändern
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Was sollte der neue Bestand von {{ selectedMeatPiece().name }} sein?
+        <input [(ngModel)]="stockInput" type="number" class="form-control" placeholder="Menge" aria-label="Menge"
+          aria-describedby="basic-addon1" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Abbrechen
+        </button>
+        <button (click)="updateStock()" type="button" data-bs-dismiss="modal" class="btn btn-success">
+          Bestand hinzufügen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Preis Modal -->
+<div #exampleModal class="modal fade" id="priceModal" tabindex="-1" 
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Preis pro KG festlegen
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       Wie hoch sollte der Preis/kg für {{ selectedMeatPiece().name }} sein?
+        <input [(ngModel)]="priceInput" type="number" class="form-control" placeholder="€" aria-label="Menge"
+          aria-describedby="basic-addon1" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Abbrechen
+        </button>
+        <button (click)="updatePrice()" type="button" data-bs-dismiss="modal" class="btn btn-success">
+         Preis ändern
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

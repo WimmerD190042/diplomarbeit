@@ -9,7 +9,7 @@ public partial class SubCategory
 
     public string Name { get; set; } = null!;
 
-    public double Stock { get; set; }
+    public double Stock => MeatPieces.Sum(mp => mp.Stock);
 
     public int CategoryId { get; set; }
 

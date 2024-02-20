@@ -1,39 +1,158 @@
 import { Component, Input, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
-import { CategoryDto, CategoryService } from '../swagger';
+import {
+  CategoryDto,
+  CategoryService,
+  MeatPiece,
+  SubCategory,
+  SubCategoryDto,
+} from '../swagger';
 import { SingleCategoryInfoComponent } from './single-category-info/single-category-info.component';
 import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-stock-overview',
   standalone: true,
-  imports: [CommonModule, SingleCategoryInfoComponent],
+  imports: [CommonModule, FormsModule, SingleCategoryInfoComponent],
   templateUrl: './stock-overview.component.html',
   styleUrl: './stock-overview.component.scss',
 })
-export class StockOverviewComponent {
+export class StockOverviewComponent implements OnInit {
   public dataService = inject(DataService);
   public categoryService = inject(CategoryService);
   public router = inject(Router);
+  categories: CategoryDto[] = [];
+  stockByCategory: { [key: number]: number } = {};
+  subCategories = signal<SubCategory[]>([]);
+  meatPieces = signal<MeatPiece[]>([]);
+  selectedSubCategory: SubCategory | null = null;
+  public stockInput: number = 0;
+  public priceInput: number = 0;
+  subCategoryStock = signal<number>(0);
 
-  categoryClicked(category: CategoryDto) {
-    console.log('categoryClicked ' + category.name);
-    this.dataService.selectedCategory.next(category);
-    this.router.navigateByUrl(`category-overview/${category.id}`);
-  }
-
-  categories: CategoryDto[] = [
-    { name: 'Category1' },
-    { name: 'Category2' },
-    // Add more categories as needed
-  ];
-
+  selectedMeatPiece = signal<MeatPiece>({});
   selectedCategory: CategoryDto | null = null;
 
-  getItemsForCategory(category: CategoryDto): string[] {
-    // Replace this with your logic to fetch items for the given category
-    return [`Item1 for ${category.name}`, `Item2 for ${category.name}`, 'Item3', 'Item4', 'Item5'];
+  ngOnInit(): void {
+    console.log('StockOverviewComponent.ngOnInit');
+    this.categories = this.dataService.categories();
+
+    this.loadStockForCategories();
+    console.log('loading!');
+  }
+
+
+
+  subCategoryClicked(subCategory: SubCategoryDto) {
+    console.log('subCategoryClicked ' + subCategory.name);
+    this.selectedSubCategory = subCategory;
+  }
+
+  loadStockForCategories(): void {
+    this.categories.forEach((category) => {
+      this.categoryService
+        .apiCategoryStockByCategoryIdGet(category.id)
+        .subscribe(
+          (stock) => {
+            this.stockByCategory[category.id!] = stock;
+          },
+          (error) => {
+            console.error(
+              'Fehler beim Laden des Bestands für Kategorie ' +
+                category.id +
+                ':',
+              error
+            );
+          }
+        );
+    });
+  }
+
+ 
+
+  getSubcategoriesForCategory(categoryId: number): void {
+    this.categoryService
+      .apiCategorySubCategoriesByCategoryIdGet(categoryId)
+      .subscribe((subCategories) => {
+        this.subCategories.set(subCategories);
+        console.log('subCategories: ', subCategories);
+      });
+  }
+
+  // calculateSubCategoryStock(subCategory: SubCategory): number {
+    
+   
+  //   let totalStock = 0;
+  //   this.meatPieces().forEach((meatPiece) => {
+  //     if (meatPiece.subCategoryId === subCategory.id) {
+  //       totalStock += meatPiece.stock!;
+  //     }
+  //   });
+  //   return totalStock;
+  // }
+
+  setPrice(event: Event, meatPiece: MeatPiece): void {
+    event.stopPropagation(); //sonst klappt es zu
+    this.selectedMeatPiece.set(meatPiece);
+    console.log('meatPieceSet: ', this.selectedMeatPiece());
+  }
+  updatePrice() {
+    console.log("lando")
+    this.categoryService
+      .apiCategorySetMeatPiecePricePerKgPut(
+        this.selectedMeatPiece().id,
+        this.priceInput
+      )
+      .subscribe(() => {
+        console.log('Price updated');
+        // Lade die Unterkategorien neu, um die aktualisierten Daten anzuzeigen
+        this.getSubcategoriesForCategory(this.selectedSubCategory!.categoryId!);
+        // Lade die Fleischstücke neu, um die aktualisierten Daten anzuzeigen
+        this.getMeatPieces(this.selectedSubCategory!.id!);
+        // this.getStockForCategory(this.selectedCategory?.id!);
+        this.loadStockForCategories();
+
+      });
+  }
+
+  updateStock() {
+    this.categoryService
+      .apiCategoryUpdateStockForMeatPiecePut(
+        this.selectedMeatPiece().id,
+        this.stockInput
+      )
+      .subscribe(() => {
+        console.log('Stock added');
+        // Lade die Unterkategorien neu, um die aktualisierten Daten anzuzeigen
+        this.getSubcategoriesForCategory(this.selectedSubCategory!.categoryId!);
+        // Lade die Fleischstücke neu, um die aktualisierten Daten anzuzeigen
+        this.getMeatPieces(this.selectedSubCategory!.id!);
+        // this.getStockForCategory(this.selectedCategory?.id!);
+        this.loadStockForCategories();
+
+      });
+  }
+
+  meatPieceClicked(meatPiece: MeatPiece) {
+    console.log('meatPieceClicked');
+  }
+
+  getMeatPieces(subCategoryId: number): void {
+    this.categoryService
+      .apiCategoryMeatPiecesBySubCategoryIdGet(subCategoryId)
+      .subscribe((meatPieces) => {
+        this.meatPieces.set(meatPieces);
+        console.log('meatPieces: ', meatPieces);
+      });
+  }
+
+  increaseStockForMeatPiece(event: Event, meatPiece: MeatPiece): void {
+    event.stopPropagation(); //sonst klappt es zu
+    this.selectedMeatPiece.set(meatPiece);
+    console.log('meatPieceSet: ', this.selectedMeatPiece());
   }
 
   toggleCategory(category: CategoryDto): void {
@@ -42,7 +161,17 @@ export class StockOverviewComponent {
     } else {
       this.selectedCategory = category;
     }
+    this.getSubcategoriesForCategory(category.id!);
   }
-
-  //subkategorie: id3 zb -> SubCategoriesByCategoryId
+  toggleSubCategory(subCategory: SubCategoryDto) {
+    console.log('toooooggle');
+    if (this.selectedSubCategory === subCategory) {
+      this.selectedCategory = null;
+    } else {
+      this.selectedSubCategory = subCategory;
+    }
+    this.getMeatPieces(subCategory.id!);
+  }
 }
+
+//subkategorie: id3 zb -> SubCategoriesByCategoryId

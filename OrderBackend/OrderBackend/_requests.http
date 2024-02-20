@@ -6,19 +6,23 @@ GET {{baseUrl}}/api/Category/getAllCategories
 #####
 GET {{baseUrl}}/api/Category/getAllMeatPieaces
 #####
-GET {{baseUrl}}/api/Category/getStockForSubCategoryId?subCategoryId=1
+GET {{baseUrl}}/api/Category/MeatPieceById?meatPieceId=1
 #####
 GET {{baseUrl}}/api/Category/MeatPiecesBySubCategoryId?subCategoryId=1
 #####
+GET {{baseUrl}}/api/Category/StockByCategoryId?categoryId=1
+#####
+GET {{baseUrl}}/api/Category/StockByMeatPieceId?meatPieceId=1
+#####
 GET {{baseUrl}}/api/Category/SubCategoriesByCategoryId?categoryId=1
+#####
+GET {{baseUrl}}/api/Category/SubCategoryTotalStock?subCategoryId=1
 #####
 POST {{baseUrl}}/api/Category/readCategories
 #####
-PUT {{baseUrl}}/api/Category/addStockForSubCategory?subCategoryId=1&newStock=1
+PUT {{baseUrl}}/api/Category/setMeatPiecePricePerKg?meatPieceId=1&pricePerKg=1
 #####
 PUT {{baseUrl}}/api/Category/updateStockForMeatPiece?meatPieceId=1&newStock=1
-#####
-PUT {{baseUrl}}/api/Category/updateStockForSubCategory?subCategoryId=1&newStock=1
 #####
 
 ################################################## Customer
@@ -26,10 +30,10 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "address": "abc"
-}
+         "id": 1,
+         "name": "abc",
+      "address": "abc"
+   }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -56,6 +60,8 @@ Content-type: application/json
 ################################################## Order
 DELETE {{baseUrl}}/Order/Order?deleteOrderId=1
 #####
+GET {{baseUrl}}/Order/CategoryNameFromOrder?orderId=1
+#####
 GET {{baseUrl}}/Order/Orders
 #####
 GET {{baseUrl}}/Order/OrdersByCustomer?customerId=1
@@ -69,29 +75,37 @@ Content-type: application/json
 
 {
    "id": 1,
-   "dateString": "abc",
-   "amount": 1,
-   "paidStatus": "abc",
-   "customerId": 1,
-   "deposit": 1,
-   "price": 1,
-   "salesDayId": 1,
-   "notes": "abc",
-   "meatPieceId": 1
-}
+      "dateString": "abc",
+      "amount": 1,
+      "paidStatus": "abc",
+      "customerId": 1,
+      "deposit": 1,
+      "price": 1,
+      "salesDayId": 1,
+      "notes": "abc",
+      "meatPieceId": 1
+   }
+#####
+POST {{baseUrl}}/Order/PayForOrder?orderId=1
 #####
 
 ################################################## SalesDay
 DELETE {{baseUrl}}/api/SalesDay/SalesDay?salesDayId=1
 #####
+GET {{baseUrl}}/api/SalesDay/getOxes?salesDayId=1
+#####
 GET {{baseUrl}}/api/SalesDay/getSalesDays
+#####
+POST {{baseUrl}}/api/SalesDay/addOx?salesDayId=1&ox=abc
 #####
 POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "dateString": "abc"
+      "id": 1,
+      "name": "abc",
+      "dateString": "abc",
+   "oxes": 
+         []
 }
 #####

@@ -8,7 +8,7 @@
 
         public string DateString { get; set; }
 
-        //public List<String> Oxes { get; set; }
+        public List<String> Oxes { get; set; }
 
         //public List<Order> Orders { get; set; }
     }

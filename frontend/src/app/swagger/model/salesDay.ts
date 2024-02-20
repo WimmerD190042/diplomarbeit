@@ -16,6 +16,7 @@ export interface SalesDay {
     id?: number;
     date?: string;
     name?: string | null;
+    readonly oxes?: Array<string> | null;
     readonly orders?: Array<Order> | null;
 }
 

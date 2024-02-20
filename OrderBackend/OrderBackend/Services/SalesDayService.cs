@@ -25,10 +25,10 @@ namespace OrderBackend.Services
         {
             string dateString = salesDayDto.DateString;
 
-            // Entferne den nicht unterstützten Teil des Strings
+
             string cleanedDateString = dateString.Substring(0, dateString.IndexOf("GMT"));
 
-            // Konvertiere den bereinigten String in ein DateTime-Objekt
+          
             DateTime parsedDate = DateTime.Parse(cleanedDateString, CultureInfo.InvariantCulture);
 
             Console.WriteLine(parsedDate);
@@ -40,12 +40,22 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
-        //public void addOx(int salesDayId, string ox)
-        //{
-        //    SalesDay salesDay = _db.SalesDays.Where(x => x.Id.Equals(salesDayId)).First();
-        //    salesDay.Oxes.Add(ox);
-        //    _db.SaveChanges();
-        //}
+        public List<string> getOxes(int salesDayId)
+        {
+            if(salesDayId==0)
+            {
+                return new List<string>();
+            }
+            SalesDay salesDay = _db.SalesDays.Where(x => x.Id.Equals(salesDayId)).First();
+                return salesDay.Oxes.ToList();
+        }
+
+        public void addOx(int salesDayId, string ox)
+        {
+            SalesDay salesDay = _db.SalesDays.Where(x => x.Id.Equals(salesDayId)).First();
+            salesDay.Oxes.Add(ox);
+            _db.SaveChanges();
+        }
 
     }
 }
