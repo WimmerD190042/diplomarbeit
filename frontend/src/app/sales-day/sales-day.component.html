@@ -355,64 +355,6 @@
     </tbody>
   </table>
 
-  <!-- Button trigger modal -->
-  <button
-    data-bs-target="#exampleModal"
-    data-bs-toggle="modal"
-    class="btn btn-secondary"
-  >
-    <mat-icon>add</mat-icon>
-  </button>
-
-  <!-- Modal -->
-  <div
-    #exampleModal
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            Bestand hinzufügen
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          Wie viel (kg) {{ dataService.selectedSubCategory().name }} möchtest du
-          hinzufügen?
-          <input
-            type="number"
-            class="form-control"
-            placeholder="Menge"
-            aria-label="Menge"
-            aria-describedby="basic-addon1"
-          />
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Abbrechen
-          </button>
-          <button type="button" data-bs-dismiss="modal" class="btn btn-success">
-            Bestand hinzufügen
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Modal -->
   <div
     #exampleModal
