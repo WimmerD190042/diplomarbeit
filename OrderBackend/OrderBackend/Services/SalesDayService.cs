@@ -26,10 +26,10 @@ namespace OrderBackend.Services
             string dateString = salesDayDto.DateString;
 
 
-            string cleanedDateString = dateString.Substring(0, dateString.IndexOf("GMT"));
 
-          
-            DateTime parsedDate = DateTime.Parse(cleanedDateString, CultureInfo.InvariantCulture);
+
+
+            DateTime parsedDate = DateTime.Parse(dateString);
 
             Console.WriteLine(parsedDate);
 

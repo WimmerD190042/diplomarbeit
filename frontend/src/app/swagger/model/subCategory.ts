@@ -16,7 +16,7 @@ import { Category } from './category';
 export interface SubCategory { 
     id?: number;
     name?: string | null;
-    readonly stock?: number;
+    stock?: number;
     categoryId?: number;
     category?: Category;
     readonly meatPieces?: Array<MeatPiece> | null;

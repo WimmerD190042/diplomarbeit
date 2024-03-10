@@ -1,7 +1,9 @@
-@baseUrl = https://localhost:5001
+@baseUrl = http://localhost:5000
 
 
 ################################################## Category
+DELETE {{baseUrl}}/api/Category/deleteMeatPiecePart?meatPiecePartId=1
+#####
 GET {{baseUrl}}/api/Category/getAllCategories
 #####
 GET {{baseUrl}}/api/Category/getAllMeatPieaces

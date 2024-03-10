@@ -120,15 +120,26 @@ export class StockOverviewComponent implements OnInit {
         console.log('MeatPiecePart added');
       });
   }
+  deleteMeatPiecePart(meatPiecePart: MeatPiecePart) {
+    this.categoryService.apiCategoryDeleteMeatPiecePartDelete(meatPiecePart.id).subscribe(() => {
+      console.log('MeatPiecePart deleted');
+      this.getMeatPieceParts(this.selectedMeatPiece().id!);
+    });
+  }
+
+  getMeatPieceParts(meatPieceId:number){
+    this.categoryService.apiCategoryMeatPiecePartsFromMeatPieceGet(meatPieceId).subscribe((meatPieceParts) => {
+      this.meatPieceParts.set(meatPieceParts);
+    });
+  }
 
   meatPieceClicked(event: Event,meatPiece: MeatPiece) {
     event.stopPropagation(); //sonst klappt es zu
 
     console.log('meatPieceClicked');
     this.selectedMeatPiece.set(meatPiece);
-    this.categoryService.apiCategoryMeatPiecePartsFromMeatPieceGet(meatPiece.id).subscribe((meatPieceParts) => {
-      this.meatPieceParts.set(meatPieceParts);
-    });
+    this.getMeatPieceParts(meatPiece.id!);
+    
 
     this.categoryService
       .apiCategoryMeatPiecePartsFromMeatPieceGet(this.selectedMeatPiece().id)

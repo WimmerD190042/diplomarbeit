@@ -54,7 +54,7 @@
                       >
                         <div style="padding-left: 60px">
                         Gewicht: {{ meatPiecePart.weight }}kg  Notizen: {{ meatPiecePart.notes }}
-                        <button>Löschen</button>
+                        <button (click)="deleteMeatPiecePart(meatPiecePart)">Löschen</button>
                         </div>
                       </li>
                     </div>
