@@ -11,6 +11,7 @@ import {
   CategoryService,
   CustomerDto,
   MeatPieceDto,
+  MeatPiecePartDto,
   OrderDto,
   OrderService,
   SalesDayService,
@@ -69,10 +70,12 @@ export class SalesDayComponent {
   selectedCategory: CategoryDto = {};
   selectedSubCategory: SubCategoryDto = {};
   selectedMeatPiece: MeatPieceDto = {};
+  selectedMeatPiecePart: MeatPiecePartDto = {};
   partsSearchTerm: string = '';
   notesSearchTerm: string = '';
   controlParts = new FormControl();
   controlCustomer = new FormControl();
+  maxWeight: number = 10.0;
   //teilstücke search
   allMeatPiecesSearch: string[] = ['Alle Teilstücke'];
   filteredAllMeatPiecesSearch: Observable<string[]> | undefined;
@@ -140,6 +143,13 @@ export class SalesDayComponent {
       this.oxes.set(x);
       console.log('oxes:', x);
     });
+  }
+
+  meatPiecePartSelected(meatPiecePart: MeatPiecePartDto) {
+    this.selectedMeatPiecePart= meatPiecePart;
+    console.log('selectedMeatPiecePart:', this.selectedMeatPiecePart);
+    this.quantity= this.selectedMeatPiecePart.weight!;
+    this.maxWeight= this.selectedMeatPiecePart.weight!;
   }
 
   addOx() {
