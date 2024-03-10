@@ -9,24 +9,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './welcome-page.component.scss',
 })
 export class WelcomePageComponent implements OnInit {
-  i: number = 0;
-  welcomeText: string = 'Willkommen Karin';
-  speed: number = 150;
-
-  constructor() {}
+  welcomeText: string = '';
+  currentIndex: number = 0;
+  originalText: string = 'Willkommen Karin';
 
   ngOnInit(): void {
-    this.typeWriteWelcome();
+    setInterval(() => this.animation(), 200);
   }
 
-  typeWriteWelcome(): void {
-    if (this.i < this.welcomeText.length) {
-      if (document.getElementById('typewriterWelcome') != null) {
-        document.getElementById('typewriterWelcome')!.innerHTML +=
-          this.welcomeText.charAt(this.i);
-        this.i++;
-        setTimeout(() => this.typeWriteWelcome(), this.speed);
-      }
+  animation(): void {
+    if (this.currentIndex < this.originalText.length) {
+      this.welcomeText += this.originalText.charAt(this.currentIndex);
+      this.currentIndex++;
     }
   }
 }

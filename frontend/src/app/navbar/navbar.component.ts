@@ -15,7 +15,7 @@ export class NavbarComponent {
   private router = inject(Router);
   activeLink: string = 'home';
 
-  handleNavLinkClick(link: string) {
+  forwardTo(link: string) {
     this.activeLink = link;
     console.log(link);
     if (link == 'dashboard') {

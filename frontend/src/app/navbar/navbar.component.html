@@ -1,42 +1,46 @@
-<div class="sidebar">
-  <div id="navBarAlignment">
-    <!--Navbar Header-->
-    <a class="nav-link" id="innviertlerFauchos">
-      Innviertler Gauchos
-    </a>
-    <!--NavBar Menu-->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" (click)="handleNavLinkClick('dashboard')" [class.active-link]="activeLink === 'dashboard'">
-          <mat-icon>dashboard</mat-icon>
-          Dashboard
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="handleNavLinkClick('home')" [class.active-link]="activeLink === 'home'">
-          <mat-icon>home</mat-icon>
-          Home
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="handleNavLinkClick('salesDays')" [class.active-link]="activeLink === 'salesDays'">
-          <mat-icon>calendar_today</mat-icon>
-          Verkaufstage
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="handleNavLinkClick('customers')" [class.active-link]="activeLink === 'customers'">
-          <mat-icon>person</mat-icon>
-          Kunden
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="handleNavLinkClick('stockOverview')"
-          [class.active-link]="activeLink === 'stockOverview'">
-          <mat-icon>book</mat-icon>
-          Fleischbestand
-        </a>
-      </li>
-    </ul>
-  </div>
+<div class="container-fluid text-center mt-4">
+  <label style="color: orange; font-weight: bold; font-size: 1.5em;">
+    Innviertler Gauchos
+  </label>
 </div>
+
+<body class="bg-light d-flex align-items-center justify-content-center">
+  <ul class="list-unstyled text-left">
+    <li class="mb-5">
+      <div class="d-flex">
+        <label (click)="forwardTo('dashboard')" class="d-flex align-items-center text-gray fw-bold text-decoration-none fs-5">
+          <mat-icon class="me-2">dashboard</mat-icon>
+          Dashboard
+        </label>
+      </div>
+    </li>
+    <li class="mb-5">
+      <div class="d-flex">
+        <label (click)="forwardTo('home')" class="d-flex align-items-center text-gray fw-bold text-decoration-none fs-5">
+          <mat-icon class="me-2">home</mat-icon>
+          Home
+        </label>
+      </div>
+    </li>
+    <li class="mb-5">
+      <div class="d-flex">
+        <label (click)="forwardTo('salesDays')" class="d-flex align-items-center text-gray fw-bold text-decoration-none fs-5">
+          <mat-icon class="me-2">calendar_today</mat-icon>
+          Verkaufstage
+        </label>
+      </div>
+    </li>
+    <li class="mb-5">
+      <label (click)="forwardTo('customers')" class="d-flex align-items-center text-gray fw-bold text-decoration-none fs-5">
+        <mat-icon class="me-2">person</mat-icon>
+        Kunden
+      </label>
+    </li>
+    <li class="mb-5">
+      <label (click)="forwardTo('stockOverview')" class="d-flex align-items-center text-gray fw-bold text-decoration-none fs-5">
+        <mat-icon class="me-2">book</mat-icon>
+        Fleischbestand
+      </label>
+    </li>
+  </ul>
+</body>
