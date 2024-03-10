@@ -24,5 +24,6 @@ export interface OrderDto {
     notes?: string | null;
     meatPieceId?: number;
     meatPieceName?: string | null;
+    meatPiecePartId?: number;
 }
 

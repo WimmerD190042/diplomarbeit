@@ -22,5 +22,6 @@ export interface OrderPostDto {
     salesDayId?: number;
     notes?: string | null;
     meatPieceId?: number;
+    meatPiecePartId?: number;
 }
 

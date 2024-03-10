@@ -21,5 +21,7 @@
         public string Notes { get; set; }
 
         public int MeatPieceId { get; set; }
+
+        public int MeatPiecePartId { get; set; } 
     }
 }

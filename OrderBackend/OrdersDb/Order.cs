@@ -23,8 +23,11 @@ public partial class Order
 
     public string Notes { get; set; } 
 
-    public int MeatPieceId { get; set; }   
+    public int MeatPieceId { get; set; } 
 
+    public int MeatPiecePartId { get; set; }
+    
+   
     public virtual SalesDay SalesDay { get; set; } = null!;
 
     public virtual MeatPiece MeatPiece { get; set; } = null!;

@@ -60,19 +60,32 @@
                 Date = DateTime.Parse(newOrder.DateString),
                 Notes = newOrder.Notes,
                 MeatPiece = _db.MeatPieces.Find(newOrder.MeatPieceId),
+               
                 Amount = newOrder.Amount,
                 PaidStatus = newOrder.PaidStatus,
                 Deposit = newOrder.Deposit,
                 Price = newOrder.Price,
+                MeatPiecePartId = newOrder.MeatPiecePartId
+                
             };
             _db.Orders.Add(addOrder);
-            //Find me the subcategory of the newOrder from the meatpiece
-           var meatPiece= _db.MeatPieces.Find(newOrder.MeatPieceId);
-            var subCategory = _db.SubCategories.Find(meatPiece.SubCategoryId);
-            meatPiece.Stock -= newOrder.Amount;
+           //var meatPiece= _db.MeatPieces.Find(newOrder.MeatPieceId);
+           // var subCategory = _db.SubCategories.Find(meatPiece.SubCategoryId);
+           // meatPiece.Stock -= newOrder.Amount;
+           var meatPiecePart= _db.MeatPieceParts.Find(newOrder.MeatPiecePartId);
+            if(meatPiecePart.Weight==newOrder.Amount)
+            {
+                _db.MeatPieceParts.Remove(meatPiecePart);
+            }
+            else
+            {
+                meatPiecePart.Weight -= newOrder.Amount;
+            }
             _db.SaveChanges();
             return "Order added";
         }
+
+
 
         public void DeleteOrder(int deleteOrderId)
         {

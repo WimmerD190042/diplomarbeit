@@ -26,8 +26,8 @@ POST {{baseUrl}}/api/Category/addMeatPiecePart
 Content-type: application/json
 
 {
-   "id": 1,
-   "weight": 1,
+         "id": 1,
+      "weight": 1,
    "notes": "abc",
    "meatPieceId": 1
 }
@@ -97,7 +97,8 @@ Content-type: application/json
    "price": 1,
    "salesDayId": 1,
    "notes": "abc",
-   "meatPieceId": 1
+   "meatPieceId": 1,
+   "meatPiecePartId": 1
 }
 #####
 POST {{baseUrl}}/Order/PayForOrder?orderId=1
@@ -116,10 +117,10 @@ POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
-   "dateString": "abc",
-   "oxes": 
-   ["abc"]
-}
+      "id": 1,
+      "name": "abc",
+      "dateString": "abc",
+      "oxes": 
+      ["abc"]
+   }
 #####

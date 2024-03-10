@@ -26,5 +26,7 @@
         public int MeatPieceId { get; set; }
 
         public string MeatPieceName { get; set; }
+
+        public int MeatPiecePartId { get; set; }
     }
 }

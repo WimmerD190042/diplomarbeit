@@ -308,6 +308,7 @@ export class SalesDayComponent {
             paidStatus: 'false',
             price: totalPrice,
             deposit: this.deposit,
+            meatPiecePartId: this.selectedMeatPiecePart.id,
           } as OrderDto;
 
           return this.orderService.orderOrderPost(order);
