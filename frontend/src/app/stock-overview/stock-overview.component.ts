@@ -33,11 +33,15 @@ export class StockOverviewComponent implements OnInit {
   selectedSubCategory: SubCategory | null = null;
   public stockInput: number = 0;
   public priceInput: number = 0;
-  subCategoryStock = signal<number>(0);
+  subCategoryStock : any = {};
 
   selectedMeatPiece = signal<MeatPiece>({});
   selectedCategory: CategoryDto | null = null;
   notes: string = '';
+
+  getSubCategoryStock(subCategoryId: number): Observable<number> {
+    return this.categoryService.apiCategorySubCategoryTotalStockGet(subCategoryId);
+  }
 
   ngOnInit(): void {
     console.log('StockOverviewComponent.ngOnInit');
@@ -49,23 +53,29 @@ export class StockOverviewComponent implements OnInit {
 
   loadStockForCategories(): void {
     this.categories.forEach((category) => {
-      this.categoryService
-        .apiCategoryStockByCategoryIdGet(category.id)
-        .subscribe(
-          (stock) => {
-            this.stockByCategory[category.id!] = stock;
-          },
-          (error) => {
-            console.error(
-              'Fehler beim Laden des Bestands für Kategorie ' +
-                category.id +
-                ':',
-              error
-            );
-          }
-        );
+      this.categoryService.apiCategoryStockByCategoryIdGet(category.id).subscribe(
+        (stock) => {
+          this.stockByCategory[category.id!] = stock;
+        },
+        (error) => {
+          console.error('Fehler beim Laden des Bestands für Kategorie ' + category.id + ':', error);
+        }
+      );
     });
   }
+
+  loadStockForSubCategories(): void {
+    this.categories.forEach((category) => {
+      this.categoryService.apiCategorySubCategoriesByCategoryIdGet(category.id).subscribe((subCategories) => {
+        subCategories.forEach((subCategory) => {
+          this.getSubCategoryStock(subCategory.id!).subscribe((stock) => {
+            this.subCategoryStock[subCategory.id!] = stock;
+          });
+        });
+      });
+    });
+  }
+
 
   getSubcategoriesForCategory(categoryId: number): void {
     this.categoryService
@@ -76,24 +86,12 @@ export class StockOverviewComponent implements OnInit {
       });
   }
 
-  // calculateSubCategoryStock(subCategory: SubCategory): number {
-
-  //   let totalStock = 0;
-  //   this.meatPieces().forEach((meatPiece) => {
-  //     if (meatPiece.subCategoryId === subCategory.id) {
-  //       totalStock += meatPiece.stock!;
-  //     }
-  //   });
-  //   return totalStock;
-  // }
-
   setPrice(event: Event, meatPiece: MeatPiece): void {
     event.stopPropagation(); //sonst klappt es zu
     this.selectedMeatPiece.set(meatPiece);
     console.log('meatPieceSet: ', this.selectedMeatPiece());
   }
   updatePrice() {
-    console.log('lando');
     this.categoryService
       .apiCategorySetMeatPiecePricePerKgPut(
         this.selectedMeatPiece().id,
@@ -110,27 +108,6 @@ export class StockOverviewComponent implements OnInit {
       });
   }
 
-  //wurde hier verwendet
-  //   <button (click)="updateStock()" type="button" data-bs-dismiss="modal" class="btn btn-success">
-  //   Teilstück erstellen
-  //  </button>
-  // updateStock() {
-  //   this.categoryService
-  //     .apiCategoryUpdateStockForMeatPiecePut(
-  //       this.selectedMeatPiece().id,
-  //       this.stockInput
-  //     )
-  //     .subscribe(() => {
-  //       console.log('Stock added');
-  //       // Lade die Unterkategorien neu, um die aktualisierten Daten anzuzeigen
-  //       this.getSubcategoriesForCategory(this.selectedSubCategory!.categoryId!);
-  //       // Lade die Fleischstücke neu, um die aktualisierten Daten anzuzeigen
-  //       this.getMeatPieces(this.selectedSubCategory!.id!);
-  //       // this.getStockForCategory(this.selectedCategory?.id!);
-  //       this.loadStockForCategories();
-
-  //     });
-  // }
   createMeatPiecePart() {
     const meatPiecePart = {
       meatPieceId: this.selectedMeatPiece().id,
@@ -144,16 +121,22 @@ export class StockOverviewComponent implements OnInit {
       });
   }
 
-  meatPieceClicked(meatPiece: MeatPiece) {
+  meatPieceClicked(event: Event,meatPiece: MeatPiece) {
+    event.stopPropagation(); //sonst klappt es zu
+
     console.log('meatPieceClicked');
     this.selectedMeatPiece.set(meatPiece);
-
-    this.categoryService.apiCategoryMeatPiecePartsFromMeatPieceGet(this.selectedMeatPiece().id).subscribe((meatPieceParts) => {
-      console.log('selectedMeatPieceId: ', this.selectedMeatPiece().id);
+    this.categoryService.apiCategoryMeatPiecePartsFromMeatPieceGet(meatPiece.id).subscribe((meatPieceParts) => {
       this.meatPieceParts.set(meatPieceParts);
-      console.log('meatPieceParts: ', meatPieceParts);
-      
     });
+
+    this.categoryService
+      .apiCategoryMeatPiecePartsFromMeatPieceGet(this.selectedMeatPiece().id)
+      .subscribe((meatPieceParts) => {
+        console.log('selectedMeatPieceId: ', this.selectedMeatPiece().id);
+        this.meatPieceParts.set(meatPieceParts);
+        console.log('meatPieceParts: ', meatPieceParts);
+      });
   }
 
   getMeatPieces(subCategoryId: number): void {

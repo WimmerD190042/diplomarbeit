@@ -61,6 +61,12 @@ namespace OrderBackend.Controllers
         {
             _dbService.AddMeatPiecePart(meatPiecePartDto);
         }
+
+        [HttpDelete("deleteMeatPiecePart")]
+        public void DeleteMeatPiecePart(int meatPiecePartId)
+        {
+            _dbService.DeleteMeatPiecePart(meatPiecePartId);
+        }
    
 
         [HttpGet("SubCategoryTotalStock")]

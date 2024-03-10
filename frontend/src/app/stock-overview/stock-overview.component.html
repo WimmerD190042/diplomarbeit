@@ -26,10 +26,13 @@
                 style="padding-left: 40px"
               >
                 <!-- Einrückung für Unterkategorie -->
-                {{ subCategory.name }} : {{ subCategory.stock }}kg
+                {{ subCategory.name }} : {{ subCategoryStock[subCategory.id!] }}kg
                 <ul *ngIf="selectedSubCategory === subCategory">
                   <li *ngFor="let meatPiece of meatPieces()">
-                    <div (click)="meatPieceClicked(meatPiece)" style="padding-left: 60px">
+                    <div
+                      (click)="meatPieceClicked($event,meatPiece)"
+                      style="padding-left: 60px"
+                    >
                       {{ meatPiece.name }} {{ meatPiece.stock }}
                       <button
                         (click)="increaseStockForMeatPiece($event, meatPiece)"
@@ -46,11 +49,13 @@
                       >
                         Preis/kg festlegen
                       </button>
-                      <li *ngFor="let meatPiecePart of selectedMeatPiece().parts">
+                      <li
+                        *ngFor="let meatPiecePart of meatPieceParts()"
+                      >
                         <div style="padding-left: 60px">
-                                eoo
+                        Gewicht: {{ meatPiecePart.weight }}kg  Notizen: {{ meatPiecePart.notes }}
+                        <button>Löschen</button>
                         </div>
-
                       </li>
                     </div>
                   </li>
@@ -169,5 +174,3 @@
     </div>
   </div>
 </div>
-
-
