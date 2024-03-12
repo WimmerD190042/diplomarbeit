@@ -35,8 +35,8 @@
         </form>
 
       </td>
-      <td>
-        <form>
+      <td >
+        <form (click)="onNameFieldClick($event,customer)">
           <div class="form-group">
             <input class="form-control" placeholder="Addresse" *ngIf="editingCustomer === customer" #addressInput
               type="text" [value]="customer.address" (input)="customer.address = addressInput.value">
