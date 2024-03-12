@@ -3,7 +3,7 @@
     <tr>
       <th class="header" scope="col">ID</th>
       <th class="header" scope="col">Name</th>
-      <th class="header" scope="col">Addresse</th>
+      <th class="header" scope="col">Adresse</th>
       <th class="header" scope="col"></th>
       <th class="header" scope="col"></th>
     </tr>
@@ -15,7 +15,7 @@
         <input class="form-control" placeholder="Name" #newName type="text">
       </td>
       <td>
-        <input class="form-control" placeholder="Addresse" #newAddress type="text">
+        <input class="form-control" placeholder="Adresse" #newAddress type="text">
       </td>
       <td colspan="2">
         <button id="addButton" class="btn btn-success"
@@ -26,34 +26,30 @@
     <tr *ngFor="let customer of dataService.customers()">
       <th scope="row">{{customer.id}}</th>
       <td (click)="moveToSingleCustomer(customer)">
-        <form>
+        <form  (click)="onNameFieldClick($event,customer)" >
           <div class="form-group">
-            <input class="form-control" placeholder="Name" *ngIf="editingCustomer === customer" #nameInput type="text"
+            <input class="form-control" placeholder="Name" *ngIf="currentEdit && editingCustomer === customer" #nameInput type="text"
               [value]="customer.name" (input)="customer.name = nameInput.value">
-            <span *ngIf="editingCustomer !== customer">{{customer.name}}</span>
+            <span *ngIf="!currentEdit || editingCustomer !== customer">{{customer.name}}</span>
           </div>
         </form>
-
-      </td>
-      <td >
-        <form (click)="onNameFieldClick($event,customer)">
-          <div class="form-group">
-            <input class="form-control" placeholder="Addresse" *ngIf="editingCustomer === customer" #addressInput
-              type="text" [value]="customer.address" (input)="customer.address = addressInput.value">
-            <span *ngIf="editingCustomer !== customer">{{customer.address}}</span>
-          </div>
-        </form>
-
-
       </td>
       <td>
-        <button *ngIf="editingCustomer === customer" class="btn btn-success btn-sm"
+        <form >
+          <div class="form-group">
+            <input class="form-control" placeholder="Adresse" *ngIf="currentEdit && editingCustomer === customer" #addressInput
+              type="text" [value]="customer.address" (input)="customer.address = addressInput.value">
+            <span *ngIf="!currentEdit || editingCustomer !== customer">{{customer.address}}</span>
+          </div>
+        </form>
+      </td>
+      <td>
+        <button *ngIf="currentEdit && editingCustomer === customer" class="btn btn-success btn-sm"
           (click)="saveChanges(customer)">Speichern</button>
-        <button *ngIf="editingCustomer !== customer" class="btn btn-secondary btn-sm"
+        <button *ngIf="!currentEdit || editingCustomer !== customer" class="btn btn-secondary btn-sm"
           (click)="editCustomer(customer)">Bearbeiten</button>
       </td>
       <td><button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer)">Löschen</button></td>
     </tr>
-
   </tbody>
 </table>
