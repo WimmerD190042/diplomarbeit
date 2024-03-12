@@ -68,10 +68,8 @@
                 MeatPiecePartId = newOrder.MeatPiecePartId
                 
             };
-            _db.Orders.Add(addOrder);
-           //var meatPiece= _db.MeatPieces.Find(newOrder.MeatPieceId);
-           // var subCategory = _db.SubCategories.Find(meatPiece.SubCategoryId);
-           // meatPiece.Stock -= newOrder.Amount;
+            _db.Orders.Add(addOrder); 
+           
            var meatPiecePart= _db.MeatPieceParts.Find(newOrder.MeatPiecePartId);
             if(meatPiecePart.Weight==newOrder.Amount)
             {

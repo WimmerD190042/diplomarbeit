@@ -164,19 +164,14 @@ namespace OrderBackend.Services
             var totalStock = _db.SubCategories
              .Where(sc => sc.Id == subCategoryId)
              .SelectMany(sc => sc.MeatPieces)
-             .Sum(mp => mp.Stock);
+             .Sum(mp => GetStockForMeatPiece(mp.Id));
 
             return totalStock;
         }
 
 
 
-        public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
-        {
-            var meatPiece = _db.MeatPieces.Where(mp => mp.Id == meatPieceId).First();
-            meatPiece.Stock = newStock;
-            _db.SaveChanges();
-        }
+        
 
         public void DeleteMeatPiecePart(int meatPiecePartId)
         {

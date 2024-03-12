@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:5000
+@baseUrl = https://localhost:5001
 
 
 ################################################## Category
@@ -26,8 +26,8 @@ POST {{baseUrl}}/api/Category/addMeatPiecePart
 Content-type: application/json
 
 {
-         "id": 1,
-      "weight": 1,
+   "id": 1,
+   "weight": 1,
    "notes": "abc",
    "meatPieceId": 1
 }
@@ -35,8 +35,6 @@ Content-type: application/json
 POST {{baseUrl}}/api/Category/readCategories
 #####
 PUT {{baseUrl}}/api/Category/setMeatPiecePricePerKg?meatPieceId=1&pricePerKg=1
-#####
-PUT {{baseUrl}}/api/Category/updateStockForMeatPiece?meatPieceId=1&newStock=1
 #####
 
 ################################################## Customer
@@ -117,10 +115,10 @@ POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-      "id": 1,
-      "name": "abc",
-      "dateString": "abc",
-      "oxes": 
-      ["abc"]
-   }
+   "id": 1,
+   "name": "abc",
+   "dateString": "abc",
+   "oxes": 
+   ["abc"]
+}
 #####

@@ -43,11 +43,7 @@ namespace OrderBackend.Controllers
 
      
 
-        [HttpPut("updateStockForMeatPiece")]
-        public void UpdateStockForMeatPiece(int meatPieceId, double newStock)
-        {
-            _dbService.UpdateStockForMeatPiece(meatPieceId, newStock);
-        }
+  
 
 
         [HttpGet("MeatPiecePartsFromMeatPiece")]

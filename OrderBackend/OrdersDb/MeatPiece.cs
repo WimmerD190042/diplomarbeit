@@ -11,7 +11,7 @@ public partial class MeatPiece
 
     public double PricePerKg { get; set; }
 
-    public double Stock { get; set; }
+   
 
     public int SubCategoryId { get; set; }
 
