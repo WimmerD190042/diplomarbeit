@@ -1,4 +1,4 @@
-@baseUrl = https://localhost:5001
+@baseUrl = http://localhost:5000
 
 
 ################################################## Category
@@ -26,11 +26,11 @@ POST {{baseUrl}}/api/Category/addMeatPiecePart
 Content-type: application/json
 
 {
-   "id": 1,
-   "weight": 1,
-   "notes": "abc",
-   "meatPieceId": 1
-}
+         "id": 1,
+         "weight": 1,
+         "notes": "abc",
+         "meatPieceId": 1
+   }
 #####
 POST {{baseUrl}}/api/Category/readCategories
 #####
@@ -119,6 +119,6 @@ Content-type: application/json
    "name": "abc",
    "dateString": "abc",
    "oxes": 
-   ["abc"]
+         []
 }
 #####

@@ -35,8 +35,8 @@ export class CreateSalesDayComponent {
   private router = inject(Router);
   private dataService = inject(DataService);
   private salesDayService = inject(SalesDayService);
-  private customerService = inject(CustomerService);
   public createSalesDayEnabled = false;
+  
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     console.log(`${event.value}`);

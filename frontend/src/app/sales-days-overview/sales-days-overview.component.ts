@@ -1,20 +1,23 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { SalesDayDto, SalesDayService } from '../swagger';
 import { SalesDayInfoComponent } from '../sales-day-info/sales-day-info.component';
 import { SubCategoryInfoComponent } from '../stock-overview/sub-category-info/sub-category-info.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sales-days-overview',
   standalone: true,
-  imports: [CommonModule,SubCategoryInfoComponent, SalesDayInfoComponent],
+  imports: [CommonModule,SubCategoryInfoComponent, SalesDayInfoComponent, FormsModule],
   templateUrl: './sales-days-overview.component.html',
   styleUrl: './sales-days-overview.component.scss',
 })
 export class SalesDaysOverviewComponent {
   public dataService = inject(DataService);
+  nameForSalesDay : string = "";
+  dateForSalesDay : string = "";
   router = inject(Router);
 
   salesDayClicked() {
@@ -23,7 +26,7 @@ export class SalesDaysOverviewComponent {
 
   private salesDayService = inject(SalesDayService);
   public createSalesDayEnabled = false;
-  createSalesDayClicked(dayName: string, selectedDate: string) {
+  createSalesDayClicked(selectedDate: string) {
     console.log("Date: " + selectedDate);
 
     // Parse the string to create a Date object
@@ -35,7 +38,7 @@ export class SalesDaysOverviewComponent {
     console.log("Formatted Date: " + formattedDate);
 
     const salesDay = {
-      name: dayName,
+      name: this.nameForSalesDay,
       dateString: formattedDate,
       oxes: [],
     } as SalesDayDto;

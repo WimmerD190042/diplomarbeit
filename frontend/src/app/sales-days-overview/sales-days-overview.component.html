@@ -18,19 +18,19 @@
         <div class="row g-3">
           <div class="col">
             <h3>Name:</h3>
-            <input #selectedName placeholder="Name for the day" type="text" class="form-control">
+            <input placeholder="Name for the day" type="text" class="form-control" [(ngModel)]="nameForSalesDay" >
           </div>
         </div>
         <div class="row g-3 mt-3">
           <div class="col">
             <h3>Datum:</h3>
-            <input #selectedDate type="date" class="form-control">
+            <input #selectedDate type="date" class="form-control" [(ngModel)]="dateForSalesDay">
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-        <button (click)="createSalesDayClicked(selectedName.value, selectedDate.value)" type="button" data-bs-dismiss="modal" class="btn btn-success">Neuen Verkaufstag anlegen</button>
+        <button [disabled]="nameForSalesDay.length === 0 || dateForSalesDay.length === 0" (click)="createSalesDayClicked(selectedDate.value)" type="button" data-bs-dismiss="modal" class="btn btn-success">Neuen Verkaufstag anlegen</button>
       </div>
     </div>
   </div>
