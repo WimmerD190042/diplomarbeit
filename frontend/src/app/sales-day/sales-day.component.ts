@@ -265,7 +265,7 @@ export class SalesDayComponent {
     this.orderService.orderOrderDelete(Order.id as number).subscribe((x) => {
       console.log('Order deleted');
       this.dataService.loadSalesDaysFromBackend();
-      this.customerChanged();
+   this.refreshOrders();
     });
   }
   toggleOxInput() {
