@@ -4,40 +4,45 @@
     <h1>Verkaufstag: {{ dataService.selectedSalesDay.value.name }}</h1>
     <h5>
       {{
-        dataService.getSalesDayDate(dataService.selectedSalesDay.value)
-          | date : "dd.MM.YYYY"
+      dataService.getSalesDayDate(dataService.selectedSalesDay.value)
+      | date : "dd.MM.YYYY"
       }}
     </h5>
 
   </div>
-  
+
 
   <!-- Anzeige der hinzugefügten Ochsen -->
   <div class="oxen-container">
     <div class="oxen-list">
       <h3 class="heading" style="margin-right: 15px">Ochsen:</h3>
-      <p class="oxText" *ngIf="oxes.length === 0">Noch keiner vorhanden</p>
-      <div *ngFor="let ox of oxes()" class="ox-item">{{ ox }}</div>
-      <!-- Plus-Symbol -->
-      <button
-        *ngIf="showPlusButton"
-        class="btn btn-plus"
-        (click)="toggleOxInput()"
-      >
-        +
-      </button>
+      <div class="dropdown">
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Alle Namen
+        </button>
+
+        <ul class="dropdown-menu">
+          <li class="dropdown-item">
+            <input class="form-control" placeholder="Ochsen name" [(ngModel)]="newOchsenName">
+          </li>
+          <li class="dropdown-item">
+            <button type="button" class="btn btn-success" (click)="newOchse()">Ochsen hinzufügen</button>
+          </li>
+          @for (ochse of ochsenArray; track $index) {
+            <li class="dropdown-item">{{ochse}}</li>
+          }
+        </ul>
+      </div>
     </div>
   </div>
+
+
+
 
   <!-- Texteingabefeld für den Namen des Ochsen -->
   <div *ngIf="showOxInput" class="ox-input-container">
     <div class="input-group" style="display: flex !important">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Name"
-        [(ngModel)]="oxName"
-      />
+      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="oxName" />
       <button class="btn btn-orange" (click)="addOx(); toggleOxInput()">
         Hinzufügen
       </button>
@@ -54,25 +59,14 @@
   <div id="kunde-wrapper">
     <!-- Kunde Search Bar -->
     <div class="input-group rounded" id="serachCustomerDiv">
-      <input
-        id="searchCustomer"
-        type="search"
-        class="form-control rounded"
-        placeholder="Suche nach Kunden"
-        aria-label="Search"
-        aria-describedby="search-addon"
-        [formControl]="controlCustomer"
-        [matAutocomplete]="auto1"
-      />
+      <input id="searchCustomer" type="search" class="form-control rounded" placeholder="Suche nach Kunden"
+        aria-label="Search" aria-describedby="search-addon" [formControl]="controlCustomer" [matAutocomplete]="auto1" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
     </div>
     <!-- Autocomplete für Kunde Suche -->
-    <mat-autocomplete
-      #auto1="matAutocomplete"
-      (optionSelected)="onCustomerSelectMat($event)"
-    >
+    <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onCustomerSelectMat($event)">
       @for (customer of customerList | async; track customer) {
       <mat-option [value]="customer">{{ customer }}</mat-option>
       }
@@ -80,25 +74,14 @@
 
     <!-- Teilstücke Search Bar -->
     <div class="input-group rounded" id="searchPartsDiv">
-      <input
-        id="searchParts"
-        type="search"
-        class="form-control rounded"
-        placeholder="Suche nach Teilstücke"
-        aria-label="Search"
-        aria-describedby="search-addon"
-        [formControl]="controlParts"
-        [matAutocomplete]="auto2"
-      />
+      <input id="searchParts" type="search" class="form-control rounded" placeholder="Suche nach Teilstücke"
+        aria-label="Search" aria-describedby="search-addon" [formControl]="controlParts" [matAutocomplete]="auto2" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
     </div>
     <!-- Autocomplete für Teilstück Suche -->
-    <mat-autocomplete
-      #auto2="matAutocomplete"
-      (optionSelected)="onMeatPieceSelectedMat($event)"
-    >
+    <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="onMeatPieceSelectedMat($event)">
       @for (meatPiece of filteredAllMeatPiecesSearch | async; track meatPiece) {
       <mat-option [value]="meatPiece">{{ meatPiece }}</mat-option>
       }
@@ -106,16 +89,9 @@
 
     <!-- Anmerkung Search Bar-->
     <div class="input-group rounded" id="searchNoteDiv">
-      <input
-        id="searchNote"
-        type="search"
-        class="form-control rounded"
-        placeholder="Suche nach Anmerkung"
-        aria-label="Search"
-        aria-describedby="search-addon"
-        [(ngModel)]="notesSearchTerm"
-        (ngModelChange)="onNoteChanged()"
-      />
+      <input id="searchNote" type="search" class="form-control rounded" placeholder="Suche nach Anmerkung"
+        aria-label="Search" aria-describedby="search-addon" [(ngModel)]="notesSearchTerm"
+        (ngModelChange)="onNoteChanged()" />
       <span class="input-group-text border-0" id="search-addon">
         <mat-icon>search</mat-icon>
       </span>
@@ -142,18 +118,11 @@
         <td>0</td>
         <!-- Todo: Kunde Select -->
         <td>
-          <select
-            id="selectPerson"
-            class="form-select"
-            [(ngModel)]="addSelectedCustomerId"
-          >
+          <select id="selectPerson" class="form-select" [(ngModel)]="addSelectedCustomerId">
             <option value="" [selected]="!addSelectedCustomerId">
               Wählen Sie bitte einen Kunden:
             </option>
-            <option
-              *ngFor="let customer of dataService.customers()"
-              [ngValue]="customer.id"
-            >
+            <option *ngFor="let customer of dataService.customers()" [ngValue]="customer.id">
               {{ customer.name }}
             </option>
           </select>
@@ -161,62 +130,29 @@
         <td>
           <div dropdown class="d-inline-block">
             <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
                 {{
-                  selectedMeatPiece.name && selectedMeatPiece.name!.length > 1
-                    ? selectedMeatPiece.name
-                    : "Auswählen"
+                selectedMeatPiece.name && selectedMeatPiece.name!.length > 1
+                ? selectedMeatPiece.name
+                : "Auswählen"
                 }}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li
-                  *ngFor="let category of dataService.categories()"
-                  class="dropdown-submenu"
-                  (click)="$event.stopPropagation()"
-                >
-                  <a
-                    class="dropdown-item"
-                    (click)="onCategorySelected(category)"
-                    >{{ category.name }}</a
-                  >
-                  <ul
-                    [class.show]="selectedCategory === category"
-                    class="dropdown-menu dropdown-submenu"
-                  >
-                    <li
-                      *ngFor="
+                <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
+                  (click)="$event.stopPropagation()">
+                  <a class="dropdown-item" (click)="onCategorySelected(category)">{{ category.name }}</a>
+                  <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
+                    <li *ngFor="
                         let subcategory of selectedCategory?.subCategories
-                      "
-                      class="dropdown-submenu"
-                      (click)="$event.stopPropagation()"
-                    >
-                      <a
-                        class="dropdown-item"
-                        (click)="onSubCategorySelected(subcategory)"
-                        >{{ subcategory.name }}</a
-                      >
-                      <ul
-                        [class.show]="selectedSubCategory === subcategory"
-                        class="dropdown-menu dropdown-submenu"
-                      >
-                        <li
-                          *ngFor="
+                      " class="dropdown-submenu" (click)="$event.stopPropagation()">
+                      <a class="dropdown-item" (click)="onSubCategorySelected(subcategory)">{{ subcategory.name }}</a>
+                      <ul [class.show]="selectedSubCategory === subcategory" class="dropdown-menu dropdown-submenu">
+                        <li *ngFor="
                             let meatpiece of selectedSubCategory?.meatPieces
-                          "
-                        >
-                          <a
-                            class="dropdown-item"
-                            data-bs-target="#MeatPiecePartsModal"
-                            data-bs-toggle="modal"
-                            (click)="onMeatPieceSelected(meatpiece)"
-                            >{{ meatpiece.name }}</a
-                          >
+                          ">
+                          <a class="dropdown-item" data-bs-target="#MeatPiecePartsModal" data-bs-toggle="modal"
+                            (click)="onMeatPieceSelected(meatpiece)">{{ meatpiece.name }}</a>
                         </li>
                       </ul>
                     </li>
@@ -228,35 +164,16 @@
         </td>
         <td></td>
         <td>
-          <input
-            [(ngModel)]="quantity"
-            type="number"
-            class="form-control"
-            id="quantity"
-            min="0"
-            max="{{maxWeight}}"
-            placeholder="0.0"
-          />
+          <input [(ngModel)]="quantity" type="number" class="form-control" id="quantity" min="0" max="{{maxWeight}}"
+            placeholder="0.0" />
         </td>
         <td>
-          <input
-            [(ngModel)]="deposit"
-            type="number"
-            class="form-control"
-            id="deposit"
-            min="0"
-            placeholder="0.0"
-          />
+          <input [(ngModel)]="deposit" type="number" class="form-control" id="deposit" min="0" placeholder="0.0" />
         </td>
         <td>
-          <textarea
-            id="notes"
-            class="form-control"
-            rows="1"
-            style="height: 36px; overflow-y: hidden"
+          <textarea id="notes" class="form-control" rows="1" style="height: 36px; overflow-y: hidden"
             oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"
-            [(ngModel)]="notes"
-          ></textarea>
+            [(ngModel)]="notes"></textarea>
         </td>
         <td>
           <!-- leer -->
@@ -267,40 +184,18 @@
             <mat-icon style="font-size: 24px">add</mat-icon>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li
-              *ngFor="let category of dataService.categories()"
-              class="dropdown-submenu"
-              (click)="$event.stopPropagation()"
-            >
+            <li *ngFor="let category of dataService.categories()" class="dropdown-submenu"
+              (click)="$event.stopPropagation()">
               <a class="dropdown-item" (click)="onCategorySelected(category)">{{
                 category.name
-              }}</a>
-              <ul
-                [class.show]="selectedCategory === category"
-                class="dropdown-menu dropdown-submenu"
-              >
-                <li
-                  *ngFor="let subcategory of selectedCategory?.subCategories"
-                  class="dropdown-submenu"
-                  (click)="$event.stopPropagation()"
-                >
-                  <a
-                    class="dropdown-item"
-                    (click)="onSubCategorySelected(subcategory)"
-                    >{{ subcategory.name }}</a
-                  >
-                  <ul
-                    [class.show]="selectedSubCategory === subcategory"
-                    class="dropdown-menu dropdown-submenu"
-                  >
-                    <li
-                      *ngFor="let meatpiece of selectedSubCategory?.meatPieces"
-                    >
-                      <a
-                        class="dropdown-item"
-                        (click)="onMeatPieceSelected(meatpiece)"
-                        >{{ meatpiece.name }}</a
-                      >
+                }}</a>
+              <ul [class.show]="selectedCategory === category" class="dropdown-menu dropdown-submenu">
+                <li *ngFor="let subcategory of selectedCategory?.subCategories" class="dropdown-submenu"
+                  (click)="$event.stopPropagation()">
+                  <a class="dropdown-item" (click)="onSubCategorySelected(subcategory)">{{ subcategory.name }}</a>
+                  <ul [class.show]="selectedSubCategory === subcategory" class="dropdown-menu dropdown-submenu">
+                    <li *ngFor="let meatpiece of selectedSubCategory?.meatPieces">
+                      <a class="dropdown-item" (click)="onMeatPieceSelected(meatpiece)">{{ meatpiece.name }}</a>
                     </li>
                   </ul>
                 </li>
@@ -334,30 +229,19 @@
   </table>
 
   <!-- Modal -->
-  <div
-    #exampleModal
-    class="modal fade"
-    id="MeatPiecePartsModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div #exampleModal class="modal fade" id="MeatPiecePartsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Teilstücke</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <table class="table table-hover">
             <th>Gewicht</th>
             <th>Notizen</th>
-     
+
 
             @for (meatPiecePart of dataService.meatPieceParts(); track
             meatPiecePart) {
@@ -371,11 +255,7 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Abbrechen
           </button>
           <button type="button" data-bs-dismiss="modal" class="btn btn-success">

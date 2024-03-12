@@ -376,4 +376,9 @@ export class SalesDayComponent {
     return value.toLowerCase().replace(/\s/g, '');
   }
 
+  newOchsenName: string = '';
+  ochsenArray: string[] = ["ochse1", "ochse2", "ochse3"];
+  newOchse() {
+    this.ochsenArray.push(this.newOchsenName);
+  }
 }
