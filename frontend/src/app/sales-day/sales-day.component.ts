@@ -86,14 +86,18 @@ export class SalesDayComponent {
   selectedCustomerId: Number = -1;
   addSelectedCustomerId: Number = 0;
 
+  refreshOrders(){
+    this.orderService
+    .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
+    .subscribe((x) => {
+      this.orders.set(x);
+      this.filterOrders.set(x);
+    });
+  }
+
   ngOnInit() {
     //Load All Orders:
-    this.orderService
-      .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
-      .subscribe((x) => {
-        this.orders.set(x);
-        this.filterOrders.set(x);
-      });
+   this.refreshOrders();
 
     //Load Teilstücke
     this.dataService.loadMeatPiecedFromBackend();
@@ -125,8 +129,8 @@ export class SalesDayComponent {
       map((value) => this.filterCustomers(value || ''))
     );
 
-    //get ALl Orders -> ToDo brauchst du das noch?
-    this.dataService.loadOrdersOfSalesDayFromBackend(1);
+   
+    this.dataService.loadOrdersOfSalesDayFromBackend(this.dataService.selectedSalesDay.value.id!);
     var list = this.dataService.allOrders();
     console.log('list length: ' + list.length);
     console.log(this.dataService.allOrders);
@@ -319,7 +323,8 @@ export class SalesDayComponent {
           console.log('Order sent to DB');
           console.log(x);
           this.dataService.loadSalesDaysFromBackend();
-          this.customerChanged();
+          this.refreshOrders();
+          // this.customerChanged();
         },
         (error) => {
           console.error('Error: ', error.error);
