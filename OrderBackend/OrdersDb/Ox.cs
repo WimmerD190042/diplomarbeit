@@ -6,21 +6,11 @@ using System.Threading.Tasks;
 
 namespace OrdersDb
 {
-    public partial class SalesDay
+    public class Ox
     {
-
         public int Id { get; set; }
-        public DateTime Date { get; set; }
-
         public string Name { get; set; }
 
-        public List<Ox> Oxes { get; set; } = new List<Ox>();
-
-        
-
-        public virtual ICollection<Order> Orders { get; } = new List<Order>();
-
-
-
+        public int SalesDayId { get; set; } 
     }
 }

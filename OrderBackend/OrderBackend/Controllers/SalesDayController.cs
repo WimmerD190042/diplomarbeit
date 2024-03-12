@@ -35,7 +35,7 @@ namespace OrderBackend.Controllers
         }
 
         [HttpGet("getOxes")]
-        public List<string> GetOxes(int salesDayId)
+        public List<Ox> GetOxes(int salesDayId)
         {
             return _dbService.getOxes(salesDayId);
         }

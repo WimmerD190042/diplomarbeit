@@ -99,6 +99,11 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
+        public int GetMeatPieceNumberOfParts(int meatPieceId)
+        {
+            return _db.MeatPieceParts.Where(mp => mp.MeatPieceId == meatPieceId).Count();
+        }
+
         public List<CategoryDto> GetAllCategories()
         {
             var options = new JsonSerializerOptions

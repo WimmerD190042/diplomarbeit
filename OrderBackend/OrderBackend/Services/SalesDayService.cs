@@ -40,19 +40,20 @@ namespace OrderBackend.Services
             _db.SaveChanges();
         }
 
-        public List<string> getOxes(int salesDayId)
+        public List<Ox> getOxes(int salesDayId)
         {
             if(salesDayId==0)
             {
-                return new List<string>();
+                return new List<Ox>();
             }
             SalesDay salesDay = _db.SalesDays.Where(x => x.Id.Equals(salesDayId)).First();
                 return salesDay.Oxes.ToList();
         }
 
-        public void addOx(int salesDayId, string ox)
+        public void addOx(int salesDayId, string oxName)
         {
             SalesDay salesDay = _db.SalesDays.Where(x => x.Id.Equals(salesDayId)).First();
+            Ox ox = new Ox { Name = oxName,SalesDayId=salesDayId };
             salesDay.Oxes.Add(ox);
             _db.SaveChanges();
         }

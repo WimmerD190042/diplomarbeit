@@ -71,6 +71,12 @@ namespace OrderBackend.Controllers
             return _dbService.GetStockFromSubCategory(subCategoryId);
         }
 
+        [HttpGet("MeatPieceNumberofParts")]
+        public int GetMeatPieceNumberofParts(int meatPieceId)
+        {
+            return _dbService.GetMeatPieceNumberOfParts(meatPieceId);
+        }
+
         [HttpGet("StockByCategoryId")]
         public double getStockByCategoryId(int categoryId)
         {

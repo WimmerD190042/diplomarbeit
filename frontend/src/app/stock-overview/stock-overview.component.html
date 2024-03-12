@@ -26,14 +26,14 @@
                 style="padding-left: 40px"
               >
                 <!-- Einrückung für Unterkategorie -->
-                {{ subCategory.name }} : {{ subCategoryStock[subCategory.id!] }}kg
+                {{ subCategory.name }} 
                 <ul *ngIf="selectedSubCategory === subCategory">
                   <li *ngFor="let meatPiece of meatPieces()">
                     <div
                       (click)="meatPieceClicked($event,meatPiece)"
                       style="padding-left: 60px"
                     >
-                      {{ meatPiece.name }} {{ meatPiece.stock }}
+                      {{ meatPiece.name }} 
                       <button
                         (click)="increaseStockForMeatPiece($event, meatPiece)"
                         data-bs-target="#exampleModal"
