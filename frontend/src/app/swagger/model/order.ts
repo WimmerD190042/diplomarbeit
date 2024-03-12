@@ -25,6 +25,7 @@ export interface Order {
     date?: string;
     notes?: string | null;
     meatPieceId?: number;
+    meatPiecePartId?: number;
     salesDay?: SalesDay;
     meatPiece?: MeatPiece;
     customer?: Customer;

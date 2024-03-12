@@ -168,6 +168,7 @@ export class StockOverviewComponent implements OnInit {
 
   toggleCategory(category: CategoryDto): void {
     if (this.selectedCategory === category) {
+      
       this.selectedCategory = null;
     } else {
       this.selectedCategory = category;

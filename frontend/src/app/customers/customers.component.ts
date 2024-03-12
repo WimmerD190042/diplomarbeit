@@ -25,9 +25,13 @@ export class CustomersComponent {
     this.router.navigateByUrl(`singleCustomer`);
   }
 
+  
+
   onNameFieldClick(event: MouseEvent,customer: CustomerDto) {
-    if (this.editingCustomer === customer) {
-      event!.stopPropagation();
+    console.log('onNameFieldClick',this.currentEdit)
+    if(this.currentEdit){
+      event.stopPropagation();
+      event.preventDefault();
     }
   }
 
