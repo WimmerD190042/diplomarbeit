@@ -77,7 +77,7 @@
             }
             else
             {
-                meatPiecePart.Weight -= newOrder.Amount;
+                meatPiecePart.Weight = Math.Round(meatPiecePart.Weight - newOrder.Amount,4);
             }
             _db.SaveChanges();
             return "Order added";

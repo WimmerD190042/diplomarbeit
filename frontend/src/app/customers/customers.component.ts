@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
   styleUrl: './customers.component.scss',
 })
 export class CustomersComponent {
+
   editingCustomer: any = null;
+  currentEdit: boolean = false;
 
   public dataService = inject(DataService);
   public customerService = inject(CustomerService);
@@ -21,6 +23,12 @@ export class CustomersComponent {
   moveToSingleCustomer(customer: CustomerDto) {
     this.dataService.selectedCustomer.next(customer);
     this.router.navigateByUrl(`singleCustomer`);
+  }
+
+  onNameFieldClick(event: MouseEvent,customer: CustomerDto) {
+    if (this.editingCustomer === customer) {
+      event!.stopPropagation();
+    }
   }
 
   createCustomerFromInput(customerName: string, customerAddress: string) {
@@ -48,6 +56,7 @@ export class CustomersComponent {
     this.customerService.apiCustomerEditCustomerPut(customer).subscribe((x) => {
       console.log(`Customer ${customer.name} edited`);
     });
+    this.currentEdit= false;
   }
 
   deleteCustomer(customer: CustomerDto) {
@@ -60,5 +69,6 @@ export class CustomersComponent {
   }
   editCustomer(customer: CustomerDto) {
     this.editingCustomer = customer;
+    this.currentEdit= true;
   }
 }

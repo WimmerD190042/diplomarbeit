@@ -27,9 +27,9 @@ Content-type: application/json
 
 {
          "id": 1,
-         "weight": 1,
-         "notes": "abc",
-         "meatPieceId": 1
+      "weight": 1,
+      "notes": "abc",
+      "meatPieceId": 1
    }
 #####
 POST {{baseUrl}}/api/Category/readCategories
@@ -42,8 +42,8 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-   "id": 1,
-   "name": "abc",
+      "id": 1,
+      "name": "abc",
    "address": "abc"
 }
 #####
@@ -87,17 +87,17 @@ Content-type: application/json
 
 {
    "id": 1,
-   "dateString": "abc",
-   "amount": 1,
-   "paidStatus": "abc",
-   "customerId": 1,
-   "deposit": 1,
-   "price": 1,
-   "salesDayId": 1,
-   "notes": "abc",
-   "meatPieceId": 1,
-   "meatPiecePartId": 1
-}
+      "dateString": "abc",
+      "amount": 1,
+      "paidStatus": "abc",
+      "customerId": 1,
+      "deposit": 1,
+         "price": 1,
+         "salesDayId": 1,
+         "notes": "abc",
+         "meatPieceId": 1,
+         "meatPiecePartId": 1
+      }
 #####
 POST {{baseUrl}}/Order/PayForOrder?orderId=1
 #####
@@ -118,7 +118,7 @@ Content-type: application/json
    "id": 1,
    "name": "abc",
    "dateString": "abc",
-   "oxes": 
-         []
-}
+      "oxes": 
+      ["abc"]
+   }
 #####

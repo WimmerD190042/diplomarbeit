@@ -154,6 +154,7 @@ export class DataService {
   loadSalesDaysFromBackend() {
     this.salesDayService.apiSalesDayGetSalesDaysGet().subscribe((x) => {
       this.salesDays.set(x);
+      
     });
   }
 
