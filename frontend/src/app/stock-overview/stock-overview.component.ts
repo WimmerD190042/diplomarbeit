@@ -118,6 +118,7 @@ export class StockOverviewComponent implements OnInit {
       .apiCategoryAddMeatPiecePartPost(meatPiecePart)
       .subscribe(() => {
         console.log('MeatPiecePart added');
+        this.loadStockForCategories();
       });
   }
   deleteMeatPiecePart(meatPiecePart: MeatPiecePart) {
