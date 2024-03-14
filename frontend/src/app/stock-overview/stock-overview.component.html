@@ -34,7 +34,7 @@
                       style="padding-left: 60px"
                     >
                       {{ meatPiece.name }} 
-                      <button
+                      <button  class="btn btn-secondary"
                         (click)="increaseStockForMeatPiece($event, meatPiece)"
                         data-bs-target="#exampleModal"
                         data-bs-toggle="modal"
@@ -42,19 +42,19 @@
                         Teilstück erstellen
                       </button>
                       €/kg: {{ meatPiece.pricePerKg }}
-                      <button
+                      <button class="btn btn-secondary"
                         (click)="setPrice($event, meatPiece)"
                         data-bs-target="#priceModal"
                         data-bs-toggle="modal"
                       >
-                        Preis/kg festlegen
+                        Preis/kg ändern
                       </button>
                       <li
                         *ngFor="let meatPiecePart of meatPieceParts()"
                       >
                         <div style="padding-left: 60px">
-                        Gewicht: {{ meatPiecePart.weight }}kg  Notizen: {{ meatPiecePart.notes }}
-                        <button (click)="deleteMeatPiecePart(meatPiecePart)">Löschen</button>
+                        Gewicht: {{ meatPiecePart.weight }}  kg &nbsp; Notizen: {{ meatPiecePart.notes }}
+                        <button class="btn btn-danger" (click)="deleteMeatPiecePart(meatPiecePart)">Löschen</button>
                         </div>
                       </li>
                     </div>

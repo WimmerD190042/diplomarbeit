@@ -26,6 +26,8 @@
       >
         +
       </button>
+
+      
     </div>
   </div>
 
@@ -263,9 +265,9 @@
         </td>
 
         <td style="text-align: center">
-          <button (click)="addOrder()">
-            <mat-icon style="font-size: 24px">add</mat-icon>
-          </button>
+          
+          <button id="addButton" class="btn btn-secondary"
+          (click)="addOrder()">Bestellen</button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li
               *ngFor="let category of dataService.categories()"
@@ -322,11 +324,10 @@
         <td>{{ order.notes }}</td>
         <td>{{ order.paidStatus === "true" ? "ja" : "nein" }}</td>
         <td style="text-align: center">
-          <button>
-            <mat-icon color="primary" style="font-size: 24px">create</mat-icon>
-          </button>
-          <button (click)="deleteOrder(order)">
-            <mat-icon color="warn" style="font-size: 24px">clear</mat-icon>
+          <button (click)="editOrderClicked()" class="btn btn-secondary">Bearbeiten</button>
+
+          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSalesDay">
+            Löschen
           </button>
         </td>
       </tr>
