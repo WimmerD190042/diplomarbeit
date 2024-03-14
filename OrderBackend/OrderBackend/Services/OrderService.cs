@@ -50,6 +50,21 @@
             }).ToList();
         }
 
+        public int GetOrdersCount(DateTime dateFrom, DateTime dateTo)
+        {
+            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date <= dateTo).Count();
+        }
+
+        public double GetRevenueForTimeSpan(DateTime dateFrom, DateTime dateTo)
+        {
+            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date <= dateTo).Sum(o => o.Price);
+            
+        }
+        public int GetUnpaidOrdersCount(DateTime dateFrom, DateTime dateTo)
+        {
+            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date <= dateTo && o.PaidStatus == "false").Count();
+        }
+
         public string AddOrder(OrderPostDto newOrder)
         {
             Order addOrder = new Order

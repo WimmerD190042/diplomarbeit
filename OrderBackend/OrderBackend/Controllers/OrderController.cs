@@ -22,6 +22,24 @@ public class OrderController : ControllerBase
         return "Order added";
     }
 
+    [HttpGet("OrdersCount")]
+    public int GetOrdersCount(DateTime dateFrom, DateTime dateTo)
+    {
+        return _dbService.GetOrdersCount(dateFrom, dateTo);
+    }
+
+    [HttpGet("RevenueForTimeSpan")]
+    public double GetRevenueForTimeSpan(DateTime dateFrom, DateTime dateTo)
+    {
+        return _dbService.GetRevenueForTimeSpan(dateFrom, dateTo);
+    }
+
+    [HttpGet("UnpaidOrdersCount")]
+    public int GetUnpaidOrdersCount(DateTime dateFrom, DateTime dateTo)
+    {
+        return _dbService.GetUnpaidOrdersCount(dateFrom, dateTo);
+    }
+
     [HttpGet("OrdersForSalesDay")]
     public List<OrderDto> getOrdersForSalesDay(int salesDayId)
     {

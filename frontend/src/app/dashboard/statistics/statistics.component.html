@@ -4,11 +4,11 @@
   <div class="row">
     <div class="col-md-6 col-sm-12 mb-3 mb-md-0 d-flex justify-content-start">
       <label for="start" class="me-2">Von:</label>
-      <input type="date" id="start" name="trip-start" value="2024-01-01"/>
+      <input [(ngModel)]="selectedStartDate" (ngModelChange)="dateChanged()"  type="date" class="form-control">
     </div>
     <div class="col-md-6 col-sm-12 d-flex justify-content-start justify-content-md-end">
       <label for="end" class="me-2">Bis:</label>
-      <input type="date" id="end" name="trip-end" value="2024-02-22"/>
+      <input [(ngModel)]="selectedEndDate" (ngModelChange)="dateChanged()"  type="date" class="form-control">
     </div>
   </div>
 </div>
@@ -26,7 +26,7 @@
   </div>
   <div class="card card-green">
     <div class="card-icon">👛</div>
-    <div class="card-title">Einnahmen</div>
-    <div class="card-value">.....</div>
+    <div class="card-title">Unbezahlte Bestellungen</div>
+    <div class="card-value">{{unpaidOrders}}</div>
   </div>
 </div>

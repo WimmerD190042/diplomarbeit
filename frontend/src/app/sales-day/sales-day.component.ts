@@ -86,6 +86,10 @@ export class SalesDayComponent {
   selectedCustomerId: Number = -1;
   addSelectedCustomerId: Number = 0;
 
+  editOrderClicked(){
+
+  }
+
   refreshOrders(){
     this.orderService
     .orderOrdersForSalesDayGet(this.dataService.selectedSalesDay.value.id)
@@ -141,12 +145,12 @@ export class SalesDayComponent {
   }
 
   getOxes(){
-    this.salesDayService
-    .apiSalesDayGetOxesGet(this.dataService.selectedSalesDay.value.id)
-    .subscribe((x) => {
-      this.oxes.set(x);
-      console.log('oxes:', x);
-    });
+    // this.salesDayService
+    // .apiSalesDayGetOxesGet(this.dataService.selectedSalesDay.value.id)
+    // .subscribe((x) => {
+    //   this.oxes.set(x);
+    //   console.log('oxes:', x);
+    // });
   }
 
   meatPiecePartSelected(meatPiecePart: MeatPiecePartDto) {

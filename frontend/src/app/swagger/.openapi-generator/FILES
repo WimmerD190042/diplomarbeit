@@ -24,6 +24,7 @@ model/newCustomerDto.ts
 model/order.ts
 model/orderDto.ts
 model/orderPostDto.ts
+model/ox.ts
 model/salesDay.ts
 model/salesDayDto.ts
 model/subCategory.ts
