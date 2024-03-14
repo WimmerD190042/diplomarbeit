@@ -9,15 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Order } from './order';
-import { Ox } from './ox';
 
 
-export interface SalesDay { 
+export interface Ox { 
     id?: number;
-    date?: string;
     name?: string | null;
-    oxes?: Array<Ox> | null;
-    readonly orders?: Array<Order> | null;
+    salesDayId?: number;
 }
 

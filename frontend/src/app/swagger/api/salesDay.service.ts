@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { Ox } from '../model/ox';
+// @ts-ignore
 import { SalesDayDto } from '../model/salesDayDto';
 
 // @ts-ignore
@@ -226,9 +228,9 @@ export class SalesDayService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiSalesDayGetOxesGet(salesDayId?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<Array<string>>;
-    public apiSalesDayGetOxesGet(salesDayId?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public apiSalesDayGetOxesGet(salesDayId?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public apiSalesDayGetOxesGet(salesDayId?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<Array<Ox>>;
+    public apiSalesDayGetOxesGet(salesDayId?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<Array<Ox>>>;
+    public apiSalesDayGetOxesGet(salesDayId?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<Array<Ox>>>;
     public apiSalesDayGetOxesGet(salesDayId?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -271,7 +273,7 @@ export class SalesDayService {
         }
 
         let localVarPath = `/api/SalesDay/getOxes`;
-        return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<Ox>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
