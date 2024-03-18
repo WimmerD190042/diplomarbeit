@@ -17,7 +17,8 @@
       <th class="header" scope="col">Menge</th>
       <th class="header" scope="col">Preis</th>
       <th class="header" scope="col">Pfand</th>
-      <th class="header" scope="col">Status</th>
+      <th class="header" scope="col">Anmerkung</th>
+      <th class="header" scope="col">Bezahlt?</th>
     </tr>
   </thead>
   <tbody>
@@ -33,9 +34,8 @@
       <td>{{order.amount}} kg</td>
       <td>{{order.price}} €</td>
       <td>{{order.deposit}} €</td>
-      <td>
-        <td>{{order.paidStatus==='true'?'ja':'nein'}}
-      </td>
+      <td>{{order.notes}}</td>
+      <td>{{order.paidStatus==='true'?'ja':'nein'}}</td>
     </tr>
   </tbody>
 </table>
