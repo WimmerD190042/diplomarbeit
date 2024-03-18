@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../data.service';
-import { Order, OrderDto, OrderService } from '../../swagger';
+import { Order, OrderDashboardDto, OrderDto, OrderService } from '../../swagger';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -13,22 +13,19 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class RecentOrdersComponent {
   public orderService = inject(OrderService);
-  public recentOrders = signal<Order[]>([]);
+  public recentOrders = signal<OrderDashboardDto[]>([]);
 
   ngOnInit(): void {
-    this.orderService.orderOrdersGet().subscribe((x) => {
-      const firstTenOrders = x.slice(0, 10);
-      this.recentOrders.set(firstTenOrders);
-    });
+    this.orderService.orderOrdersForDashboardGet().subscribe((x) =>
+      this.recentOrders.set(x)
+    );
   }
 
   exportButtonClick() {
     var csvData = 'Customer;Menge;Anmerkung\n';
     this.recentOrders().forEach((order) => {
-      const customerId = order.customerId;
-      const meatPieceId = order.meatPieceId;
       const note = order.notes;
-      csvData += `${customerId};${meatPieceId};${note}\n`;
+      //csvData += `${customerId};${meatPieceId};${note}\n`;
     });
     var blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
     var link = document.createElement('a');

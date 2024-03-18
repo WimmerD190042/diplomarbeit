@@ -9,6 +9,7 @@ export * from './meatPiecePart';
 export * from './meatPiecePartDto';
 export * from './newCustomerDto';
 export * from './order';
+export * from './orderDashboardDto';
 export * from './orderDto';
 export * from './orderPostDto';
 export * from './ox';

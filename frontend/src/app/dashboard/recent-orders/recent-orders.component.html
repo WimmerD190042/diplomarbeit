@@ -23,14 +23,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let order of recentOrders()">
-      <td>
-        {{order.id}}
-      </td>
-      <td>
-        {{order.customerId}}
-      </td>
-      <td>kategorie</td>
-      <td>{{order.date | date : "dd.MM.yyyy HH:mm"}}</td>
+      <td>{{order.id}}</td>
+      <td>{{order.customerName}}</td>
+      <td>ToDo: Category</td>
+      <td>{{order.id | date : "dd.MM.yyyy HH:mm"}}</td>
       <td>{{order.amount}} kg</td>
       <td>{{order.price}} €</td>
       <td>{{order.deposit}} €</td>

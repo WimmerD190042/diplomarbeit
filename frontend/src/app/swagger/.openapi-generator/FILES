@@ -22,6 +22,7 @@ model/meatPiecePartDto.ts
 model/models.ts
 model/newCustomerDto.ts
 model/order.ts
+model/orderDashboardDto.ts
 model/orderDto.ts
 model/orderPostDto.ts
 model/ox.ts
