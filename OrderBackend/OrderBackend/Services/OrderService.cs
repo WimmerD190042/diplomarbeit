@@ -58,7 +58,7 @@
         public double GetRevenueForTimeSpan(DateTime dateFrom, DateTime dateTo)
         {
             return _db.Orders.Where(o => o.Date >= dateFrom && o.Date <= dateTo).Sum(o => o.Price);
-            
+
         }
         public int GetUnpaidOrdersCount(DateTime dateFrom, DateTime dateTo)
         {
@@ -75,24 +75,24 @@
                 Date = DateTime.Parse(newOrder.DateString),
                 Notes = newOrder.Notes,
                 MeatPiece = _db.MeatPieces.Find(newOrder.MeatPieceId),
-               
+
                 Amount = newOrder.Amount,
                 PaidStatus = newOrder.PaidStatus,
                 Deposit = newOrder.Deposit,
                 Price = newOrder.Price,
                 MeatPiecePartId = newOrder.MeatPiecePartId
-                
+
             };
-            _db.Orders.Add(addOrder); 
-           
-           var meatPiecePart= _db.MeatPieceParts.Find(newOrder.MeatPiecePartId);
-            if(meatPiecePart.Weight==newOrder.Amount)
+            _db.Orders.Add(addOrder);
+
+            var meatPiecePart = _db.MeatPieceParts.Find(newOrder.MeatPiecePartId);
+            if (meatPiecePart.Weight == newOrder.Amount)
             {
                 _db.MeatPieceParts.Remove(meatPiecePart);
             }
             else
             {
-                meatPiecePart.Weight = Math.Round(meatPiecePart.Weight - newOrder.Amount,4);
+                meatPiecePart.Weight = Math.Round(meatPiecePart.Weight - newOrder.Amount, 4);
             }
             _db.SaveChanges();
             return "Order added";
@@ -116,6 +116,12 @@
             }.CopyPropertiesFrom(y)).ToList();
         }
 
-       
+        public List<OrderDashboardDto> GetOrdersForDashboard()
+        {
+            return _db.Orders.Select(x => new OrderDashboardDto()
+            {
+                CustomerName = _db.Customers.Where(y => y.Id == x.CustomerId).Select(x => x.Name).First()
+            }.CopyPropertiesFrom(x)).ToList();
+        }
     }
 }

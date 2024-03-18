@@ -75,4 +75,10 @@ public class OrderController : ControllerBase
     {
         _dbService.PayForOrder(orderId);
     }
+
+    [HttpGet("OrdersForDashboard")]
+    public List<OrderDashboardDto> GetOrdersForDashboard()
+    {
+        return _dbService.GetOrdersForDashboard();
+    }
 }

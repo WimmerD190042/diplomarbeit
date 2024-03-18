@@ -19,19 +19,8 @@ export class RecentOrdersComponent {
     this.orderService.orderOrdersGet().subscribe((x) => {
       const firstTenOrders = x.slice(0, 10);
       this.recentOrders.set(firstTenOrders);
-      console.log('Recent Orders loaded');
-      console.log(this.recentOrders());
     });
   }
-
-  // getCategoryName(orderId: number): string {
-  //   console.log('endlos')
-  //   let name = '';
-  //   this.orderService.orderCategoryNameFromOrderGet(orderId).subscribe((x) => {
-  //     name = x;
-  //   });
-  //   return name;
-  // }
 
   exportButtonClick() {
     var csvData = 'Customer;Menge;Anmerkung\n';

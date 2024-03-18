@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:5000
+@baseUrl = https://localhost:5001
 
 
 ################################################## Category
@@ -28,11 +28,11 @@ POST {{baseUrl}}/api/Category/addMeatPiecePart
 Content-type: application/json
 
 {
-      "id": 1,
-            "weight": 1,
-            "notes": "abc",
-            "meatPieceId": 1
-   }
+   "id": 1,
+   "weight": 1,
+   "notes": "abc",
+   "meatPieceId": 1
+}
 #####
 POST {{baseUrl}}/api/Category/readCategories
 #####
@@ -44,10 +44,10 @@ DELETE {{baseUrl}}/api/Customer/deleteCustomer
 Content-type: application/json
 
 {
-      "id": 1,
-      "name": "abc",
-      "address": "abc"
-   }
+   "id": 1,
+   "name": "abc",
+   "address": "abc"
+}
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
@@ -65,7 +65,7 @@ PUT {{baseUrl}}/api/Customer/editCustomer
 Content-type: application/json
 
 {
-      "id": 1,
+   "id": 1,
    "name": "abc",
    "address": "abc"
 }
@@ -82,6 +82,8 @@ GET {{baseUrl}}/Order/OrdersByCustomer?customerId=1
 #####
 GET {{baseUrl}}/Order/OrdersCount?dateFrom=abc&dateTo=abc
 #####
+GET {{baseUrl}}/Order/OrdersForDashboard
+#####
 GET {{baseUrl}}/Order/OrdersForSalesDay?salesDayId=1
 #####
 GET {{baseUrl}}/Order/OrdersFromCustomerForSalesDay?customerId=1&salesDayId=1
@@ -94,17 +96,17 @@ POST {{baseUrl}}/Order/Order
 Content-type: application/json
 
 {
-         "id": 1,
-         "dateString": "abc",
-         "amount": 1,
-         "paidStatus": "abc",
-         "customerId": 1,
-         "deposit": 1,
-         "price": 1,
-         "salesDayId": 1,
-         "notes": "abc",
-         "meatPieceId": 1,
-      "meatPiecePartId": 1
+   "id": 1,
+   "dateString": "abc",
+   "amount": 1,
+   "paidStatus": "abc",
+   "customerId": 1,
+   "deposit": 1,
+   "price": 1,
+   "salesDayId": 1,
+   "notes": "abc",
+   "meatPieceId": 1,
+   "meatPiecePartId": 1
 }
 #####
 POST {{baseUrl}}/Order/PayForOrder?orderId=1
@@ -123,10 +125,10 @@ POST {{baseUrl}}/api/SalesDay/addSalesDay
 Content-type: application/json
 
 {
-         "id": 1,
-         "name": "abc",
-         "dateString": "abc",
-         "oxes": 
-         []
-      }
+   "id": 1,
+   "name": "abc",
+   "dateString": "abc",
+   "oxes": 
+   ["abc"]
+}
 #####
