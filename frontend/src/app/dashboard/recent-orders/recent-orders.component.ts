@@ -13,17 +13,18 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class RecentOrdersComponent {
   public orderService = inject(OrderService);
-  public recentOrders = signal<OrderDashboardDto[]>([]);
+  public dataService = inject(DataService);
+ 
 
   ngOnInit(): void {
     this.orderService.orderOrdersForDashboardGet().subscribe((x) =>
-      this.recentOrders.set(x)
+      this.dataService.recentOrders.set(x)
     );
   }
 
   exportButtonClick() {
     var csvData = 'Customer;Menge;Anmerkung\n';
-    this.recentOrders().forEach((order) => {
+    this.dataService.recentOrders().forEach((order) => {
       const note = order.notes;
       //csvData += `${customerId};${meatPieceId};${note}\n`;
     });

@@ -27,7 +27,6 @@ export class StatisticsComponent {
     this.getTotalOrders();
     this.getRevenue();
     this.getUnpaidOrders();
-
   }
 
   getUnpaidOrders() {
@@ -49,8 +48,6 @@ export class StatisticsComponent {
   }
 
   dateChanged() {
-    this.getUnpaidOrders();
-    this.getTotalOrders();
-    this.getRevenue();
+    this.dataService.loadDashboardOrdersFromBackend(this.selectedStartDate, this.selectedEndDate);
   }
 }

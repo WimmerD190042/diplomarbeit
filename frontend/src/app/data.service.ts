@@ -16,6 +16,7 @@ import {
   CustomerService,
   MeatPieceDto,
   MeatPiecePartDto,
+  OrderDashboardDto,
   OrderDto,
   OrderService,
   SalesDayDto,
@@ -64,6 +65,7 @@ export class DataService {
   allOrders = signal<OrderDto[]>([]);
   salesDayDateString = signal('');
   meatPieceParts = signal<MeatPiecePartDto[]>([]);
+  recentOrders = signal<OrderDashboardDto[]>([]);
 
   setSelectedSubCategory(subCategory: SubCategoryDto) {
     this.selectedSubCategory.set(subCategory);
@@ -167,6 +169,12 @@ export class DataService {
   loadOrdersOfSalesDayFromBackend(salesDayId: number) {
     this.orderService.orderOrdersForSalesDayGet(salesDayId).subscribe((x) => {
       this.allOrders.set(x);
+    });
+  }
+
+  loadDashboardOrdersFromBackend(startDate: string, endDate: string) {
+    this.orderService.orderOrdersForDashboardGet(startDate, endDate).subscribe((x) => {
+        this.recentOrders.set(x);
     });
   }
 }
