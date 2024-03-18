@@ -14,6 +14,8 @@
 export interface OrderDashboardDto { 
     id?: number;
     customerName?: string | null;
+    category?: string | null;
+    date?: string;
     amount?: number;
     price?: number;
     deposit?: number;

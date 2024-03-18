@@ -77,8 +77,8 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("OrdersForDashboard")]
-    public List<OrderDashboardDto> GetOrdersForDashboard()
+    public List<OrderDashboardDto> GetOrdersForDashboard(DateTime startDate, DateTime endDate)
     {
-        return _dbService.GetOrdersForDashboard();
+        return _dbService.GetOrdersForDashboard(startDate, endDate);
     }
 }

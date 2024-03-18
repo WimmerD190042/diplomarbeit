@@ -18,38 +18,37 @@ export class StatisticsComponent {
   unpaidOrders: number = 0;
   totalSales: number = 0;
   revenue: number = 0;
-test: Date = new Date();
-selectedEndDate: string = new Date().toString();
-selectedStartDate: string = new Date().toString();
+  test: Date = new Date();
+  selectedEndDate: string = new Date().toString();
+  selectedStartDate: string = new Date().toString();
 
 
   async ngOnInit() {
- this.getTotalOrders();
-  this.getRevenue();
-  this.getUnpaidOrders();
-    
+    this.getTotalOrders();
+    this.getRevenue();
+    this.getUnpaidOrders();
+
   }
 
   getUnpaidOrders() {
-    this.orderService.orderUnpaidOrdersCountGet(this.selectedStartDate,this.selectedEndDate).subscribe((data) => {
+    this.orderService.orderUnpaidOrdersCountGet(this.selectedStartDate, this.selectedEndDate).subscribe((data) => {
       this.unpaidOrders = data;
     });
   }
 
   getTotalOrders() {
-    this.orderService.orderOrdersCountGet(this.selectedStartDate,this.selectedEndDate).subscribe((data)=>{
+    this.orderService.orderOrdersCountGet(this.selectedStartDate, this.selectedEndDate).subscribe((data) => {
       this.totalSales = data;
     });
   }
 
   getRevenue() {
-    this.orderService.orderRevenueForTimeSpanGet(this.selectedStartDate,this.selectedEndDate).subscribe((data) => {
+    this.orderService.orderRevenueForTimeSpanGet(this.selectedStartDate, this.selectedEndDate).subscribe((data) => {
       this.revenue = data;
     });
   }
 
-
-  dateChanged(){
+  dateChanged() {
     this.getUnpaidOrders();
     this.getTotalOrders();
     this.getRevenue();

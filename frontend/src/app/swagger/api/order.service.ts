@@ -420,13 +420,25 @@ export class OrderService {
     }
 
     /**
+     * @param startDate 
+     * @param endDate 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public orderOrdersForDashboardGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<Array<OrderDashboardDto>>;
-    public orderOrdersForDashboardGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<Array<OrderDashboardDto>>>;
-    public orderOrdersForDashboardGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<Array<OrderDashboardDto>>>;
-    public orderOrdersForDashboardGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public orderOrdersForDashboardGet(startDate?: string, endDate?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<Array<OrderDashboardDto>>;
+    public orderOrdersForDashboardGet(startDate?: string, endDate?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<Array<OrderDashboardDto>>>;
+    public orderOrdersForDashboardGet(startDate?: string, endDate?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<Array<OrderDashboardDto>>>;
+    public orderOrdersForDashboardGet(startDate?: string, endDate?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (startDate !== undefined && startDate !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>startDate, 'startDate');
+        }
+        if (endDate !== undefined && endDate !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>endDate, 'endDate');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -465,6 +477,7 @@ export class OrderService {
         return this.httpClient.request<Array<OrderDashboardDto>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

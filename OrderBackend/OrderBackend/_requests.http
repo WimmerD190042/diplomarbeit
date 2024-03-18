@@ -82,7 +82,7 @@ GET {{baseUrl}}/Order/OrdersByCustomer?customerId=1
 #####
 GET {{baseUrl}}/Order/OrdersCount?dateFrom=abc&dateTo=abc
 #####
-GET {{baseUrl}}/Order/OrdersForDashboard
+GET {{baseUrl}}/Order/OrdersForDashboard?startDate=abc&endDate=abc
 #####
 GET {{baseUrl}}/Order/OrdersForSalesDay?salesDayId=1
 #####

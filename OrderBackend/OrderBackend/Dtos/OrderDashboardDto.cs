@@ -6,6 +6,8 @@
 
         public int Id { get; set; }
         public string CustomerName {  get; set; }
+        public string Category {  get; set; }
+        public DateTime Date { get; set; }
         public double Amount { get; set; }
         public double Price { get; set; }
         public double Deposit { get; set; }

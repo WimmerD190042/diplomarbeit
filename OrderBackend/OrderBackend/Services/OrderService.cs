@@ -116,11 +116,12 @@
             }.CopyPropertiesFrom(y)).ToList();
         }
 
-        public List<OrderDashboardDto> GetOrdersForDashboard()
+        public List<OrderDashboardDto> GetOrdersForDashboard(DateTime startDate, DateTime endDate)
         {
-            return _db.Orders.Select(x => new OrderDashboardDto()
+            return _db.Orders.Where(x => (startDate <= x.Date && endDate >= x.Date) || startDate == null && endDate == null).Select(x => new OrderDashboardDto()
             {
-                CustomerName = _db.Customers.Where(y => y.Id == x.CustomerId).Select(x => x.Name).First()
+                CustomerName = _db.Customers.Where(y => y.Id == x.CustomerId).Select(x => x.Name).First(),
+                Category = "ToDo: Category"
             }.CopyPropertiesFrom(x)).ToList();
         }
     }
