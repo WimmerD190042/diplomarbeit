@@ -27,6 +27,20 @@ export class StatisticsComponent {
     this.getTotalOrders();
     this.getRevenue();
     this.getUnpaidOrders();
+    const today = new Date();
+    this.selectedEndDate = this.formatDate(today);
+    this.selectedStartDate = this.formatDate(today);
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}-${this.pad(month)}-${this.pad(day)}`;
+  }
+
+  private pad(n: number): string {
+    return n < 10 ? '0' + n : n.toString();
   }
 
   getUnpaidOrders() {
