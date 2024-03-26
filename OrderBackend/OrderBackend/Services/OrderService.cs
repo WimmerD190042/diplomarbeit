@@ -52,17 +52,17 @@
 
         public int GetOrdersCount(DateTime dateFrom, DateTime dateTo)
         {
-            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date <= dateTo).Count();
+            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date.AddDays(-1) <= dateTo).Count();
         }
 
         public double GetRevenueForTimeSpan(DateTime dateFrom, DateTime dateTo)
         {
-            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date <= dateTo).Sum(o => o.Price);
+            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date.AddDays(-1) <= dateTo).Sum(o => o.Price);
 
         }
         public int GetUnpaidOrdersCount(DateTime dateFrom, DateTime dateTo)
         {
-            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date <= dateTo && o.PaidStatus == "false").Count();
+            return _db.Orders.Where(o => o.Date >= dateFrom && o.Date.AddDays(-1) <= dateTo && o.PaidStatus == "false").Count();
         }
 
         public string AddOrder(OrderPostDto newOrder)
@@ -116,9 +116,25 @@
             }.CopyPropertiesFrom(y)).ToList();
         }
 
+        public List<OrderDashboardDto> GetDashboardOrders(DateTime startDate, DateTime endDate)
+        {
+            var orders = _db.Orders.Where(x => (startDate <= x.Date && endDate >= x.Date.AddDays(-1)) || startDate == null && endDate == null)
+                .Select(x => new OrderDashboardDto()
+                {
+                    CustomerName = x.Customer.Name,
+                    Category= x.MeatPiece.Name,
+                    Date = x.Date
+                    
+
+                }.CopyPropertiesFrom(x))
+                .ToList();
+
+            return orders;
+        }
+
         public List<OrderDashboardDto> GetOrdersForDashboard(DateTime startDate, DateTime endDate)
         {
-            return _db.Orders.Where(x => (startDate <= x.Date && endDate >= x.Date) || startDate == null && endDate == null).Select(x => new OrderDashboardDto()
+            return _db.Orders.Where(x => (startDate <= x.Date && endDate >= x.Date.AddDays(-1)) || startDate == null && endDate == null).Select(x => new OrderDashboardDto()
             {
                 CustomerName = _db.Customers.Where(y => y.Id == x.CustomerId).Select(x => x.Name).First(),
                 Category = "ToDo: Category"

@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 import { MeatPiecePart } from './meatPiecePart';
-import { Article } from './article';
 import { SubCategory } from './subCategory';
 
 
@@ -19,7 +18,6 @@ export interface MeatPiece {
     name?: string | null;
     pricePerKg?: number;
     subCategoryId?: number;
-    readonly articles?: Array<Article> | null;
     readonly parts?: Array<MeatPiecePart> | null;
     subCategory?: SubCategory;
 }

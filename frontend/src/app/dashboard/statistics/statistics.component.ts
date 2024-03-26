@@ -62,6 +62,9 @@ export class StatisticsComponent {
   }
 
   dateChanged() {
+    this.getUnpaidOrders();
+    this.getTotalOrders();
+    this.getRevenue();
     this.dataService.loadDashboardOrdersFromBackend(this.selectedStartDate, this.selectedEndDate);
   }
 }

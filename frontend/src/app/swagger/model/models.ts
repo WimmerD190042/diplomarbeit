@@ -1,4 +1,3 @@
-export * from './article';
 export * from './category';
 export * from './categoryDto';
 export * from './customer';

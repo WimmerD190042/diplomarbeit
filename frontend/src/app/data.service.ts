@@ -173,8 +173,14 @@ export class DataService {
   }
 
   loadDashboardOrdersFromBackend(startDate: string, endDate: string) {
-    this.orderService.orderOrdersForDashboardGet(startDate, endDate).subscribe((x) => {
-        this.recentOrders.set(x);
+this.orderService.orderDashboardOrdersGet(startDate, endDate).subscribe((x) => {
+      this.recentOrders.set(x);
+      console.log('recentOrders: ', this.recentOrders());
     });
+
+    // this.orderService.orderOrdersForDashboardGet(startDate, endDate).subscribe((x) => {
+    //     this.recentOrders.set(x);
+    //     console.log('recentOrders: ', this.recentOrders());
+    // });
   }
 }
