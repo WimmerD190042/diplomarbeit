@@ -10,7 +10,6 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
-model/article.ts
 model/category.ts
 model/categoryDto.ts
 model/customer.ts

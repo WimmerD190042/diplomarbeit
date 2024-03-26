@@ -48,6 +48,8 @@ DELETE {{baseUrl}}/Order/Order?deleteOrderId=1
 #####
 GET {{baseUrl}}/Order/CategoryNameFromOrder?orderId=1
 #####
+GET {{baseUrl}}/Order/DashboardOrders?dateFrom=abc&dateTo=abc
+#####
 GET {{baseUrl}}/Order/Orders
 #####
 GET {{baseUrl}}/Order/OrdersByCustomer?customerId=1

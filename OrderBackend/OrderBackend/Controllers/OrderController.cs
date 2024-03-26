@@ -40,6 +40,12 @@ public class OrderController : ControllerBase
         return _dbService.GetUnpaidOrdersCount(dateFrom, dateTo);
     }
 
+    [HttpGet("DashboardOrders")]
+    public List<OrderDashboardDto> GetDashBoardOrders(DateTime dateFrom, DateTime dateTo)
+    {
+        return _dbService.GetDashboardOrders(dateFrom, dateTo);
+    }
+
     [HttpGet("OrdersForSalesDay")]
     public List<OrderDto> getOrdersForSalesDay(int salesDayId)
     {
