@@ -120,6 +120,7 @@ export class StockOverviewComponent implements OnInit {
         console.log('MeatPiecePart added');
         this.loadStockForCategories();
       });
+      this.getMeatPieceParts(this.selectedMeatPiece().id!);
   }
   deleteMeatPiecePart(meatPiecePart: MeatPiecePart) {
     this.categoryService.apiCategoryDeleteMeatPiecePartDelete(meatPiecePart.id).subscribe(() => {
@@ -135,20 +136,18 @@ export class StockOverviewComponent implements OnInit {
   }
 
   meatPieceClicked(event: Event,meatPiece: MeatPiece) {
+    this.selectedMeatPiece.set(meatPiece);
     event.stopPropagation(); //sonst klappt es zu
+    this.meatPieceParts.set([]);
+
+    
 
     console.log('meatPieceClicked');
-    this.selectedMeatPiece.set(meatPiece);
+    
     this.getMeatPieceParts(meatPiece.id!);
     
 
-    this.categoryService
-      .apiCategoryMeatPiecePartsFromMeatPieceGet(this.selectedMeatPiece().id)
-      .subscribe((meatPieceParts) => {
-        console.log('selectedMeatPieceId: ', this.selectedMeatPiece().id);
-        this.meatPieceParts.set(meatPieceParts);
-        console.log('meatPieceParts: ', meatPieceParts);
-      });
+   
   }
 
   getMeatPieces(subCategoryId: number): void {
@@ -167,6 +166,7 @@ export class StockOverviewComponent implements OnInit {
   }
 
   toggleCategory(category: CategoryDto): void {
+    this.meatPieceParts.set([]);
     if (this.selectedCategory === category) {
       
       this.selectedCategory = null;
@@ -176,6 +176,7 @@ export class StockOverviewComponent implements OnInit {
     this.getSubcategoriesForCategory(category.id!);
   }
   toggleSubCategory(subCategory: SubCategoryDto) {
+    this.meatPieceParts.set([]);
     console.log('toooooggle');
     if (this.selectedSubCategory === subCategory) {
       this.selectedCategory = null;
