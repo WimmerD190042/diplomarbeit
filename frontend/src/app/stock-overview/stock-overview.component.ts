@@ -136,13 +136,14 @@ export class StockOverviewComponent implements OnInit {
   }
 
   meatPieceClicked(event: Event,meatPiece: MeatPiece) {
+    this.selectedMeatPiece.set(meatPiece);
     event.stopPropagation(); //sonst klappt es zu
     this.meatPieceParts.set([]);
 
     
 
     console.log('meatPieceClicked');
-    this.selectedMeatPiece.set(meatPiece);
+    
     this.getMeatPieceParts(meatPiece.id!);
     
 

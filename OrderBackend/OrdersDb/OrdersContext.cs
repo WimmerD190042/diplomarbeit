@@ -11,8 +11,8 @@ public partial class OrdersContext : DbContext
     public OrdersContext(DbContextOptions<OrdersContext> options)
         : base(options)
     {}
+     
 
-    public virtual DbSet<Article> Articles { get; set; }
 
     public virtual DbSet<Category> Categories { get; set; }
 
