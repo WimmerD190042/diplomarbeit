@@ -218,7 +218,7 @@
         <td style="text-align: center">
           <button (click)="editOrderClicked()" class="btn btn-secondary">Bearbeiten</button>
 
-          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSalesDay">
+          <button (click)="deleteOrder(order)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteSalesDay">
             Löschen
           </button>
         </td>
