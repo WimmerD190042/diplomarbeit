@@ -25,6 +25,14 @@ GET {{baseUrl}}/api/Category/SubCategoriesByCategoryId?categoryId=1
 GET {{baseUrl}}/api/Category/SubCategoryTotalStock?subCategoryId=1
 #####
 POST {{baseUrl}}/api/Category/addMeatPiecePart
+Content-type: application/json
+
+{
+      "id": 1,
+            "weight": 1,
+            "notes": "abc",
+            "meatPieceId": 1
+         }
 #####
 POST {{baseUrl}}/api/Category/readCategories
 #####
@@ -33,14 +41,34 @@ PUT {{baseUrl}}/api/Category/setMeatPiecePricePerKg?meatPieceId=1&pricePerKg=1
 
 ################################################## Customer
 DELETE {{baseUrl}}/api/Customer/deleteCustomer
+Content-type: application/json
+
+{
+         "id": 1,
+         "name": "abc",
+         "address": "abc"
+   }
 #####
 GET {{baseUrl}}/api/Customer/getAllCustomers
 #####
 POST {{baseUrl}}/api/Customer/addNewCustomer
+Content-type: application/json
+
+{
+   "name": "abc",
+   "address": "abc"
+}
 #####
 POST {{baseUrl}}/api/Customer/ReadCustomers
 #####
 PUT {{baseUrl}}/api/Customer/editCustomer
+Content-type: application/json
+
+{
+      "id": 1,
+            "name": "abc",
+         "address": "abc"
+      }
 #####
 
 ################################################## Order
@@ -67,6 +95,21 @@ GET {{baseUrl}}/Order/RevenueForTimeSpan?dateFrom=abc&dateTo=abc
 GET {{baseUrl}}/Order/UnpaidOrdersCount?dateFrom=abc&dateTo=abc
 #####
 POST {{baseUrl}}/Order/Order
+Content-type: application/json
+
+{
+      "id": 1,
+      "dateString": "abc",
+      "amount": 1,
+         "paidStatus": "abc",
+         "customerId": 1,
+         "deposit": 1,
+         "price": 1,
+         "salesDayId": 1,
+         "notes": "abc",
+         "meatPieceId": 1,
+         "meatPiecePartId": 1
+   }
 #####
 POST {{baseUrl}}/Order/PayForOrder?orderId=1
 #####
@@ -81,4 +124,13 @@ GET {{baseUrl}}/api/SalesDay/getSalesDays
 POST {{baseUrl}}/api/SalesDay/addOx?salesDayId=1&ox=abc
 #####
 POST {{baseUrl}}/api/SalesDay/addSalesDay
+Content-type: application/json
+
+{
+      "id": 1,
+      "name": "abc",
+      "dateString": "abc",
+      "oxes": 
+      ["abc"]
+   }
 #####
